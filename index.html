@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>少兵同志</title>
+    <title>爱拆东西的程序员</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -333,18 +333,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 }
 
 
-    .post-copyright:after {
-        position: absolute;
-        color: #fff;
-        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3E%3Cpath fill='gray' d='M245.8 214.9l-33.2 17.3c-9.4-19.6-25.2-20-27.4-20-22.2 0-33.3 14.6-33.3 43.9 0 23.5 9.2 43.8 33.3 43.8 14.4 0 24.6-7 30.5-21.3l30.6 15.5a73.2 73.2 0 01-65.1 39c-22.6 0-74-10.3-74-77 0-58.7 43-77 72.6-77 30.8-.1 52.7 11.9 66 35.8zm143 0l-32.7 17.3c-9.5-19.8-25.7-20-27.9-20-22.1 0-33.2 14.6-33.2 43.9 0 23.5 9.2 43.8 33.2 43.8 14.5 0 24.7-7 30.5-21.3l31 15.5c-2 3.8-21.3 39-65 39-22.7 0-74-9.9-74-77 0-58.7 43-77 72.6-77C354 179 376 191 389 214.8zM247.7 8C104.7 8 0 123 0 256c0 138.4 113.6 248 247.6 248C377.5 504 496 403 496 256 496 118 389.4 8 247.6 8zm.8 450.8c-112.5 0-203.7-93-203.7-202.8 0-105.5 85.5-203.3 203.8-203.3A201.7 201.7 0 01451.3 256c0 121.7-99.7 202.9-202.9 202.9z'/%3E%3C/svg%3E");
-        content: ' ';
-        height: 10rem;
-        width: 10rem;
-        right: -2rem;
-        top: -2rem;
-        opacity: .1;
-    }
-
 </style>
 
     
@@ -365,10 +353,34 @@ header .header__right .dropdown-menus .dropdown-menu {
         <header>
             
 <div class="header__left">
-	<a href="/" class="button"><span class="logo__text">Theme Miracle</span></a>
+	<a href="/" class="button"><span class="logo__text">爱拆东西的程序员</span></a>
 </div>
 <div class="header__right">
 	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/links/" class="button">
+			<div class="navbar-menu">友链</div>
+		</a>
+		
+		<a href="/about/" class="button">
+			<div class="navbar-menu">关于</div>
+		</a>
 		
 	</div>
 	
@@ -403,6 +415,24 @@ header .header__right .dropdown-menus .dropdown-menu {
 	</a>
 	<div class="dropdown-menus" id="dropdown-menus">
 		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/links/" class="dropdown-menu button">友链</a>
+		<br>
+		
+		<a href="/about/" class="dropdown-menu button">关于</a>
+		<br>
+		
 	</div>
 </div>
 
@@ -414,10 +444,10 @@ header .header__right .dropdown-menus .dropdown-menu {
   <div id="index-banner" class="text-center middle-center">
     <div class="banner-text">
         <h3 id="banner-name">
-            Theme Miracle
+            爱拆东西的程序员
         </h3>
         <p class="slogan">
-          一款简洁的单栏 Hexo 主题
+          一个软件工程师的自述：好看的皮囊千篇一律，有趣的灵魂万里挑一
         </p>
     </div>
 </div>
@@ -468,7 +498,7 @@ Quick
     
     
     
-    <p>&copy;  2020 - 2021&nbsp;&nbsp;Theme Miracle</p>
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
     
     <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
     
@@ -499,6 +529,16 @@ Quick
     
 
     
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
   /* 小彩蛋: 饮茶先啦 */
   setTimeout(() => {
     var time = new Date();
@@ -519,6 +559,15 @@ Quick
 
 
 
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
 
 
 
