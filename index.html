@@ -374,14 +374,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 			<div class="navbar-menu">标签</div>
 		</a>
 		
-		<a href="/links/" class="button">
-			<div class="navbar-menu">友链</div>
-		</a>
-		
-		<a href="/about/" class="button">
-			<div class="navbar-menu">关于</div>
-		</a>
-		
 	</div>
 	
 	<a href="/search/" class="button">
@@ -427,12 +419,6 @@ header .header__right .dropdown-menus .dropdown-menu {
 		<a href="/tags/" class="dropdown-menu button">标签</a>
 		<br>
 		
-		<a href="/links/" class="dropdown-menu button">友链</a>
-		<br>
-		
-		<a href="/about/" class="dropdown-menu button">关于</a>
-		<br>
-		
 	</div>
 </div>
 
@@ -461,26 +447,416 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
-            <a href="/2023/08/08/hello-world/">
+            <a href="/2023/05/15/14.SpringBoot%20%E9%9B%86%E6%88%90%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6PageHelper/">
             
-            Hello World</a>
+            14.SpringBoot 集成分页插件 PageHelper</a>
           </h3>
           <p class="index-excerpt">
               
               
                 
               
-              Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
+              SpringBoot 集成分页插件PageHelper
+ 分页是一个项目中最基本的功能之一，当我们使用MyBatis进行数据库操作时，利用PageHelper可以很方便的帮我们完成分页功能的实现！
+
+1. 添加依赖123456&lt;!-- 分页处理依赖包 --&gt;&lt;dependency&gt;    &lt;groupId&gt;com.github.pagehelper&lt;/gr
           </p>
           <div class="index-btm post-metas">
             
               
-                <time datetime="2023-08-08 17:11" pubdate>
-                  2023-08-08
+                <time datetime="2023-05-15 20:19" pubdate>
+                  2023-05-15
                 </time>
               
             
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/11/13.SpringBoot%20%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E7%BB%9F%E4%B8%80%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C/">
+            
+            13.SpringBoot 定义全局统一返回结果</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              SpringBoot 定义全局统一返回结果
+在前后端分离的项目开发中，定义统一的返回结果格式可以提高开发的效率和沟通成本。
+
+返回结构通常来说，返回结构中包含 code （返回码）、msg（返回消息说明）、data（返回数据），其中code、msg是强制要求返回数据的
+格式如下：
+12345&#123;    &quot;code&quot;:200,    &quot;msg&quot;:&qu
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-11 20:19" pubdate>
+                  2023-05-11
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/10/11.SpringBoot%20%E6%95%B4%E5%90%88%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+            
+            11.SpringBoot 整合统一异常处理</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              SpringBoot整合统一异常处理1. 背景首先要搞清楚为什么要进行统一的异常处理，不进行异常处理会发生什么？我们在开发的过程中，经常会遇到异常报错的情况，例如：
+
+这个时候，对于我们的前端处理非常的不友好，因为返回的数据结构并不是统一的结果，不利于前端处理。那么这个时候我们就要对异常进行统一拦截，统一返回结果，方便异常记录和错误排查！
+2. 认识两个注解@RestControllerAdvic
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-10 20:19" pubdate>
+                  2023-05-10
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/10/12.SpringBoot%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E7%9A%84%E5%A4%84%E7%90%86/">
+            
+            12.SpringBoot 前后端分离项目跨域问题的处理</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              SpringBoot 前后端分离项目跨域问题的处理1. 什么是跨域跨域资源共享是由同源策略引发的，首先要了解同源策略。而要了解同源策略先要了解什么是“源”。
+1.1 不同源则触发一个跨域的HTTP请求在浏览器中，当 “一个资源” 向 “与它所在的服务器不同的域、协议或端口” 请求一个资源时，该资源会发起一个跨域 HTTP 请求。浏览器可能“限制发起跨域请求”，或者是 “可以发起跨域请求，但是返回结
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-10 20:19" pubdate>
+                  2023-05-10
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/08/10.SpringBoot%20%E6%95%B4%E5%90%88%20MinIo%20%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1/">
+            
+            10.SpringBoot 整合 MinIo 对象存储服务</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              MinIo简介MinIO是在GNU Affero通用公共许可证v3.0下发布的高性能对象存储。API兼容Amazon S3云存储服务。使用MinIO为机器学习、分析和应用程序数据工作负载构建高性能基础架构。对象存储服务可以用来存储各类文件，例如图片、视频、日志文件、备份数据和容器&#x2F;虚拟机镜像等。
+安装部署方式很多，这里使用docker安装方式
+
+下载MinIo的docker镜像
+
+1do
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-08 20:19" pubdate>
+                  2023-05-08
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/06/09.Spring%20Security%E5%85%A5%E9%97%A8/">
+            
+            09.Spring Security入门</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              Spring Security入门1. 认识认证流程
+关键实现类：
+
+UsernamePasswordAuthenticationFilter
+ProviderManager
+DaoAuthenticationProvider
+InMemoryUserDetailsManager
+
+1.1 认证流程
+提交用户名和密码
+封装Authentication对象，注意此处还没有权限
+调用authentic
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-06 20:19" pubdate>
+                  2023-05-06
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/05/08.JWT%20%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            
+            08.JWT 的使用</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              什么是JWT、JWS、JWE、JWK、JWA前言Learn about the JOSE framework and its specifications, including JSON Web Token (JWT), JSON Web Signature (JWS), JSON Web Encryption (JWE), JSON Web Key (JWK), and JSON Web Alg
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-05 20:19" pubdate>
+                  2023-05-05
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/05/03/07.%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">
+            
+            07.数据库连接池</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              数据库连接池 Druid (德鲁伊)1.  JDBC数据库连接池的必要性在使用开发基于数据库的web程序时，传统的模式基本是按以下步骤
+1）在主程序（如servlet、beans）中建立数据库连接
+2）进行sql操作
+3）断开数据库连接
+这种模式开发，存在的问题:
+普通的JDBC数据库连接使用 DriverManager 来获取，每次向数据库建立连接的时候都要将 Connection加载到内存中，
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-05-03 20:19" pubdate>
+                  2023-05-03
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/04/30/05.SpringMVC%20/">
+            
+            05.SpringMVC</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-04-30 20:19" pubdate>
+                  2023-04-30
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/2023/04/30/06.SpringBoot/">
+            
+            06.Spring Boot</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              Spring Boot简介：Spring Boot创建可以运行的独立的、基于Spring的生产级应用程序。可以轻松入门。大多数Spring Boot应用程序只需要很少的Spring配置
+本文基于 Spring Boot 2.7.11
+1. 快速入门
+jdk8及以上
+Spring Framework 5.3.27及以上
+Maven 3.5 +
+
+1.1 创建一个Maven工程pom.xml
+1234
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-04-30 20:19" pubdate>
+                  2023-04-30
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
+                
+              
             
           </div>
         </article>
@@ -489,6 +865,12 @@ Quick
   
 </div>
 </div>
+
+    <nav aria-label="navigation">
+      <span class="pagination" id="pagination">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
+      </span>
+    </nav>
 
         </div>
         
