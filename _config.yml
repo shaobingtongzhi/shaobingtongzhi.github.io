@@ -106,4 +106,4 @@ deploy:
   type: git
   repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
   branch: main
-  message: 解决hexo部署后重新设置域名问题
+  message: 添加自定义css,配置评论模块

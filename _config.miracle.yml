@@ -174,7 +174,7 @@ post:
 
     # 评论插件
     # Comment plugin
-    comment: true
+    comment: false
 
     # 代码显示设置
     # Code display setting
