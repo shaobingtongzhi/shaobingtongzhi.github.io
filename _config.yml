@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://nucbadaomen.link
+url: https://blog.nucbadaomen.link
 permalink: :year:month/:hash.html
 permalink_defaults:
 pretty_urls:
@@ -106,4 +106,4 @@ deploy:
   type: git
   repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
   branch: main
-  message: 更新博文
+  message: 解决hexo部署后重新设置域名问题
