@@ -266,16 +266,16 @@ comment:
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: gitalk | valine | waline | twikoo | giscus | detalk | artalk
-    type: detalk
+    type: gitalk
 
     # Gitalk
     # See: https://github.com/gitalk/gitalk#options
     gitalk:
-        clientID: 
-        clientSecret: 
-        repo: 
-        owner: 
-        admin: ['name']
+        clientID: e0bf9f449af708958954
+        clientSecret: e993653b01fde254cdf6a0f370d65b4104ec368b
+        repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
+        owner: shaobingtongzhi
+        admin: ['shaobingtongzhi']
         language: zh-CN
         labels: ['Gitalk']
         perPage: 10
@@ -422,7 +422,7 @@ links:
 # Talk Page
 #---------------------------
 talk:
-    enable: true
+    enable: false
 
     # Page Title
     title: 说说
@@ -491,3 +491,5 @@ static_prefix:
     hpp: https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@1.2.0/
     detalk: https://cdn.jsdelivr.net/npm/@detalk/static@1.3.1/dist/
     artalk: https://cdn.jsdelivr.net/npm/artalk@2.4.4/dist/
+custom:
+    css: 'css/custom.css'

@@ -1,0 +1,14 @@
+.post-card-main {
+  max-width: 1200px !important;
+}
+.index-card{
+	max-width:1024px !important;
+}
+@media (min-width: 768px) {
+  article[class='page'] {
+    max-width: 1200px !important;
+  }
+}
+footer p:nth-child(2){
+	display:none;
+}
