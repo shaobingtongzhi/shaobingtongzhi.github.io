@@ -98,6 +98,24 @@ git branch -a
 git branch 本地分支名称 --track remotes/origin/source
 ```
 
+### git checkout 命令
+
+#### 切换分支
+
+```sh
+git checkout [branch name]
+```
+
+#### 恢复文件，撤销修改
+
+```sh
+# 恢复所有文件，撤销所有修改
+git checkout .
+
+# 恢复某个文件，如a.txt
+git checkout a.txt
+```
+
 ### git stash 贮藏
 
 #### 贮藏
@@ -146,7 +164,13 @@ git stash show -p
 git stash clear
 ```
 
+### git diff 比较
 
+#### 比较差异
+
+```sh
+git diff [文件]
+```
 
 ## git配置
 
@@ -385,5 +409,13 @@ git commit -m "update ignored files"
 ```sh
 # 例如查询 Readme.md是被哪一行生效的
 git check-ignore -v Readme.md
+```
+
+## 其它
+
+***git中文件名中文乱码问题***
+
+```sh
+ git config --global core.quotepath false
 ```
 
