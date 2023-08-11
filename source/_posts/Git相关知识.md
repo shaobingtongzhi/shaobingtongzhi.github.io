@@ -134,6 +134,20 @@ stash@{1}: On main: hexo配置
 git stash drop stash@{1}
 ```
 
+#### 查看贮藏里具体内容
+
+```sh
+git stash show -p 
+```
+
+#### 清空贮藏
+
+```sh
+git stash clear
+```
+
+
+
 ## git配置
 
 ```sh
