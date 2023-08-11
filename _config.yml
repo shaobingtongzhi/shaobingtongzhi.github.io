@@ -106,4 +106,4 @@ deploy:
   type: git
   repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
   branch: main
-  message: 添加自定义css,配置评论模块
+  message: "{{ now('DD HH:mm:ss') }}"
