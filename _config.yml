@@ -106,4 +106,4 @@ deploy:
   type: git
   repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
   branch: main
-  message: "{{ now('DD HH:mm:ss') }}"
+  message: "Update Sites :{{ now('DD HH:mm:ss') }}"
