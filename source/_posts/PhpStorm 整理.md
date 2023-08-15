@@ -5,13 +5,15 @@ tags:
 	- IDEA
 	- PHP 
 	- 编辑器
+	- 激活码
 categories:
 	- 学习笔记 
 	- 03-PhpStorm相关笔记
 
 ---
 # PhpStorm整理
-
+> 获取临时激活码：http://jets.idejihuo.com
+> IDEA临时激活码：http://www.idejihuo.com
 ## 试用期重置
 
 [插件地址](https://gitee.com/pengzhile/ide-eval-resetter)
