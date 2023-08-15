@@ -107,3 +107,5 @@ deploy:
   repo: https://github.com/shaobingtongzhi/shaobingtongzhi.github.io.git
   branch: main
   message: "Update Sites :{{ now('DD HH:mm:ss') }}"
+  name: shaobingtongzhi
+  email: hfrgwrgw@163.com
