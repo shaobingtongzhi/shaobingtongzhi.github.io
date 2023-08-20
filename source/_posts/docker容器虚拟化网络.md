@@ -6,8 +6,8 @@ tag:
 	- 容器
 	- docker网络
 categories:
+	- 学习笔记
 	- 08-docker相关笔记
-	- docker容器网络
 ---
 # 容器虚拟化网络
 ## 查看docker支持的网络模型
