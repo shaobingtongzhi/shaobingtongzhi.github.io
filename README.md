@@ -13,10 +13,14 @@
 npm install
 ```
 
-安装hexo
-
+配置环境变量
 ```sh
-npm install -g hexo-cli
+# 把 node_modules/.bin 配置到环境变量
+
+#Mac
+参考：https://www.jianshu.com/p/acb1f062a925
+#Win
+我的电脑-》属性-》高级-》环境变量-》PATH
 ```
 
 参考：https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo
