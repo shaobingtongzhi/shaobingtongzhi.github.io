@@ -33,3 +33,8 @@ ls -l --block-size=m
 du -sm ./* |sort -rn
 ```
 
+查看硬盘空间
+
+```sh
+df -h
+```
