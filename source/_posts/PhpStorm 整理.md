@@ -67,7 +67,7 @@ $DATE$ $TIME$ By 爱拆东西的程序员
 
 编辑变量：
 
-![001.jpg](https://cdn.staticaly.com/gh/hfshaobing/picx-images-hosting@master/20230815/image.37l0939a45k0.webp)
+![001.jpg](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230815/image.37l0939a45k0.webp)
 
  图1
 
