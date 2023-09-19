@@ -105,7 +105,7 @@ iptables -D INPUT 1 # 删除指定链上的指定序号
 
 ```sh
 # 启动防火墙
-systemctl star firewalld
+systemctl start firewalld
 # 暂时关闭防火墙
 systemctl stop firewalld
 # 开启防火墙自启动

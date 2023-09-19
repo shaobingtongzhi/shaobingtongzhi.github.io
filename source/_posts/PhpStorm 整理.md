@@ -8,7 +8,7 @@ tags:
 	- 激活码
 categories:
 	- 学习笔记 
-	- 03-PhpStorm相关笔记
+	- 03-编辑器相关笔记
 
 ---
 # PhpStorm整理
