@@ -19,7 +19,9 @@ categories:
 
 node.js是javascript的一种运行环境，是对Google V8引擎进行的封装，是一个服务器端的javascript的解释器。
 
-### 使用 n 进行更新
+### 使用 n 
+
+注意：n命令不支持windows系統，只支持mac
 
 #### 简介
 

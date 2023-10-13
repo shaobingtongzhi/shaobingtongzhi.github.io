@@ -29,5 +29,12 @@ npm install
 
 ```sh
 hexo server
+
+# 清理生成的文件和緩存文件
+hexo clean
+# 生成文件
+hexo generate
+# 部署
+hexo deploy
 ```
 
