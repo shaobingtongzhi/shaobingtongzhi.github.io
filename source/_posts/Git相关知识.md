@@ -106,6 +106,33 @@ git branch 本地分支名称 --track remotes/origin/source
 git checkout [branch name]
 ```
 
+#### 创建新分支并切换到新分支
+
+```sh
+git checkout -b [branch name]
+# 从指定分支创建新分支
+# 1.切换到指定分支
+# 2.拉取代码
+# 3.创建分支
+# 4.推送
+```
+
+### git merge 命令
+
+```sh
+# 比如从master 合并到 dev
+# 1. 切换到 master
+git checkout master
+# 2. 拉取代码到最新
+git pull
+# 3. 切换到 dev
+git checkout dev
+# 4. 合并，可以用 git status 查看合并状态检查是否有冲突
+git merge master
+# 5. 提交
+git push
+```
+
 #### 恢复文件，撤销修改
 
 ```sh
