@@ -14,6 +14,32 @@ categories:
 
 ## git常用命令
 
+### git add 命令
+
+#### 将修改文件提交到暂存区
+
+- git add 
+
+例如：
+
+```SH
+# 将所有文件提交到暂存区
+git add .
+
+# 将指定文件提交暂存区
+git add a.txt
+```
+
+### git restore 命令
+
+#### 撤销提交到暂存区的文件
+
+```sh
+git restore --staged add.txt
+```
+
+
+
 ### git remote 命令
 
 #### 显示所有远程仓库
