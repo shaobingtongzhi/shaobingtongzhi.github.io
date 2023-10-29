@@ -141,7 +141,17 @@ git checkout -b [branch name]
 # 2.拉取代码
 # 3.创建分支
 # 4.推送
+
+git checkout --orphan [branch name]
 ```
+
+#### 删除分支内的所有内容
+
+```sh
+git rm -rf .
+```
+
+
 
 ### git merge 命令
 
