@@ -55,3 +55,28 @@ while (1) {
 }
 ```
 
+# 乱码处理
+
+```cpp
+string utf8_to_ansi(string strUTF8) {
+	UINT nLen = MultiByteToWideChar(CP_UTF8, NULL, strUTF8.c_str(), -1, NULL, NULL);
+	WCHAR *wszBuffer = new WCHAR[nLen + 1];
+	nLen = MultiByteToWideChar(CP_UTF8, NULL, strUTF8.c_str(), -1, wszBuffer, nLen);
+	wszBuffer[nLen] = 0;
+	nLen = WideCharToMultiByte(936, NULL, wszBuffer, -1, NULL, NULL, NULL, NULL);
+	CHAR *szBuffer = new CHAR[nLen + 1];
+	nLen = WideCharToMultiByte(936, NULL, wszBuffer, -1, szBuffer, nLen, NULL, NULL);
+	szBuffer[nLen] = 0;
+	strUTF8 = szBuffer;
+	delete[]szBuffer;
+	delete[]wszBuffer;
+	return strUTF8;
+}
+
+//调用
+nickname = "灏戝叺";
+char temp[100];
+	strcpy_s(temp,strlen(utf8_to_ansi(nickname).c_str())+1, utf8_to_ansi(nickname).c_str());
+
+```
+
