@@ -9,6 +9,8 @@ categories:
   - 实用方法
 ---
 
+# 安装
+
 **windows 安装软件时出现2502，2503报错**
 
 此现象是**安装权限不足**所致，此时，调用管理者权限cmd终端，终端内命令行安装即可。步骤如下：
@@ -24,6 +26,8 @@ msiexec /package xxx.msi
 ```
 
 ![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_222054.2jmgnb8qk2m0.webp)
+
+# 卸载
 
 **windows 卸载软件时出现2502，2503报错**
 
@@ -51,3 +55,16 @@ xxx.msi
 
 参考地址：[查看](https://www.php.cn/faq/515351.html)
 
+# 补充
+
+出现这个问题，大多是因为当前用户对**C:\Windows\Temp**这个文件夹的**权限不够**造成的，所以**提权**才是解决的关键
+
+1. 找到Temp这个文件夹，然后右键属性-》高级-》添加
+
+![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164705.1a6aarsqzykg.webp)
+
+2. 选择主体-》填入当前账号名称-》把权限都勾上即可
+
+![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164848.6zhs0hayz08.webp)
+
+![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164958.6548nzbrzmg0.webp)
