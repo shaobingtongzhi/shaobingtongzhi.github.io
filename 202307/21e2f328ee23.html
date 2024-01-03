@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Linux 防火墙 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="Linux 防火墙"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>Linux 防火墙</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2023-07-23 00:00" pubdate>
+          2023-07-23
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 3.9k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        42
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E9%87%8C%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.</span> <span class="toc-text">Linux里的防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#iptables-%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.1.</span> <span class="toc-text">iptables 防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">iptables 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables-%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">iptables 语法格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-iptables-%E8%A7%84%E5%88%99"><span class="toc-number">1.1.3.</span> <span class="toc-text">查看 iptables 规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E7%A9%BA-iptables-%E8%A7%84%E5%88%99"><span class="toc-number">1.1.4.</span> <span class="toc-text">清空 iptables 规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-iptables-%E8%A7%84%E5%88%99"><span class="toc-number">1.1.5.</span> <span class="toc-text">添加 iptables 规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%9F%90%E6%9D%A1%E8%A7%84%E5%88%99"><span class="toc-number">1.1.6.</span> <span class="toc-text">删除某条规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firewalld-%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.2.</span> <span class="toc-text">Firewalld 防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E3%80%81%E6%B3%A8%E9%94%80"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">启动、自启动、注销</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">查看状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.2.3.</span> <span class="toc-text">区域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#firewalld-%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.4.</span> <span class="toc-text">firewalld 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#firewall-cmd-%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.5.</span> <span class="toc-text">firewall-cmd 命令行配置工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%98%B2%E7%81%AB%E5%A2%99%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">查看防火墙状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.6.</span> <span class="toc-text">服务管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.7.</span> <span class="toc-text">端口管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.8.</span> <span class="toc-text">两种配置模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98"><span class="toc-number">1.3.</span> <span class="toc-text">实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#firewalld-%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">firewalld 解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elasticsearch-%E7%99%BB%E5%BD%95%E6%8E%88%E6%9D%83"><span class="toc-number">1.3.2.</span> <span class="toc-text">elasticsearch 登录授权</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="Linux里的防火墙"><a href="#Linux里的防火墙" class="headerlink" title="Linux里的防火墙"></a>Linux里的防火墙</h1><blockquote>
+<p>注意：iptables 和 firewalld 服务不能同时启动</p>
+</blockquote>
+<h2 id="iptables-防火墙"><a href="#iptables-防火墙" class="headerlink" title="iptables 防火墙"></a>iptables 防火墙</h2><h3 id="iptables-简介"><a href="#iptables-简介" class="headerlink" title="iptables 简介"></a>iptables 简介</h3><p>iptables是集成在<em><strong>Linux内核</strong></em>中的<em><strong>包过滤防火墙系统</strong></em>。使用iptable可以添加、删除具体的过滤规则，iptables默认维护着4个表和5个链，所有的防火墙策略规则都被分别写入这些表与链中</p>
+<p>“四表”是指iptables的功能，默认的iptables规则表有filter表（过滤规则表）、nat表（地址转换规则表）、mangle（修改数据标记位规则表）、raw（跟踪数据表规则表）：</p>
+<ol>
+<li><p>filter表：控制数据包是否允许进出及转发，可以控制的链路有INPUT、FORWARD和OUTPUT。</p>
+</li>
+<li><p>nat表：控制数据包中地址转换，可以控制的链路有PREROUTING、INPUT、OUTPUT和POSTROUTING。</p>
+</li>
+<li><p>mangle：修改数据包中的原数据，可以控制的链路有PREROUTING、INPUT、OUTPUT、FORWARD和POSTROUTING。</p>
+</li>
+<li><p>raw：控制 nat 表中连接追踪机制的启用状况，可以控制的链路有 PREROUTING、OUTPUT。</p>
+</li>
+</ol>
+<p>“五链”是指内核中控制网络的NetFilter 定义的 5 个规则链。</p>
+<p>每个规则表中包含多个数据链：</p>
+<ol>
+<li><p>INPUT（入站数据过滤）。</p>
+</li>
+<li><p>OUTPUT（出站数据过滤）。</p>
+</li>
+<li><p>FORWARD（转发数据过滤）。</p>
+</li>
+<li><p>PREROUTING（路由前过滤）</p>
+</li>
+<li><p>POSTROUTING（路由后过滤）。</p>
+</li>
+</ol>
+<h3 id="iptables-语法格式"><a href="#iptables-语法格式" class="headerlink" title="iptables 语法格式"></a>iptables 语法格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables [-t table] COMMAND [chain] CRETIRIA -j ACTION</span><br><span class="line"></span><br><span class="line">各参数的含义为：</span><br><span class="line">①-t：指定需要维护的防火墙规则表filter、nat、mangle或raw。在不使用-t 时则默认使用filter表。</span><br><span class="line">②COMMAND：子命令，定义对规则的管理。</span><br><span class="line">③chain：指明链表。</span><br><span class="line">④CRETIRIA：匹配参数。</span><br><span class="line">⑤ACTION：触发动作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-iptables-规则"><a href="#查看-iptables-规则" class="headerlink" title="查看 iptables 规则"></a>查看 iptables 规则</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -L <span class="comment"># 查看iptables规则</span></span><br><span class="line">iptables -L -vn <span class="comment"># 查看iptables规则(详细信息)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="清空-iptables-规则"><a href="#清空-iptables-规则" class="headerlink" title="清空 iptables 规则"></a>清空 iptables 规则</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F <span class="comment"># 清除所有规则，不会处理默认的规则</span></span><br><span class="line">iptables -X <span class="comment"># 删除用户自定义的链</span></span><br><span class="line">iptables -Z <span class="comment"># 链的计数器清零(数据包计数器与数据包字节计数器)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-iptables-规则"><a href="#添加-iptables-规则" class="headerlink" title="添加 iptables 规则"></a>添加 iptables 规则</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -t <span class="comment"># 指定表(default: `filter&#x27;)</span></span><br><span class="line">iptables -A <span class="comment"># 把规则添加到指定的链上，默认添加到最后一行</span></span><br><span class="line">iptables -I <span class="comment"># 插入规则，默认插入到第一行(封IP)</span></span><br><span class="line">iptables -D <span class="comment"># 删除链上的规则</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除某条规则"><a href="#删除某条规则" class="headerlink" title="删除某条规则"></a>删除某条规则</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -nL --line-numbers <span class="comment"># 查看规则号码</span></span><br><span class="line">iptables -D INPUT 1 <span class="comment"># 删除指定链上的指定序号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Firewalld-防火墙"><a href="#Firewalld-防火墙" class="headerlink" title="Firewalld 防火墙"></a>Firewalld 防火墙</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>防火墙是Linux系统的主要的安全工具 ，可以提供基本的安全防护，在Linux历史上已经使用过的防火墙工具包括：ipfwadm、ipchains、iptables（即Centos6就是使用的iptables），而在firewalld中新引入了 区域（Zone）这个概念。</p>
+<p>以前的iptables防火墙是静态的，每次修改都要求防火墙完全重启，这个过程包括内核netfilter防火墙模块的卸载和新配置所需模块的装载等，而模块的卸载将会破坏状态防火墙和确立建立的连接，现在firewalld可以动态管理防火墙，firewalld把netfilter的过滤功能集于一身。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="启动、自启动、注销"><a href="#启动、自启动、注销" class="headerlink" title="启动、自启动、注销"></a>启动、自启动、注销</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动防火墙</span></span><br><span class="line">systemctl start firewalld</span><br><span class="line"><span class="comment"># 暂时关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 开启防火墙自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld</span><br><span class="line"><span class="comment"># 关闭防火墙自启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"><span class="comment"># 注销firewalld服务，意味着系统重启后firewalld服务也不会启动</span></span><br><span class="line"><span class="comment"># 不能使用systemctl disable/enable 操作</span></span><br><span class="line"><span class="comment"># 不能使用systemctl start/stop 操作</span></span><br><span class="line">systemctl mask firewalld</span><br><span class="line"><span class="comment"># 解除注销</span></span><br><span class="line">systemctl unmask firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="区域"><a href="#区域" class="headerlink" title="区域"></a>区域</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>一个 zone 就是一套过滤规则，数据包必须要经过某个 zone 才能入站或出站。不同 zone 中规则粒度粗细、安全强度都不尽相同。可以把 zone 看作是一个个出站或入站必须经过的安检门，有的严格、有的宽松、有的检查细致、有的检查粗略</li>
+<li>每个 zone 单独对应一个 xml 配置文件，在目录 &#x2F;usr&#x2F;lib&#x2F;firewalld&#x2F;services&#x2F; 下，文件名为 &lt;zone名称&gt;.xml。自定义 zone 只需要添加一个 &lt;zone名称&gt;.xml 文件，然后在其中添加过滤规则即可</li>
+<li>每个 zone 都有一个默认的处理行为，包括：default(省缺)、ACCEPT、REJECT、DROP</li>
+</ul>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><p>firewalld 将网卡对应到不同的区域（zone），zone 默认共有 9 个区域：block，dmz，drop，external，home，internal，public，trusted，work。</p>
+<ul>
+<li>trusted（信任区域）	允许所有网络流量连接，即使没有开放任何服务，那么使用此 zone 的流量照样通过</li>
+<li>public（公共区域）	默认的 zone，部分公开，不信任网络中其他计算机，只放行特定服务</li>
+<li>external（外部区域）	允许与 ssh 预定义的服务传入流量，其余均拒绝。默认将通过此区域转发的 IPv4 传出流量进行地址伪装可用于为路由器启用了伪装功能的外部网络</li>
+<li>home（家庭区域）	允许与 ssh、ipp-client、mdns、samba-client 或 dhcpv6-client 预定义的服务传入流量，其余均拒绝</li>
+<li>internal（内部区域）	默认值时与 home 区域相同</li>
+<li>work（工作区域）	允许与 ssh、ipp-client、dhcpv6-client 预定义的服务传入流量，其余均拒绝</li>
+<li>dmz（隔离区域也称为非军事区域）	允许与 ssh 预定义的服务传入流量，其余均拒绝</li>
+<li>block（限制区域）	任何流入的包都被拒绝，返回 icmp-host-prohibited 报文（ipv4）或 icmp6-adm-prohibited 报文（ipv6）。只允许由该系统初始化的网络连接</li>
+<li>drop（丢弃区域）	任何流入的包都被丢弃，不做任何响应，只允许流出的数据包</li>
+</ul>
+<h3 id="firewalld-服务"><a href="#firewalld-服务" class="headerlink" title="firewalld 服务"></a>firewalld 服务</h3><ul>
+<li>在 &#x2F;usr&#x2F;lib&#x2F;firewalld&#x2F;services&#x2F; 目录中，还保存了另外一类配置文件，每个文件对应一项具体的网络服务，如 ssh 服务等</li>
+<li>与之对应的配置文件中记录了各项服务所使用的 tcp&#x2F;udp 端口，在最新版本的 firewalld 中默认已经定义了 70 多种服务供我们使用</li>
+<li>当默认提供的服务不够用或者需要自定义某项服务的端口时，我们需要将 service 配置文件放置在 &#x2F;etc&#x2F;firewalld&#x2F;services&#x2F; 目录中</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/firewalld/		中存放修改过的配置（优先查找，找不到再找默认的配置）</span><br><span class="line">/usr/lib/firewalld/	默认的配置信息</span><br></pre></td></tr></table></figure>
+
+<p>正常情况下，firewalld是默认开启ssh服务的，当我们开启firewalld的时候，不会影响ssh连接。这个我们可以通过查看firewall配置文件确认。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/firewalld/zones/public.xml    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">zone</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">short</span>&gt;</span>Public<span class="tag">&lt;/<span class="name">short</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">service</span> <span class="attr">name</span>=<span class="string">&quot;ssh&quot;</span>/&gt;</span>  #表示ssh服务开放</span><br><span class="line"><span class="tag">&lt;/<span class="name">zone</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但其实，防火墙开放服务时，会开放服务的默认端口。可以检查ssh端口是否是默认端口22.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/ssh/sshd_config |grep Port</span><br><span class="line"></span><br><span class="line">[root@localhost zones]<span class="comment"># cat /etc/ssh/sshd_config |grep Port</span></span><br><span class="line"><span class="comment">#Port 22</span></span><br><span class="line"><span class="comment">#GatewayPorts no</span></span><br></pre></td></tr></table></figure>
+
+<p>发现端口是22，如果不是22,比如是2222那怎么办，修改public.xml即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">zone</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">short</span>&gt;</span>Public<span class="tag">&lt;/<span class="name">short</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">service</span> <span class="attr">name</span>=<span class="string">&quot;ssh&quot;</span>/&gt;</span>  #表示ssh服务开放</span><br><span class="line">  <span class="tag">&lt;<span class="name">service</span> <span class="attr">name</span>=<span class="string">&quot;dhcpv6-client&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">port</span> <span class="attr">protocol</span>=<span class="string">&quot;tcp&quot;</span> <span class="attr">port</span>=<span class="string">&quot;2222&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">zone</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="firewall-cmd-命令行配置工具"><a href="#firewall-cmd-命令行配置工具" class="headerlink" title="firewall-cmd 命令行配置工具"></a>firewall-cmd 命令行配置工具</h3><h4 id="查看防火墙状态"><a href="#查看防火墙状态" class="headerlink" title="查看防火墙状态"></a>查看防火墙状态</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h3><p>为了方便管理，firewalld预先定义了很多服务 ， 存 放 在**&#x2F;usr&#x2F;lib&#x2F;firewalld&#x2F;services&#x2F;**目录中，服务通过单个的XML 配置文件来指定。这些配置文件则按以下格式命名：service-name.xml，每个文件对应一项具体的网络服务，如 ssh 服 务等。与之对应的配置文件中记录了各项服务所使用的 tcp&#x2F;udp 端口。在最新版本的 firewalld 中默认已经定义了 70 多种服务供我们使用，对于每个网络区域，均可以配置允许访问的服务。当默认提供的服务不适用或者需要自定义某项服务的端口时，我们需要将 service 配置文件放置在&#x2F;etc&#x2F;firewalld&#x2F;services&#x2F; 目录中。service 配置具有以下优点。</p>
+<ul>
+<li>通过服务名字来管理规则更加人性化</li>
+<li>通过服务来组织端口分组的模式更加高效，如果一个服务使用了若干个网络端口，则服务的配置文件就相当于提供了到这些端口的规则管理的批量操作快捷方式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[--zone=&lt;zone&gt;] --list-services 显示指定区域内允许访问的所有服务 </span><br><span class="line">[--zone=&lt;zone&gt;] --add-service=&lt;service&gt; 为指定区域设置允许访问的某项服务 </span><br><span class="line">[--zone=&lt;zone&gt;] --remove-service=&lt;service&gt; 删除指定区域已设置的允许访问的某项服务 </span><br><span class="line">[--zone=&lt;zone&gt;] --list-ports 显示指定区域内允许访问的所有端口号</span><br><span class="line">[--zone=&lt;zone&gt;] --add-port=&lt;portid&gt;[-&lt;portid&gt;]/&lt;protocol&gt; 为指定区域设置允许访问的某个/某段端口号 （包括协议名） </span><br><span class="line">[--zone=&lt;zone&gt;] --remove-port=&lt;portid&gt;[-&lt;portid&gt;]/&lt;protocol&gt; 删除指定区域已设置的允许访问的端口号（包括 协议名） </span><br><span class="line">[--zone=&lt;zone&gt;] --list-icmp-blocks 显示指定区域内拒绝访问的所有 ICMP 类型 </span><br><span class="line">[--zone=&lt;zone&gt;] --add-icmp-block=&lt;icmptype&gt; 为指定区域设置拒绝访问的某项 ICMP 类型 </span><br><span class="line">[--zone=&lt;zone&gt;] --remove-icmp-block=&lt;icmptype&gt; 删除指定区域已设置的拒绝访问的某项 ICMP 类 型</span><br><span class="line">省略--zone=&lt;zone&gt;时表示对默认区域操作 </span><br></pre></td></tr></table></figure>
+
+<h3 id="端口管理"><a href="#端口管理" class="headerlink" title="端口管理"></a>端口管理</h3><p>在进行服务配置时，预定义的网络服务可以使用服务名配置，服务所涉及的端口就会自动打开。但是，<em><strong>对于非预定义的服务只能手动为指定的区域添加端口</strong></em>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --zone=internal --add-port=443/tcp  #在 internal 区域增加 443/TCP 端口</span></span><br><span class="line">success</span><br><span class="line">[root@localhost ~]<span class="comment">#firewall-cmd --zone=internal --remove-port=443/tcp #在 internal 区域移除 443/TCP 端口</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="两种配置模式"><a href="#两种配置模式" class="headerlink" title="两种配置模式"></a>两种配置模式</h3><ul>
+<li>运行时模式（Runtime mode）表示 当前内存中运行的防火墙配置，在系统或 firewalld 服务重启、停止时配置将失效</li>
+<li>永久模式（Permanent mode）表示重启防火墙或重新加载防火墙时的规则配置，是永久存储在配置 文件中的</li>
+</ul>
+<p>firewall-cmd 命令工具与配置模式相关的选项有三个：</p>
+<ul>
+<li>–reload：重新加载防火墙规则并保持状态信息，即将永久配置应用为运行时配置</li>
+<li>–permanent：带有此选项的命令用于设置永久性规则，这些规则只有在重新启动 firewalld 或重新加载防火墙规则时才会生效；若不带有此选项，表示用于设置运行时 规则</li>
+<li>–runtime-to-permanent：将当前的运行时配置写入规则配置文件中，使之成为永久性</li>
+</ul>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>客户护网行动扫出elasticsearch的未授权访问漏洞，针对这个漏洞进行修复</p>
+<ul>
+<li>限制9200端口的访问</li>
+<li>对elasticsearch进行登录授权</li>
+</ul>
+<h3 id="firewalld-解决办法"><a href="#firewalld-解决办法" class="headerlink" title="firewalld 解决办法"></a>firewalld 解决办法</h3><ol>
+<li>查看firewalld服务状态</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld </span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>注意：开启防火墙前要确认 ssh 的 22端口以及mysql的3306、redis的6379、80等服务端口</p>
+<p>cat &#x2F;etc&#x2F;firewalld&#x2F;zones&#x2F;public.xml  </p>
+</blockquote>
+<ol start="2">
+<li>开启firewalld</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查看已设置的富规则</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-rich-rules</span><br><span class="line">firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因为客户环境使用的是docker 容器，所以官网描述 docker和firewall是有冲突的，具体冲突原因：<a target="_blank" rel="noopener" href="https://docs.docker.com/network/packet-filtering-firewalls/">https://docs.docker.com/network/packet-filtering-firewalls/</a></p>
+<p>大概意思就是：firewall的底层是使用iptables进行数据过滤，建立在iptables之上，而docker使用iptables来进行网络隔离和管理，这可能会与 Docker 产生冲突。当 firewalld 启动或者重启的时候，将会从 iptables 中移除 DOCKER 的规则，从而影响了 Docker 的正常工作</p>
+</blockquote>
+<ol start="4">
+<li>解决docker 和 firewall 的冲突</li>
+</ol>
+<p>让docker绕过firewall</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">####### 2、修改docker配置 #######</span></span><br><span class="line"><span class="comment">#修改docker配置</span></span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment">#添加规则</span></span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line"><span class="string">&quot;experimental&quot;</span> : <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;iptables&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#重启docker</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line"><span class="comment">####### 3、开启或重启防火墙 #######</span></span><br><span class="line">systemctl restart firewalld</span><br><span class="line"> </span><br><span class="line"><span class="comment">####### 4、再次重启docker #######</span></span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>【重要一】</strong></em><br>绕过iptables之后，有个弊端：容器内部无法访问外界IP。如果需要访问，那么打开firewalld防火墙，且开启NAT转发功能，详细步骤如下：</p>
+<p>此外，建议firewall防火墙开启NAT转发功能，解决阻止docker容器访问外界IP<br>见 <a target="_blank" rel="noopener" href="https://blog.csdn.net/liyanggyang/article/details/128838350">https://blog.csdn.net/liyanggyang/article/details/128838350</a></p>
+<p><em><strong>【重要二】</strong></em><br>在打开firewalld防火墙，且开启NAT转发功能后，允许容器访问外界IP：<br>1、容器访问本宿主机(物理&#x2F;虚拟机)IP，本宿主机的防火墙检测到的IP是容器IP， 所以本机防火墙需要放行docker网段（可见“firewall-cmd命令可参考”）<br>2、访问其他外界物理&#x2F;虚拟机，外界物理&#x2F;虚拟机检测到的IP是容器所在宿主机IP。</p>
+<p><em><strong>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/liyanggyang/article/details/130386522">https://blog.csdn.net/liyanggyang/article/details/130386522</a></strong></em></p>
+<p><em><strong>开启防火墙 · 解决阻止docker容器访问外界IP ｜NAT转发</strong></em></p>
+<ul>
+<li>检查是否允许 NAT 转发</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-masquerade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开启 NAT 转发</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=public --add-masquerade &amp;&amp; firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>禁止防火墙 NAT 转发</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --remove-masquerade &amp;&amp; firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>查看php容器ip</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect php72</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li>针对php容器可以访问9200端口</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-rich-rule=<span class="string">&quot;rule family=&quot;</span>ipv4<span class="string">&quot; source address=&quot;</span>172.17.0.3<span class="string">&quot; port protocol=&quot;</span>tcp<span class="string">&quot; port=&quot;</span>9200<span class="string">&quot; accept&quot;</span> &amp;&amp; firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：执行后，一定要 重新载入设置 firewall-cmd –reload</p>
+<p>补充删除规则的命令</p>
+<p>firewall-cmd –permanent –remove-rich-rule&#x3D;”rule family&#x3D;”ipv4” source address&#x3D;”172.17.0.3” port protocol&#x3D;”tcp” port&#x3D;”9200” accept” &amp;&amp; firewall-cmd –reload</p>
+</blockquote>
+<ol start="7">
+<li>开放8272、8306、6379端口</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=8272/tcp --permanent &amp;&amp; firewall-cmd --reload</span><br><span class="line">firewall-cmd --zone=public --add-port=8306/tcp --permanent &amp;&amp; firewall-cmd --reload</span><br><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent &amp;&amp; firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>补充删除规则命令</p>
+<p>firewall-cmd –zone&#x3D;public –remove-port&#x3D;9200&#x2F;tcp –permanent &amp;&amp; firewall-cmd –reload</p>
+</blockquote>
+<ol start="8">
+<li>查看已设置的规则</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-all</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>查看端口有没有生效</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --query-port=8272/tcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="elasticsearch-登录授权"><a href="#elasticsearch-登录授权" class="headerlink" title="elasticsearch 登录授权"></a>elasticsearch 登录授权</h3><ol>
+<li><p>复制http-basic.zip文件到es容器指定目录<br>docker cp http-basic.zip es654:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;plugins</p>
+</li>
+<li><p>进入es容器<br>docker exec -it es654 bash</p>
+</li>
+<li><p>解压文件<br>cd plugins	<br>unzip http-basic.zip<br>rm -rf http-basic.zip</p>
+</li>
+<li><p>配置http-baisc，设置es的版本信息<br>cd http-basic<br>vi plugin-descriptor.properties</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elasticsearch.version=6.5.4</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>配置es<br>cd &#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;config<br>vi elasticsearch.yml</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cluster.name:</span> <span class="string">&quot;docker-cluster&quot;</span></span><br><span class="line"><span class="attr">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="attr">xpack.security.enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># minimum_master_nodes need to be explicitly set when bound on a public IP</span></span><br><span class="line"><span class="comment"># set to 1 to allow single node clusters</span></span><br><span class="line"><span class="comment"># Details: https://github.com/elastic/elasticsearch/pull/17288</span></span><br><span class="line"><span class="attr">discovery.zen.minimum_master_nodes:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">http.basic.enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">http.basic.log:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">http.basic.username:</span> <span class="string">&quot;ccbscf&quot;</span></span><br><span class="line"><span class="attr">http.basic.password:</span> <span class="string">&quot;$.ccbscf#&quot;</span></span><br><span class="line"><span class="attr">http.basic.ipwhitelist:</span> <span class="string">&quot;&quot;</span>                    </span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>修改代码<br>apps&#x2F;cosola_V10&#x2F;vendor&#x2F;elasticsearch&#x2F;elasticsearch&#x2F;src&#x2F;Elasticsearch&#x2F;ClientBuilder 624行 修改代码</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="variable">$hosts</span> <span class="keyword">as</span> <span class="variable">$host</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$host</span>)) &#123;</span><br><span class="line">        <span class="variable">$host</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">prependMissingScheme</span>(<span class="variable">$host</span>);</span><br><span class="line">        <span class="variable">$host</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">extractURIParts</span>(<span class="variable">$host</span>);</span><br><span class="line">    &#125; <span class="keyword">elseif</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$host</span>)) &#123;</span><br><span class="line">        <span class="variable">$host</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">normalizeExtendedHost</span>(<span class="variable">$host</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;logger-&gt;<span class="title function_ invoke__">error</span>(<span class="string">&quot;Could not parse host: &quot;</span>.<span class="title function_ invoke__">print_r</span>(<span class="variable">$host</span>, <span class="literal">true</span>));</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RuntimeException</span>(<span class="string">&quot;Could not parse host: &quot;</span>.<span class="title function_ invoke__">print_r</span>(<span class="variable">$host</span>, <span class="literal">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$host</span>[<span class="string">&#x27;user&#x27;</span>] = <span class="string">&quot;user&quot;</span>;   <span class="comment">//增加用户名</span></span><br><span class="line">    <span class="variable">$host</span>[<span class="string">&#x27;pass&#x27;</span>] = <span class="string">&quot;pass&quot;</span>;  <span class="comment">//增加密码</span></span><br><span class="line">    <span class="variable">$connections</span>[] = <span class="variable language_">$this</span>-&gt;connectionFactory-&gt;<span class="title function_ invoke__">create</span>(<span class="variable">$host</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>重启es容器</li>
+</ol>
+<p>docker restart es654</p>
+<ol start="8">
+<li>验证 http-basic</li>
+</ol>
+<ul>
+<li>curl 127.0.0.1:9200</li>
+<li>curl –user user:pass 127.0.0.1:9200</li>
+<li><a target="_blank" rel="noopener" href="http://xxxx.xxx.com/public/index.php?app=core&mod=Test&act=testEs">http://xxxx.xxx.com/public/index.php?app=core&amp;mod=Test&amp;act=testEs</a></li>
+<li>浏览器 ip:9200 访问</li>
+</ul>
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/06-Linux%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">06-Linux相关知识</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/Linux/"># Linux</a>
+              
+                <a class="hover-with-bg" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/"># 防火墙</a>
+              
+                <a class="hover-with-bg" href="/tags/iptables/"># iptables</a>
+              
+                <a class="hover-with-bg" href="/tags/firewalld/"># firewalld</a>
+              
+                <a class="hover-with-bg" href="/tags/es%E7%99%BB%E5%BD%95%E6%8E%88%E6%9D%83/"># es登录授权</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202307/21e2f328ee23.html">https://blog.nucbadaomen.link/202307/21e2f328ee23.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>

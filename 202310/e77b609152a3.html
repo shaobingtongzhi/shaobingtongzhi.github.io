@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Inno Setup 教程 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="Inno Setup 教程"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>Inno Setup 教程</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2023-10-22 00:00" pubdate>
+          2023-10-22
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 2.8k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        32
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86Inno-Setup"><span class="toc-number">1.</span> <span class="toc-text">认识Inno Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-Inno-Setup"><span class="toc-number">1.2.</span> <span class="toc-text">下载安装 Inno Setup</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">生成安装过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E4%BF%A1%E6%81%AF%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">几个重要信息的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AE%89%E8%A3%85%E5%8C%85%E5%9B%BE%E6%A0%87"><span class="toc-number">2.3.</span> <span class="toc-text">修改安装包图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87"><span class="toc-number">2.4.</span> <span class="toc-text">修改安装过程中的图片</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">3.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pascal%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="toc-number">3.1.</span> <span class="toc-text">Pascal语法基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files-%E9%A1%B9"><span class="toc-number">3.2.</span> <span class="toc-text">[Files]项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#code-%E9%A1%B9"><span class="toc-number">3.3.</span> <span class="toc-text">[code]项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Functions"><span class="toc-number">3.3.1.</span> <span class="toc-text">Event Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InitializeSetup"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">InitializeSetup()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Registry-functions"><span class="toc-number">3.3.2.</span> <span class="toc-text">Registry functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RegKeyExists"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">RegKeyExists()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RegValueExists"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">RegValueExists()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RegGetSubkeyNames"><span class="toc-number">3.3.2.3.</span> <span class="toc-text">RegGetSubkeyNames()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RegGetValueNames"><span class="toc-number">3.3.2.4.</span> <span class="toc-text">RegGetValueNames()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RegQueryStringValue"><span class="toc-number">3.3.2.5.</span> <span class="toc-text">RegQueryStringValue()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-funcions"><span class="toc-number">3.3.3.</span> <span class="toc-text">File funcions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Exec"><span class="toc-number">3.3.3.1.</span> <span class="toc-text">Exec()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ExtractTemporaryFile"><span class="toc-number">3.3.3.2.</span> <span class="toc-text">ExtractTemporaryFile()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dialog-functions"><span class="toc-number">3.3.4.</span> <span class="toc-text">Dialog functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MsgBox"><span class="toc-number">3.3.4.1.</span> <span class="toc-text">MsgBox()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Setup-Logging-functions"><span class="toc-number">3.3.5.</span> <span class="toc-text">Setup Logging functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Log"><span class="toc-number">3.3.5.1.</span> <span class="toc-text">Log()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="toc-number">3.4.</span> <span class="toc-text">关键代码</span></a></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="认识Inno-Setup"><a href="#认识Inno-Setup" class="headerlink" title="认识Inno Setup"></a>认识Inno Setup</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>一款开源、免费的可以用来制作exe软件安装流程的打包软件！！！</p>
+<p>官网地址：<a target="_blank" rel="noopener" href="https://jrsoftware.org/">https://jrsoftware.org</a></p>
+<p>特点：</p>
+<ul>
+<li>支持自 2006 年以来的每个 Windows 版本</li>
+<li>支持创建<strong>单个 EXE</strong> 来安装程序，以便于在线分发</li>
+<li>标准窗口向导界面</li>
+<li>完整的<strong>卸载</strong>功能</li>
+<li>在任何地方创建快捷方式，包括在“开始”菜单和桌面上</li>
+<li>创建注册表和 .INI 条目</li>
+<li>在安装之前、期间或之后运行其他程序</li>
+<li>支持<strong>多语言</strong>安装</li>
+<li>集成 Pascal 脚本引擎选项，用于高级运行时安装和卸载自定义</li>
+</ul>
+<h2 id="下载安装-Inno-Setup"><a href="#下载安装-Inno-Setup" class="headerlink" title="下载安装 Inno Setup"></a>下载安装 Inno Setup</h2><p>下载地址： </p>
+<p><a target="_blank" rel="noopener" href="https://jrsoftware.org/download.php/is.exe">https://jrsoftware.org/download.php/is.exe</a></p>
+<p>中文语言包：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl">https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl</a></p>
+<p><em><strong>注意</strong></em> ：这个中文语言包是生成的软件安装过程语言包，不是Inno Setup的汉化包</p>
+<p>放置位置如下图所示：</p>
+<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E6%94%BE%E7%BD%AE%E8%AF%AD%E8%A8%80%E5%8C%85.y0wpym1lbww.webp"></p>
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><h2 id="生成安装过程"><a href="#生成安装过程" class="headerlink" title="生成安装过程"></a>生成安装过程</h2><p>图标网站：<a target="_blank" rel="noopener" href="https://iconbuddy.app/">https://iconbuddy.app/</a></p>
+<p>png转ico：<a target="_blank" rel="noopener" href="https://www.aconvert.com/cn/icon/png-to-ico/">https://www.aconvert.com/cn/icon/png-to-ico</a></p>
+<p>步骤：</p>
+<ol>
+<li>使用脚本向导创建一个新的脚本</li>
+<li>下一步。。。</li>
+</ol>
+<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80%E5%8C%85.rltatgkgllc.webp"></p>
+<p>注意：这次是可以选择中文语言包了</p>
+<p><em><strong>BUG 1</strong></em></p>
+<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E4%B9%B1%E7%A0%81.1cgekw0bftnk.webp"></p>
+<p><em><strong>解决方案</strong></em></p>
+<p>用记事本查看语言包<code>ChineseSimplified.isl</code>的保存格式，将保存格式设置为 <code>ANSI</code> 即可</p>
+<h2 id="几个重要信息的设置"><a href="#几个重要信息的设置" class="headerlink" title="几个重要信息的设置"></a>几个重要信息的设置</h2><p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E9%85%8D%E7%BD%AE%E5%AE%89%E8%A3%85%E4%BF%A1%E6%81%AF.12ky74ym1lg0.webp"></p>
+<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E5%BA%94%E7%94%A8%E5%90%8D%E7%A7%B0%E5%8F%91%E5%B8%83%E8%80%85.58qfd7buhf40.webp"></p>
+<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231010/%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95.6jdfntw2jx80.webp"></p>
+<h2 id="修改安装包图标"><a href="#修改安装包图标" class="headerlink" title="修改安装包图标"></a>修改安装包图标</h2><p>图标中至少包含以下尺寸：16x16、32x32、48x48、64x64和256x256。</p>
+<p>如果未指定该指令或该指令为空，则将使用支持上述大小的内置图标</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Setup]</span><br><span class="line">;安装包图标</span><br><span class="line">SetupIconFile=MyProgSetup.ico</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="修改安装过程中的图片"><a href="#修改安装过程中的图片" class="headerlink" title="修改安装过程中的图片"></a>修改安装过程中的图片</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Setup]</span><br><span class="line">;安装向导样式，有两个值：classic 、modern 分别表示 经典、现代</span><br><span class="line">WizardStyle=classic</span><br><span class="line">;安装向导左侧图片 大小要求：164 x 314</span><br><span class="line">WizardImageFile=WizClassicImage.bmp </span><br><span class="line">;安装向导右侧小图片 大小要求：55 x 55</span><br><span class="line">WizardSmallImageFile=WizClassicSmallImage-IS.bmp</span><br></pre></td></tr></table></figure>
+
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><blockquote>
+<p> 场景一：我们开发的软件不只有exe文件，还包含了一些资源文件（图片、音频等）、dll动态库文件等等，那我们就需要把这些东西也一并打包</p>
+</blockquote>
+<blockquote>
+<p> 场景二：我们开发了一款软件，这个软件的运行依赖与另外一个指定版本的软件，所以就需要实现在安装我们这个软件之前，先安装好另外一个软件</p>
+</blockquote>
+<p>Pascal脚本功能（类似Pascal的现代Delphi）为在运行时自定义安装或卸载添加了许多新的可能性。</p>
+<ul>
+<li><p>支持在自定义条件下中止安装程序或卸载启动。</p>
+</li>
+<li><p>支持在运行时向安装程序添加自定义向导页面。</p>
+</li>
+<li><p>支持在安装之前、期间或之后从Pascal脚本中提取和调用DLL或其他文件。</p>
+</li>
+<li><p>支持可以执行任何操作的脚本常量-普通常量、从注册表读取、从ini读取和从命令行读取常量可以执行更多操作。</p>
+</li>
+<li><p>支持在自定义条件下运行时删除类型、组件和&#x2F;或任务。</p>
+</li>
+<li><p>支持根据自定义条件有条件地安装[Files]、[Registry]、[Run]等条目。</p>
+</li>
+<li><p>Pascal脚本有很多支持功能，几乎是Inno Setup本身所能做的一切。</p>
+</li>
+</ul>
+<h2 id="Pascal语法基础"><a href="#Pascal语法基础" class="headerlink" title="Pascal语法基础"></a>Pascal语法基础</h2><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">;注释使用英文封号</span><br><span class="line">;全局变量</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  变量名称: 变量类型;</span><br><span class="line">;常量</span><br><span class="line"><span class="keyword">const</span> </span><br><span class="line">  常量名称 =  <span class="string">&#x27;常量内容&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> 函数名称（形参:</span>形参类型,...）:返回值类型</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line">;<span class="keyword">if</span>结构</span><br><span class="line"><span class="keyword">if</span> xxx <span class="keyword">then</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">内容</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">;为假时</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> xxx <span class="keyword">then</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">内容</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Files-项"><a href="#Files-项" class="headerlink" title="[Files]项"></a>[Files]项</h2><p>[Files]项内定义安装程序要在用户系统上安装的任何文件</p>
+<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Files]</span><br><span class="line">Source: &quot;D:\<span class="keyword">Program</span> Files (x86)\Inno Setup <span class="number">6</span>\Examples\<span class="comment">&#123;#MyAppExeName&#125;</span>&quot;; DestDir: &quot;<span class="comment">&#123;app&#125;</span>&quot;; Flags: ignoreversion</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Source：必填项，源文件名称，可以是一个通配符，用于在单个条目中指定一组文件</p>
+</li>
+<li><p>DestDir：必填项，文件要安装在用户系统上的目录，几乎总是以其中一个目录常量开头。如果指定的路径在用户的系统中不存在，则会自动创建该路径，如果为空，则会在卸载过程中自动删除该路径。</p>
+</li>
+<li><p>Flags：扩展参数，多个项可以通过空格分隔</p>
+<ul>
+<li><p>deleteafterinstall：指示安装程序照常安装文件，但在安装完成（或中止）后将其删除。这对于提取在脚本的[运行]部分执行的程序所需的临时数据非常有用，<strong>注意：不能与isreadme、regserver、regtypelib、restartreplace、sharedfile或uninsoveruninstall标志组合使用</strong></p>
+</li>
+<li><p>ignoreversion：不比较版本信息直接替换现有文件，无论其版本号如何，<strong>注意：此标志只能用于应用程序专用的文件，而不能用于共享系统文件</strong></p>
+</li>
+<li><p>isreadme：标明是“自述”文件。安装中只有一个文件可以具有此标志。当文件具有此标志时，用户将询问他们是否希望在安装完成后查看自述文件。如果选择“是”，安装程序将使用文件类型的默认程序打开该文件。因此，README文件应该始终以.txt、.wri或.doc等扩展名结尾。</p>
+<p><strong>请注意，如果安装程序必须重新启动用户的计算机（由于安装了带有restartreplace标志的文件，或者如果AlwaysStart[Setup]部分指令为yes），则用户将无法查看自述文件</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="code-项"><a href="#code-项" class="headerlink" title="[code]项"></a>[code]项</h2><p>[Code]部分是一个可选部分，用于指定Pascal脚本。Pascal脚本可以通过多种方式用于自定义安装或卸载。请注意，创建Pascal脚本并不容易，需要Inno Setup的经验和Pascal或至少类似编程语言的编程知识。</p>
+<h3 id="Event-Functions"><a href="#Event-Functions" class="headerlink" title="Event Functions"></a>Event Functions</h3><h4 id="InitializeSetup"><a href="#InitializeSetup" class="headerlink" title="InitializeSetup()"></a>InitializeSetup()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InitializeSetup</span><span class="params">()</span>:</span> Boolean;</span><br><span class="line">Called during Setup<span class="string">&#x27;s initialization. Return False to abort Setup, True otherwise.</span></span><br><span class="line"><span class="string">;在安装程序初始化期间调用。返回False可中止安装程序，否则返回True。</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Registry-functions"><a href="#Registry-functions" class="headerlink" title="Registry functions"></a><strong>Registry functions</strong></h3><h4 id="RegKeyExists"><a href="#RegKeyExists" class="headerlink" title="RegKeyExists()"></a>RegKeyExists()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RegKeyExists</span><span class="params">(<span class="keyword">const</span> RootKey: Integer; <span class="keyword">const</span> SubKeyName: <span class="keyword">String</span>)</span>:</span> Boolean;</span><br><span class="line">;Returns True <span class="keyword">if</span> the specified registry key exists.</span><br><span class="line">;如果指定的注册表项存在，则返回True。</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> RegKeyExists(HKEY_AUTO, <span class="string">&#x27;Software\Jordan Russell\Inno Setup&#x27;</span>) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// The key exists</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RegValueExists"><a href="#RegValueExists" class="headerlink" title="RegValueExists()"></a>RegValueExists()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RegValueExists</span><span class="params">(<span class="keyword">const</span> RootKey: Integer; <span class="keyword">const</span> SubKeyName, ValueName: <span class="keyword">String</span>)</span>:</span> Boolean;</span><br><span class="line">;Returns True <span class="keyword">if</span> the specified registry key <span class="keyword">and</span> value exist.</span><br><span class="line">;如果指定的注册表项和值存在，则返回True。</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> RegValueExists(HKEY_CURRENT_USER, <span class="string">&#x27;Console&#x27;</span>, <span class="string">&#x27;WindowSize&#x27;</span>) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// The value exists</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RegGetSubkeyNames"><a href="#RegGetSubkeyNames" class="headerlink" title="RegGetSubkeyNames()"></a>RegGetSubkeyNames()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RegGetSubkeyNames</span><span class="params">(<span class="keyword">const</span> RootKey: Integer; <span class="keyword">const</span> SubKeyName: <span class="keyword">String</span>; <span class="keyword">var</span> Names: TArrayOfString)</span>:</span> Boolean;</span><br><span class="line"></span><br><span class="line">;Opens the specified registry key <span class="keyword">and</span> reads the names <span class="keyword">of</span> its subkeys into the specified <span class="keyword">string</span> <span class="keyword">array</span> Names. Returns True <span class="keyword">if</span> successful, False <span class="keyword">otherwise</span>.</span><br><span class="line">;打开指定的注册表项，并将其子项的名称读取到指定的字符串数组names中。如果成功，则返回True，否则返回False。</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  Names: TArrayOfString;</span><br><span class="line">  I: Integer;</span><br><span class="line">  S: <span class="keyword">String</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> RegGetSubkeyNames(HKEY_CURRENT_USER, <span class="string">&#x27;Control Panel&#x27;</span>, Names) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    S := <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> I := <span class="number">0</span> <span class="keyword">to</span> GetArrayLength(Names)-<span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">      S := S + Names[I] + <span class="string">#13#10</span>;</span><br><span class="line">    MsgBox(<span class="string">&#x27;List of subkeys:&#x27;</span><span class="string">#13#10#13#10</span> + S, mbInformation, MB_OK);</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// add any code to handle failure here</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RegGetValueNames"><a href="#RegGetValueNames" class="headerlink" title="RegGetValueNames()"></a>RegGetValueNames()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RegGetValueNames</span><span class="params">(<span class="keyword">const</span> RootKey: Integer; <span class="keyword">const</span> SubKeyName: <span class="keyword">String</span>; <span class="keyword">var</span> Names: TArrayOfString)</span>:</span> Boolean;</span><br><span class="line"></span><br><span class="line">;Opens the specified registry key <span class="keyword">and</span> reads the names <span class="keyword">of</span> its values into the specified <span class="keyword">string</span> <span class="keyword">array</span> Names. Returns True <span class="keyword">if</span> successful, False <span class="keyword">otherwise</span>.</span><br><span class="line"></span><br><span class="line">;打开指定的注册表项，并将其值的名称读取到指定的字符串数组names中。如果成功，则返回True，否则返回False。</span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  Names: TArrayOfString;</span><br><span class="line">  I: Integer;</span><br><span class="line">  S: <span class="keyword">String</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> RegGetValueNames(HKEY_CURRENT_USER, <span class="string">&#x27;Control Panel\Mouse&#x27;</span>, Names) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    S := <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> I := <span class="number">0</span> <span class="keyword">to</span> GetArrayLength(Names)-<span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">      S := S + Names[I] + <span class="string">#13#10</span>;</span><br><span class="line">    MsgBox(<span class="string">&#x27;List of values:&#x27;</span><span class="string">#13#10#13#10</span> + S, mbInformation, MB_OK);</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// add any code to handle failure here</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RegQueryStringValue"><a href="#RegQueryStringValue" class="headerlink" title="RegQueryStringValue()"></a>RegQueryStringValue()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RegQueryStringValue</span><span class="params">(<span class="keyword">const</span> RootKey: Integer; <span class="keyword">const</span> SubKeyName, ValueName: <span class="keyword">String</span>; <span class="keyword">var</span> ResultStr: <span class="keyword">String</span>)</span>:</span> Boolean;</span><br><span class="line">;Queries the specified REG_SZ- <span class="keyword">or</span> REG_EXPAND_SZ-<span class="keyword">type</span> value, <span class="keyword">and</span> returns the data <span class="keyword">in</span> ResultStr. Returns True <span class="keyword">if</span> successful. When False <span class="keyword">is</span> returned, ResultStr <span class="keyword">is</span> unmodified.</span><br><span class="line">;查询指定的REG_SZ或REG_EXPAND_SZ类型的值，并在ResultStr中返回数据。如果成功，则返回True。当返回False时，ResultStr是未修改的。</span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  Country: <span class="keyword">String</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> RegQueryStringValue(HKEY_CURRENT_USER, <span class="string">&#x27;Control Panel\International&#x27;</span>,</span><br><span class="line">     <span class="string">&#x27;sCountry&#x27;</span>, Country) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// Successfully read the value</span></span><br><span class="line">    MsgBox(<span class="string">&#x27;Your country: &#x27;</span> + Country, mbInformation, MB_OK);</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="File-funcions"><a href="#File-funcions" class="headerlink" title="File funcions"></a>File funcions</h3><h4 id="Exec"><a href="#Exec" class="headerlink" title="Exec()"></a>Exec()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Exec</span><span class="params">(<span class="keyword">const</span> Filename, Params, WorkingDir: <span class="keyword">String</span>; <span class="keyword">const</span> ShowCmd: Integer; <span class="keyword">const</span> Wait: TExecWait; <span class="keyword">var</span> ResultCode: Integer)</span>:</span> Boolean;</span><br><span class="line"></span><br><span class="line">;执行可执行文件</span><br><span class="line">Example:</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  ResultCode: Integer;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// Launch Notepad and wait for it to terminate</span></span><br><span class="line">  <span class="keyword">if</span> Exec(ExpandConstant(<span class="string">&#x27;&#123;win&#125;\notepad.exe&#x27;</span>), <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, SW_SHOW,</span><br><span class="line">     ewWaitUntilTerminated, ResultCode) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// handle success if necessary; ResultCode contains the exit code</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">// handle failure if necessary; ResultCode contains the error code</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="ExtractTemporaryFile"><a href="#ExtractTemporaryFile" class="headerlink" title="ExtractTemporaryFile()"></a>ExtractTemporaryFile()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">ExtractTemporaryFile</span><span class="params">(<span class="keyword">const</span> FileName: <span class="keyword">String</span>)</span>;</span></span><br><span class="line"></span><br><span class="line">;将指定的文件从[Files]部分提取到临时目录中。要查找临时目录的位置，请使用ExpandConstant（<span class="string">&#x27;｛tmp｝&#x27;</span>）。</span><br><span class="line">;当安装程序退出时，提取的文件将自动删除。</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">[Files]</span><br><span class="line">Source: &quot;Readme.txt&quot;; Flags: dontcopy noencryption</span><br><span class="line"></span><br><span class="line">[Code]</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InitializeSetup</span>:</span> Boolean;</span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  S: AnsiString;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// Show the contents of Readme.txt (non Unicode) in a message box</span></span><br><span class="line">  ExtractTemporaryFile(<span class="string">&#x27;Readme.txt&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> LoadStringFromFile(ExpandConstant(<span class="string">&#x27;&#123;tmp&#125;\Readme.txt&#x27;</span>), S) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    MsgBox(S, mbInformation, MB_OK);</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line">  Result := True;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dialog-functions"><a href="#Dialog-functions" class="headerlink" title="Dialog functions"></a>Dialog functions</h3><h4 id="MsgBox"><a href="#MsgBox" class="headerlink" title="MsgBox()"></a>MsgBox()</h4><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MsgBox</span><span class="params">(<span class="keyword">const</span> Text: <span class="keyword">String</span>; <span class="keyword">const</span> Typ: TMsgBoxType; <span class="keyword">const</span> Buttons: Integer)</span>:</span> Integer;</span><br><span class="line">;消息框</span><br><span class="line">;TMsgBoxType <span class="keyword">is</span> defined <span class="keyword">as</span>:</span><br><span class="line">;TMsgBoxType = (mbInformation, mbConfirmation, mbError, mbCriticalError);</span><br><span class="line">;Supported flags <span class="keyword">for</span> Buttons are:</span><br><span class="line">;MB_OK, MB_OKCANCEL, MB_ABORTRETRYIGNORE, MB_YESNOCANCEL, MB_YESNO, MB_RETRYCANCEL, ;MB_DEFBUTTON1, MB_DEFBUTTON2, MB_DEFBUTTON3, MB_SETFOREGROUND</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Setup-Logging-functions"><a href="#Setup-Logging-functions" class="headerlink" title="Setup Logging functions"></a>Setup Logging functions</h3><h4 id="Log"><a href="#Log" class="headerlink" title="Log()"></a>Log()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">procedure Log(const S: String);</span><br><span class="line">;日志</span><br><span class="line">;将指定的字符串记录在安装程序的日志文件中，需要 [Setup]项中的 SetupLogging 属性设置为yes</span><br><span class="line">[Setup]</span><br><span class="line">SetupLogging=yes;</span><br></pre></td></tr></table></figure>
+
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">[Code]</span><br><span class="line"><span class="comment">//1. 检测有没有安装微信,没有就安装，否则 进行下一步</span></span><br><span class="line"><span class="comment">//2. 检测安装的微信版本 是不是 2.6.8.52, 是的话就 直接安装软件 ，否则 提示用户安装指定版本</span></span><br><span class="line"><span class="keyword">var</span></span><br><span class="line">  Names: TArrayOfString;</span><br><span class="line">  S: <span class="keyword">String</span>;</span><br><span class="line">  I: Integer;</span><br><span class="line">  ResultCode: Integer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> </span><br><span class="line">  NoInstallMsg =  <span class="string">&#x27;检测到当前系统未安装微信&#x27;</span><span class="string">#13#10</span><span class="string">&#x27;安装选择 是，不安装选择 否&#x27;</span>;</span><br><span class="line">  NoSameMsg = <span class="string">&#x27;检测到当前系统安装版本与软件支持版本不一致&#x27;</span><span class="string">#13#10</span><span class="string">&#x27;安装选择 是，不安装选择 否&#x27;</span>;</span><br><span class="line">  NeedVersion = <span class="string">&#x27;2.6.8.52&#x27;</span>;</span><br><span class="line">  <span class="comment">//NeedVersion = &#x27;3.2.1.154&#x27;;</span></span><br><span class="line"><span class="comment">//自定义执行程序</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//检测安装结果</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CheckInstallResult</span><span class="params">()</span>:</span>boolean;</span><br><span class="line"><span class="keyword">var</span> </span><br><span class="line">  Version: <span class="keyword">String</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  Result := true;</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> RegKeyExists(HKEY_LOCAL_MACHINE,<span class="string">&#x27;SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WeChat&#x27;</span>) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    Result := false;</span><br><span class="line">    <span class="keyword">Exit</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> RegQueryStringValue(HKLM,<span class="string">&#x27;SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WeChat&#x27;</span>,<span class="string">&#x27;DisplayVersion&#x27;</span>,Version) <span class="keyword">then</span> </span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    Result := false;</span><br><span class="line">    <span class="keyword">Exit</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line">  MsgBox(<span class="string">&#x27;检测到的版本：&#x27;</span> + Version + <span class="string">#13#10</span> +  <span class="string">&#x27;需要安装的版本：&#x27;</span> + NeedVersion ,mbInformation,MB_OK);</span><br><span class="line">  <span class="keyword">if</span> Version &lt;&gt; NeedVersion <span class="keyword">then</span> </span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">//MsgBox(&#x27;不相等，终止&#x27;,mbInformation,MB_OK);</span></span><br><span class="line">    Result := false;</span><br><span class="line">    <span class="keyword">Exit</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装第三方软件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InstallWeChat</span><span class="params">(Msg: <span class="keyword">String</span>)</span>:</span>boolean;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> MsgBox(Msg,mbConfirmation,MB_YESNO) = IDYES <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">     <span class="comment">//MsgBox(&#x27;安装、、、&#x27;,mbInformation,MB_OK)</span></span><br><span class="line">     <span class="comment">//1. 提取执行程序到临时目录</span></span><br><span class="line">      ExtractTemporaryFile(<span class="string">&#x27;&#123;#InstallExeName&#125;&#x27;</span>);</span><br><span class="line">     <span class="comment">//2. 执行可执行程序</span></span><br><span class="line">      <span class="keyword">if</span> Exec(ExpandConstant(<span class="string">&#x27;&#123;tmp&#125;\&#123;#InstallExeName&#125;&#x27;</span>), <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, SW_SHOW,</span><br><span class="line">         ewWaitUntilTerminated, ResultCode) <span class="keyword">then</span></span><br><span class="line">      <span class="keyword">begin</span></span><br><span class="line">        <span class="comment">// handle success if necessary; ResultCode contains the exit code</span></span><br><span class="line">        <span class="comment">//MsgBox(&#x27;ResultCode:&#x27; + IntToStr(ResultCode) + &#x27;  &#x27; + SysErrorMessage(ResultCode) ,mbInformation,MB_OK);</span></span><br><span class="line">        <span class="comment">//MsgBox(&#x27;ResultCode:&#x27; + SysErrorMessage(ResultCode) ,mbInformation,MB_OK);</span></span><br><span class="line">        <span class="comment">//todo 通过注册表检测 安装的版本，符合要求就 返回 true ,否则返回 false</span></span><br><span class="line">        Result := CheckInstallResult();</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        <span class="comment">// handle failure if necessary; ResultCode contains the error code</span></span><br><span class="line">        MsgBox(<span class="string">&#x27;安装失败，ResultCode:&#x27;</span> + SysErrorMessage(ResultCode) ,mbInformation,MB_OK);</span><br><span class="line">        Result := false;</span><br><span class="line">      <span class="keyword">end</span>;</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">//选择了否</span></span><br><span class="line">    Result := false;</span><br><span class="line">    <span class="comment">//MsgBox(&#x27;安装失败，安装程序将退出，谢谢使用&#x27;,mbInformation,MB_OK);</span></span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化安装程序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InitializeSetup</span><span class="params">()</span>:</span> Boolean;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  Result := true;</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> RegKeyExists(HKEY_LOCAL_MACHINE,<span class="string">&#x27;SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WeChat&#x27;</span>) <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">//未安装微信，执行安装操作</span></span><br><span class="line">    Result := InstallWeChat(NoInstallMsg);</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> RegQueryStringValue(HKLM,<span class="string">&#x27;SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\WeChat&#x27;</span>,<span class="string">&#x27;DisplayVersion&#x27;</span>,S) <span class="keyword">then</span> </span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    MsgBox(<span class="string">&#x27;程序异常，退出安装&#x27;</span>,mbInformation,MB_OK);</span><br><span class="line">    Result := false;  </span><br><span class="line">    <span class="keyword">Exit</span>; </span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line">  <span class="keyword">if</span> S &lt;&gt; NeedVersion <span class="keyword">then</span> </span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="comment">//版本不一致，执行安装程序</span></span><br><span class="line">    Result := InstallWeChat(NoSameMsg);</span><br><span class="line">  <span class="keyword">end</span>;</span><br><span class="line">  <span class="keyword">if</span> Result = false <span class="keyword">then</span></span><br><span class="line">    MsgBox(<span class="string">&#x27;安装失败，安装程序将退出，谢谢使用&#x27;</span>,mbInformation,MB_OK);</span><br><span class="line">  Log(<span class="string">&#x27;222&#x27;</span>);</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/EXE%E6%B5%81%E7%A8%8B%E5%88%B6%E4%BD%9C/">EXE流程制作</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/Inno-Setup/"># Inno Setup</a>
+              
+                <a class="hover-with-bg" href="/tags/%E6%B5%81%E7%A8%8B%E5%88%B6%E4%BD%9C/"># 流程制作</a>
+              
+                <a class="hover-with-bg" href="/tags/%E6%A1%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F/"># 桌面程序</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202310/e77b609152a3.html">https://blog.nucbadaomen.link/202310/e77b609152a3.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>

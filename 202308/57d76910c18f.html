@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>PHP 代码打包 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="PHP 代码打包"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>PHP 代码打包</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2023-08-01 20:19" pubdate>
+          2023-08-01
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 1.8k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        28
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP-%E4%BB%A3%E7%A0%81%E6%89%93%E5%8C%85"><span class="toc-number">1.</span> <span class="toc-text">PHP 代码打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP-%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0"><span class="toc-number">2.</span> <span class="toc-text">PHP 代码更新</span></a></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="PHP-代码打包"><a href="#PHP-代码打包" class="headerlink" title="PHP 代码打包"></a>PHP 代码打包</h1><ol>
+<li>shell脚本</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Step1.开始拉取最新代码&gt;&gt;&#x27;</span></span><br><span class="line">git pull </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Step2.开始比较差异文件&gt;&gt;&#x27;</span></span><br><span class="line"><span class="built_in">head</span>=$(git rev-parse --short HEAD)</span><br><span class="line">lastHead=$(<span class="built_in">cat</span> lastHead.txt)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$head</span> &gt; lastHead.txt</span><br><span class="line"><span class="built_in">echo</span> `git diff --name-only <span class="variable">$lastHead</span> <span class="variable">$head</span>` &gt;updateFileList.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Step3.将需要更新的文件拷贝到update目录下&#x27;</span></span><br><span class="line"><span class="built_in">rm</span> -rf update/*</span><br><span class="line">php -f update.php</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Step5.打包并记录本次更新内容到本地日志文件&#x27;</span></span><br><span class="line"><span class="built_in">cd</span> update</span><br><span class="line">zip -r `<span class="built_in">date</span> +%Y%m%d_%H%M`<span class="string">&#x27;_CCB_UPDATE&#x27;</span>.zip ./*</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;&#x27;</span>&gt;&gt;updatelog.txt</span><br><span class="line"><span class="built_in">log</span>=<span class="string">&#x27;----- &#x27;</span>`<span class="built_in">date</span> +%Y%m%d-%H:%M`<span class="string">&#x27; 更新内容如下(请无视update目录下内容) -----&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$log</span> &gt;&gt; updatelog.txt</span><br><span class="line"><span class="built_in">cat</span> updateFileList.txt | <span class="built_in">tr</span> <span class="string">&quot; &quot;</span> <span class="string">&quot;\n&quot;</span> &gt;&gt; updatelog.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;&#x27;</span>&gt;&gt;updatelog.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>php脚本</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$lists</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;updateFileList.txt&#x27;</span>);</span><br><span class="line">    <span class="variable">$lists</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&quot; &quot;</span>,<span class="title function_ invoke__">trim</span>(<span class="variable">$lists</span>,<span class="string">&quot; &quot;</span>));</span><br><span class="line">    <span class="comment">//忽略文件列表</span></span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$lists</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="variable">$v</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$v</span>,<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="variable">$v</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$v</span>,<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">        <span class="variable">$v</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$v</span>,<span class="string">&#x27;&quot;&#x27;</span>);</span><br><span class="line">        <span class="variable">$dir_name</span> = <span class="title function_ invoke__">dirname</span>(<span class="variable">$v</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$v</span> &amp;&amp; !<span class="title function_ invoke__">isIgnore</span>(<span class="variable">$v</span>,<span class="variable">$dir_name</span>))&#123;</span><br><span class="line">            <span class="variable">$update_dir</span> = <span class="string">&#x27;update/&#x27;</span>.<span class="variable">$dir_name</span>;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="title function_ invoke__">is_dir</span>(<span class="variable">$update_dir</span>))&#123;</span><br><span class="line">                <span class="title function_ invoke__">mkdir</span>(<span class="variable">$update_dir</span>,<span class="number">0775</span>,<span class="literal">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_ invoke__">copy</span>(<span class="string">&#x27;../&#x27;</span>.<span class="variable">$v</span>,<span class="string">&#x27;update/&#x27;</span>.<span class="variable">$v</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;copy file :&#x27;</span>,<span class="variable">$v</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;isIgnore file :&#x27;</span>,<span class="variable">$v</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isIgnore</span>(<span class="params"><span class="variable">$v</span>,<span class="variable">$dir_name</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$ignore_dir</span> = [<span class="string">&#x27;up&#x27;</span>,<span class="string">&#x27;config/lang&#x27;</span>];</span><br><span class="line">        <span class="variable">$ignore_file</span> = [<span class="string">&#x27;config/config.inc.php&#x27;</span>,<span class="string">&#x27;config/conv.inc.php&#x27;</span>,<span class="string">&#x27;.gitignore&#x27;</span>];</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$v</span>,<span class="variable">$ignore_file</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">foreach</span>(<span class="variable">$ignore_dir</span> <span class="keyword">as</span> <span class="variable">$dir</span>)&#123;  </span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$dir_name</span>, <span class="variable">$dir</span>) === <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>打更新包步骤</li>
+</ol>
+<blockquote>
+<p> 运行shell脚本即可</p>
+</blockquote>
+<ol start="4">
+<li>打回滚包步骤</li>
+</ol>
+<blockquote>
+<p>a）从上次更新打包节点迁出一个临时分支</p>
+<p>b）复制本次打包生成的update&#x2F;updateFileList.txt内容</p>
+<p>c）切换到迁出的分支，粘贴覆盖原update&#x2F;updateFileList.txt内容</p>
+<p>d）修改update.sh，将step3之前的部分注视掉即可</p>
+<p>e）执行update.sh打包，修改更新包名称为日期_rollback.zip</p>
+</blockquote>
+<h1 id="PHP-代码更新"><a href="#PHP-代码更新" class="headerlink" title="PHP 代码更新"></a>PHP 代码更新</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ADMIN_USERNAME&#x27;</span>,<span class="string">&#x27;&#x27;</span>);   <span class="comment">// Admin Username</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ADMIN_PASSWORD&#x27;</span>,<span class="string">&#x27;&#x27;</span>);   <span class="comment">// Admin Password</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;SITE_PATH&#x27;</span>,<span class="title function_ invoke__">dirname</span>(<span class="title function_ invoke__">dirname</span>(<span class="keyword">__FILE__</span>)));</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;UPDATE_ZIP_PATH&#x27;</span>,SITE_PATH.DIRECTORY_SEPARATOR.<span class="string">&#x27;zip_bak&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;FUNC&#x27;</span>,<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;f&#x27;</span>])?<span class="variable">$_GET</span>[<span class="string">&#x27;f&#x27;</span>]:<span class="string">&#x27;Default&#x27;</span>);</span><br><span class="line"><span class="comment">// $GLOBALS</span></span><br><span class="line"><span class="variable">$func</span> = <span class="string">&#x27;update&#x27;</span>.FUNC;</span><br><span class="line"><span class="title function_ invoke__">checkAuth</span>();</span><br><span class="line"><span class="keyword">if</span>( <span class="variable">$GLOBALS</span>[<span class="string">&#x27;is_login&#x27;</span>] || <span class="variable">$func</span> == <span class="string">&#x27;updateSetAuth&#x27;</span> )&#123;</span><br><span class="line">    <span class="keyword">if</span>( <span class="title function_ invoke__">function_exists</span>(<span class="variable">$func</span>))&#123;</span><br><span class="line">        <span class="variable">$func</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;Error:no access&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateSetAuth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( <span class="variable">$_POST</span>[<span class="string">&#x27;user&#x27;</span>] == ADMIN_USERNAME &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;pwd&#x27;</span>] ==ADMIN_PASSWORD  )&#123;</span><br><span class="line">        <span class="variable">$time</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line">        <span class="title function_ invoke__">setcookie</span>(<span class="string">&#x27;updateAdminKey&#x27;</span>,<span class="title function_ invoke__">md5</span>(ADMIN_USERNAME.<span class="variable">$time</span>).<span class="string">&#x27;,&#x27;</span>.<span class="variable">$time</span>,<span class="title function_ invoke__">time</span>()+<span class="number">3600</span>,<span class="string">&#x27;/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="literal">true</span>);</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location:?f=Default&#x27;</span>);<span class="keyword">exit</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;ERROR: login error&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAuth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$auth</span> =  <span class="keyword">isset</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;updateAdminKey&#x27;</span>]) ? (<span class="variable">$_COOKIE</span>[<span class="string">&#x27;updateAdminKey&#x27;</span>]) : <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>( !<span class="variable">$auth</span>)&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;is_login&#x27;</span>] = <span class="literal">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">list</span>(<span class="variable">$user</span>,<span class="variable">$time</span>) = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$auth</span>);</span><br><span class="line">        <span class="keyword">if</span>( <span class="variable">$user</span> == <span class="title function_ invoke__">md5</span>(ADMIN_USERNAME.<span class="variable">$time</span>)  &amp;&amp; <span class="variable">$time</span> + <span class="number">3600</span> &gt; <span class="title function_ invoke__">time</span>())&#123;</span><br><span class="line">            <span class="variable">$GLOBALS</span>[<span class="string">&#x27;is_login&#x27;</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="variable">$GLOBALS</span>[<span class="string">&#x27;is_login&#x27;</span>] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//默认</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateDefault</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//上传处理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateUpload</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>( !<span class="title function_ invoke__">is_dir</span>(UPDATE_ZIP_PATH))&#123;</span><br><span class="line">        <span class="title function_ invoke__">mkdir</span>(UPDATE_ZIP_PATH,<span class="number">0775</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>( <span class="keyword">empty</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>]) )&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;Error:please upload file&#x27;</span>;<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>( <span class="title function_ invoke__">pathinfo</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>],PATHINFO_EXTENSION) !=<span class="string">&#x27;zip&#x27;</span>)&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;Error:not allowed file type&#x27;</span>;<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$res</span> = <span class="title function_ invoke__">copy</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>],UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">    <span class="keyword">if</span>( !<span class="variable">$res</span>)&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;Error:copy file error&#x27;</span>;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;copy &#x27;</span>.<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>].<span class="string">&#x27; to &#x27;</span>.UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$zip</span> = <span class="keyword">new</span> <span class="title class_">ZipArchive</span>();</span><br><span class="line">    <span class="keyword">if</span>( <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">open</span>( UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>] ) === <span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="variable">$md5key</span> = <span class="title function_ invoke__">md5</span>(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]).<span class="title function_ invoke__">date</span>(<span class="string">&#x27;YmdHis&#x27;</span>);</span><br><span class="line">        <span class="variable">$tmpDir</span> = UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$md5key</span>;</span><br><span class="line">        <span class="comment">//创建临时文件夹</span></span><br><span class="line">        <span class="title function_ invoke__">mkdir</span>(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$md5key</span>);</span><br><span class="line">        <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">extractTo</span>(<span class="variable">$tmpDir</span>);</span><br><span class="line">        <span class="variable">$scanList</span> = <span class="title function_ invoke__">scandir</span>(<span class="variable">$tmpDir</span>);</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;update_list&#x27;</span>] = <span class="variable">$todoList</span> = [];</span><br><span class="line">        <span class="keyword">foreach</span>( <span class="variable">$scanList</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>( <span class="variable">$v</span> != <span class="string">&#x27;..&#x27;</span> &amp;&amp; <span class="variable">$v</span>!=<span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>( !<span class="title function_ invoke__">in_array</span>(<span class="variable">$v</span>,[<span class="string">&#x27;apps&#x27;</span>,<span class="string">&#x27;libs&#x27;</span>,<span class="string">&#x27;framework&#x27;</span>,<span class="string">&#x27;public&#x27;</span>,<span class="string">&#x27;views&#x27;</span>,<span class="string">&#x27;config&#x27;</span>]))&#123;</span><br><span class="line">                    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;ERROR: DIR &#x27;</span>.<span class="variable">$v</span>.<span class="string">&#x27; is not Allowed  ,Update Error!&lt;br/&gt;&#x27;</span>;</span><br><span class="line">                    <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">                    <span class="keyword">return</span> ;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="variable">$todoList</span>[] = <span class="variable">$v</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span>(<span class="variable">$todoList</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">            <span class="title function_ invoke__">doUpdateList</span>(<span class="variable">$tmpDir</span>,<span class="variable">$tmpDir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//正式解压到站点目录下去，不要解压到其他地方去</span></span><br><span class="line">        <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">extractTo</span>(SITE_PATH);</span><br><span class="line">        <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>][] = <span class="string">&#x27;Error:zip file canot open&#x27;</span>;<span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doUpdateList</span>(<span class="params"><span class="variable">$tmpDir</span>,<span class="variable">$dir</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$scanList</span> = <span class="title function_ invoke__">scandir</span>(<span class="variable">$dir</span>);</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$scanList</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$v</span> != <span class="string">&#x27;..&#x27;</span> &amp;&amp; <span class="variable">$v</span>!=<span class="string">&#x27;.&#x27;</span> &amp;&amp;  <span class="title function_ invoke__">is_dir</span>(<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>) )&#123;</span><br><span class="line">            <span class="title function_ invoke__">doUpdateList</span>(<span class="variable">$tmpDir</span>,<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>);</span><br><span class="line">        &#125;<span class="keyword">elseif</span>(<span class="title function_ invoke__">is_file</span>(<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>))&#123;</span><br><span class="line">            <span class="title function_ invoke__">copy</span>(<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>,<span class="title function_ invoke__">str_replace</span>(<span class="variable">$tmpDir</span>,SITE_PATH,<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>));</span><br><span class="line">            <span class="variable">$GLOBALS</span>[<span class="string">&#x27;update_list&#x27;</span>][] = <span class="title function_ invoke__">str_replace</span>(<span class="variable">$tmpDir</span>,SITE_PATH,<span class="variable">$dir</span>.DIRECTORY_SEPARATOR.<span class="variable">$v</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateShowOld</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !<span class="title function_ invoke__">is_dir</span>(UPDATE_ZIP_PATH))&#123;</span><br><span class="line">        <span class="title function_ invoke__">mkdir</span>(UPDATE_ZIP_PATH,<span class="number">0775</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$list</span> = <span class="title function_ invoke__">scandir</span>(UPDATE_ZIP_PATH);</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$list</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>( <span class="variable">$v</span> !=<span class="string">&#x27;..&#x27;</span> &amp;&amp; <span class="variable">$v</span> !=<span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">            <span class="variable">$ctime</span> = <span class="title function_ invoke__">filectime</span>(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.<span class="variable">$v</span>);</span><br><span class="line">            <span class="variable">$GLOBALS</span>[<span class="string">&#x27;oldList&#x27;</span>][] = [<span class="string">&#x27;name&#x27;</span>=&gt;<span class="variable">$v</span>,<span class="string">&#x27;ctime&#x27;</span>=&gt;<span class="title function_ invoke__">date</span>(<span class="string">&quot;Y/m/d H:i:s&quot;</span>,<span class="variable">$ctime</span>)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=utf-8&quot;</span>&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;X-UA-Compatible&quot;</span> content=<span class="string">&quot;IE=edge&quot;</span> &gt;</span><br><span class="line">&lt;title&gt;代码更新管理&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">if</span>( !<span class="variable">$GLOBALS</span>[<span class="string">&#x27;is_login&#x27;</span>] || FUNC == <span class="string">&#x27;SetAuth&#x27;</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;form action=<span class="string">&quot;?f=SetAuth&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">        &lt;table <span class="class"><span class="keyword">class</span>=&quot;<span class="title">tableborder</span>&quot; &gt;</span></span><br><span class="line"><span class="class">          &lt;<span class="title">tr</span> <span class="title">class</span>=&quot;<span class="title">cell</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">td</span> <span class="title">class</span>=&quot;<span class="title">altbg2</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            请先登录&lt;<span class="title">br</span>/&gt;</span></span><br><span class="line"><span class="class">            账号： &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">text</span>&quot; <span class="title">name</span>=&quot;<span class="title">user</span>&quot; <span class="title">class</span>=&quot;<span class="title">txt</span>&quot; <span class="title">style</span>=&quot;<span class="title">width</span>:300<span class="title">px</span>&quot;/&gt;</span></span><br><span class="line"><span class="class">           &lt;<span class="title">br</span>/&gt;</span></span><br><span class="line"><span class="class">            密码： &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">password</span>&quot; <span class="title">name</span>=&quot;<span class="title">pwd</span>&quot;&quot; <span class="title">class</span>=&quot;<span class="title">txt</span>&quot; <span class="title">style</span>=&quot;<span class="title">width</span>:300<span class="title">px</span>&quot;/&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">br</span>/&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">submit</span>&quot; <span class="title">name</span>=&quot;<span class="title">botton2</span>&quot; <span class="title">style</span>=&quot;<span class="title">background</span>-<span class="title">color</span>:<span class="title">orange</span>;<span class="title">color</span>:#000;<span class="title">margin</span>:2<span class="title">px</span>&quot; <span class="title">value</span>=&quot; 登录 &quot;/&gt;&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line"><span class="class">          &lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="class">      &lt;/<span class="title">form</span>&gt; </span></span><br><span class="line"><span class="class">    &lt;?<span class="title">php</span> <span class="title">if</span>(!<span class="title">empty</span>($<span class="title">GLOBALS</span>[&#x27;<span class="title">tips</span>&#x27;]))</span>&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        <span class="meta">&lt;?php</span> <span class="keyword">foreach</span>(<span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>] <span class="keyword">as</span> <span class="variable">$v</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">        &lt;li&gt; <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$v</span>;<span class="meta">?&gt;</span>&lt;/li&gt;</span><br><span class="line">        <span class="meta">&lt;?php</span> &#125; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125; <span class="meta">?&gt;</span></span><br><span class="line">        &lt;/body&gt;</span><br><span class="line">    &lt;/html&gt;  </span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">die</span>(); &#125; <span class="meta">?&gt;</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;pre&gt;</span><br><span class="line">    &lt;h1&gt;系统基本信息&lt;/h1&gt;</span><br><span class="line">    站点根目录：<span class="meta">&lt;?php</span> <span class="keyword">echo</span> SITE_PATH;<span class="meta">?&gt;</span> &lt;a href=<span class="string">&quot;?f=Default&quot;</span>&gt;更新代码包&lt;/a&gt;&lt;br/&gt;</span><br><span class="line">    更新包存放目录：<span class="meta">&lt;?php</span> <span class="keyword">echo</span> UPDATE_ZIP_PATH;<span class="meta">?&gt;</span> &lt;a href=<span class="string">&quot;?f=ShowOld&quot;</span>&gt;查看历史更新包&lt;/a&gt;</span><br><span class="line">    &lt;hr /&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">if</span>(FUNC == <span class="string">&#x27;Default&#x27;</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;form action=<span class="string">&quot;?f=Upload&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">        &lt;table <span class="class"><span class="keyword">class</span>=&quot;<span class="title">tableborder</span>&quot; <span class="title">style</span>=&quot;<span class="title">width</span>:500<span class="title">px</span>;&quot;&gt;</span></span><br><span class="line"><span class="class">          &lt;<span class="title">tr</span> <span class="title">class</span>=&quot;<span class="title">cell</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">td</span> <span class="title">class</span>=&quot;<span class="title">altbg2</span>&quot;&gt;&lt;<span class="title">label</span> &gt;</span></span><br><span class="line"><span class="class">              上传代码包 &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">file</span>&quot; <span class="title">name</span>=&quot;<span class="title">file</span>&quot; <span class="title">class</span>=&quot;<span class="title">txt</span>&quot; <span class="title">style</span>=&quot;<span class="title">width</span>:400<span class="title">px</span>&quot; <span class="title">style</span>=&quot;<span class="title">float</span>:<span class="title">left</span>&quot;/&gt;</span></span><br><span class="line"><span class="class">            &lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;/<span class="title">td</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">td</span>&gt;&lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">submit</span>&quot; <span class="title">name</span>=&quot;<span class="title">botton2</span>&quot; <span class="title">style</span>=&quot;<span class="title">background</span>-<span class="title">color</span>:<span class="title">orange</span>;<span class="title">color</span>:#000;<span class="title">margin</span>:2<span class="title">px</span>&quot; <span class="title">value</span>=&quot; 更新代码包 &quot;/&gt;&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line"><span class="class">          &lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="class">      &lt;/<span class="title">form</span>&gt; </span></span><br><span class="line"><span class="class">&lt;?<span class="title">php</span> &#125;<span class="title">elseif</span>(<span class="title">FUNC</span> == &#x27;<span class="title">Upload</span>&#x27;)</span>&#123; <span class="meta">?&gt;</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>]))&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">foreach</span>(<span class="variable">$GLOBALS</span>[<span class="string">&#x27;tips&#x27;</span>] <span class="keyword">as</span> <span class="variable">$v</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;li&gt; <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$v</span>;<span class="meta">?&gt;</span>&lt;/li&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125;<span class="keyword">else</span>&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;h2&gt;代码更新成功！本次更新涉及目录：&lt;/h2&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">foreach</span>(<span class="variable">$GLOBALS</span>[<span class="string">&#x27;update_list&#x27;</span>] <span class="keyword">as</span> <span class="variable">$v</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;li&gt; <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$v</span>;<span class="meta">?&gt;</span>&lt;/li&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125;<span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span> &#125;<span class="keyword">elseif</span>(FUNC == <span class="string">&#x27;ShowOld&#x27;</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;div&gt;</span><br><span class="line">    &lt;h2&gt;历史更新包列表：&lt;/h2&gt;</span><br><span class="line">    &lt;table style=<span class="string">&quot;width:100%;text-align:left;&quot;</span>&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;更新包名称&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;上传时间&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">foreach</span>(<span class="variable">$GLOBALS</span>[<span class="string">&#x27;oldList&#x27;</span>] <span class="keyword">as</span> <span class="variable">$v</span>)&#123; <span class="meta">?&gt;</span></span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$v</span>[<span class="string">&#x27;name&#x27;</span>];<span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$v</span>[<span class="string">&#x27;ctime&#x27;</span>];<span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> &#125;<span class="meta">?&gt;</span></span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> &#125;<span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/PHP-%E4%BB%A3%E7%A0%81%E6%89%93%E5%8C%85/">PHP 代码打包</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/git/"># git</a>
+              
+                <a class="hover-with-bg" href="/tags/PHP/"># PHP</a>
+              
+                <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81%E6%89%93%E5%8C%85/"># 代码打包</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202308/57d76910c18f.html">https://blog.nucbadaomen.link/202308/57d76910c18f.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
