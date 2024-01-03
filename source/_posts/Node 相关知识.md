@@ -68,14 +68,21 @@ nvm全名node.js version management，是一个node的版本管理工具。通�
 
 下载地址：https://github.com/nvm-sh/nvm
 
-安装步骤参考：[https://blog.csdn.net/sebeefe/article/details/126773937](https://blog.csdn.net/sebeefe/article/details/126773937)
+nvm安装参考
+https://blog.csdn.net/weixin_46516647/article/details/130108878
+
+nvm解决慢的问题
+https://blog.csdn.net/liujiajie1990/article/details/131410885
 
 #### 基本使用
 
 
 ```sh
 # 列出所有可用的node版本
+## Windows
 nvm list available
+## Mac、Linux
+nvm ls-remote
 # 列出安装了node的哪些版本
 nvm list
 # 安装指定版本的node
