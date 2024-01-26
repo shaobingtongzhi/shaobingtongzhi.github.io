@@ -44,6 +44,10 @@ HEIC格式是苹果为了保证压缩比且能保证图片清晰而推出的专�
 
 ![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231201/heicToJpg3.2cn30n0np6hw.webp)
 
+>链接: https://pan.baidu.com/s/1jqqSDTMk7p7d_mUItu9UWg?pwd=snjs 
+>
+>提取码: snjs
+
 # 转换网站
 
 - [改图鸭](https://www.gaituya.com/heic-to-jpg/?zhhxx220317-270952486) - 非会员不能转换超过2M的文件
