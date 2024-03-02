@@ -447,6 +447,56 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/202106/dc413bc18979.html">
+            
+            Linux 磁盘空间爆满，服务无法访问</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              原因：docker引擎默认是安装在系统盘下 &#x2F;var&#x2F;lib&#x2F;docker 一般来说系统盘比较小，当空间不够时会造成docker运行不正常
+造成空间不足的原因：
+
+
+没有用的镜像没有及时删除
+没有用的容器没有及时删除
+docker容器运行中产生的各种垃圾缓存
+系统产生的垃圾
+人为。。。
+
+
+解决方案：把docker迁移到数据盘，所以根本问题是保证磁盘的空间充足
+将do
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2021-06-07 00:00" pubdate>
+                  2021-06-07
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/202002/338072c120c8.html">
             
             Node 相关知识</a>
@@ -819,46 +869,6 @@ Chinese(Simplified) Language 中文语言包，汉化
               
                 <time datetime="2016-05-01 00:00" pubdate>
                   2016-05-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201604/78e744cf92e4.html">
-            
-            Linux 下自定义环境变量文件</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              linux下配置自己的环境变量文件my_env.sh配置环境变量分为系统级和用户级，系统级所有用户生效，用户级针对特定用户，现场环境根据职能不同，会通过用户限制操作范围，环境变量修改以实际需要为准，遵循权限最小原则。
-系统级一般添加系统环境变量，修改&#x2F;etc&#x2F;profile文件，如果操作失误，删除重要配置，影响系统运行。
-centos7版本中 &#x2F;etc&#x2F;pr
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-04-01 00:00" pubdate>
-                  2016-04-01
                 </time>
               
             
