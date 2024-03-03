@@ -447,6 +447,58 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/201605/96bf1cda4fda.html">
+            
+            Linux 下 java 输出中文乱码问题</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              1.检查java文件编码是否是UTF-82.检查系统环境是否安装了中文库
+1locale -a |grep zh_CN
+如果没有中文库，则先安装中文库
+
+安装中文库
+
+1sudo yum install kde-l10n-Chinese
+
+添加UTF-8字符集
+
+1localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+
+配置环境变量
+
+123vi /etc/profi
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2016-05-01 00:00" pubdate>
+                  2016-05-01
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/201604/78e744cf92e4.html">
             
             Linux 下自定义环境变量文件</a>
