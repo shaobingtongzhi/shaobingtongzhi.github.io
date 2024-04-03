@@ -482,3 +482,83 @@ git check-ignore -v Readme.md
  git config --global core.quotepath false
 ```
 
+# 问题汇总
+
+## git status 时有Untracked files 的文件，原因分析及解决方案
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-46-39.6lzv1e1c30o0.webp)
+
+### 原因分析
+
+我们要真正弄明白问题的原因，我们就要先知道文件的几个状态。
+git在未 **commit** 之前有三种状态：
+
+1. Untracked files 未跟踪
+2. Changes not staged for commit 未提交的更改
+3. Changes to be committed 提交的更改
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-50-19.1tcm818hkshs.webp)
+
+什么文件会是未跟踪的呢？
+那些新创建的或者从未add过的文件就是未跟踪的。
+此时有几种情况：
+
+**<font color=red>1. 我们创建了准备提交上去的，这种好办只要add了就可以了</font>**。
+
+**<font color=red>2. 必须放在git工具目录中，但又不能提交的，比如保存了数据库密码的配置文件等的东西。</font>**
+
+**<font color=red>3. 我们不准备提交又没用的。</font>**
+
+### 问题解决
+
+#### 第一种情况
+
+直接add
+
+```sh
+git add xxx.txt
+```
+
+#### 第二种情况
+
+在git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去，git就会自动忽略这些文件
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-56-07.7fejp4587tw0.webp)
+
+.gitignore 文件
+
+```
+personal_tax.access_log
+personal_tax.error_log
+~$管理大屏显示接口文档.docx
+```
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/企业微信截图_20240403085725.1ichvmdhnhls.webp)
+
+#### 第三种情况
+
+我们不需要就删除就可以了：clean
+git clean 是从你的工作目录种删除所有没有tracked(未跟踪)过的文件。
+要知道这个命令很危险，删除了就找不到了。但是如果已经git add . 就不会被删除。
+参数说明：
+n：显示将要被删除的文件以及目录
+d：删除未被添加到git路径中的文件以及目录（将.gitignore文件标记的文件全部删除）。
+f：强制执行（只会删除文件）
+x：删除没有被track的文件
+
+**使用**
+
+```sh
+## 是一个演习，告诉你那些文件会被删除，不会真正删除
+git clean -n
+## 删除当前目录下所有没有track过的文件，.gitignore文件里指定的不会删除。
+git clean -f
+## 删除指定路径下的没有被track过的文件
+git clean -f <path>
+## 强制删除所有没有被track过的文件和文件夹，
+git clean -df
+## 强制删除所有没有被track过的文件（.gitignore文件里指定的也不能避免）
+git clean -fx
+
+```
+
