@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<div class="post-card-center">
+<div class="post-card-main">
+
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/d2cfe85d5ba0.html">
+            
+            哪有没时间那回事</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+耗时2-3天
+晚上睡不着，一定是还不够累，那就早晨早点起，倒逼晚上早睡
+通过打卡可以帮助我们达到坚持的目的
+
+清单制作一天的事务清单，按照清单的内容来安排自己的时间，逐渐优化清单项，以此来控制自己的时间。
+番茄工作法书中提到的番茄工作法就是每工作25分钟休息5分钟，如此循环四次后休息半小时为一轮。这个方法有点机械，但是可以作为训练专注力的基本方法。可以把它当作手段，但不能依赖它！
+打卡通过对期望
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-29 00:00" pubdate>
+                  2023-11-29
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/">读书汇</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/2023/">2023</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/5b0d3f62d75a.html">
+            
+            Gif录制工具</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              简介一款开源、免费的可以将屏幕录制为Gif格式的工具，并且可以对录制结果进行编辑
+官方地址：ScreenToGif - 录制屏幕，编辑并保存为 gif、视频或其他格式
+开源地址：https://github.com/NickeManarin/ScreenToGif
+支持
+Windows
+
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-28 00:00" pubdate>
+                  2023-11-28
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/b84f6f49b07d.html">
+            
+            如何使用手机做电脑的网卡</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+
+背景笔记本太老旧了，自带的无线网卡搜不到路由器的5G wifi，或者搜到的信号弱；台式机不方便安装网线，又不想买无线网卡
+实验硬件
+台式机或笔记本
+
+手机（华为P10）
+
+数据线
+
+
+操作步骤
+手机和电脑用数据线连接
+手机连接家里的无线网络
+打开手机 设置-&gt;无线和网络-&gt;移动网络共享-&gt;USB 共享网络
+
+
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-28 00:00" pubdate>
+                  2023-11-28
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/80a963300e17.html">
+            
+            干法</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+都本书耗时2天
+读本书耗时2天
+干就完了，通过拼命工作达到升华灵魂、陶冶情操的状态
+没有什么烦恼是通过努力工作解决不了的
+
+三种类型的人
+自燃型 - 在别人吩咐之前自发去干
+可燃型 - 等人吩咐才去干，有了命令才去做
+不燃型
+
+努力成为自燃型的人，起码也是可燃型，绝对不能成为不燃型
+工作观工作结果 &#x3D; 思维方式 * 热情 * 能力
+付出不亚于任何人的努力，当你竭尽全力时神灵就会出现
+
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-27 00:00" pubdate>
+                  2023-11-27
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/">读书汇</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/2023/">2023</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/e1629769dacd.html">
+            
+            打造第二大脑</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+阅读本书持续了2-3天空闲时间
+书中提到的12个问题很重要，这些问题最好是开放性的问题，对我们去做知识的收集有很大帮助。
+书中推荐利用软件应用完成信息的存储、提取
+释放大脑，让大脑有更多的空间去做创意类的工作
+
+分享知识的目的在于分享，当然能帮助别人并不是一项义务。
+当我们收集到的知识越来越多的时候，内心的服务意识便会浮出水面。如果知识跟我们在内的任何人都没有影响，那它他又有什么意义呢？
+自我表
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-26 00:00" pubdate>
+                  2023-11-26
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/">读书汇</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E8%AF%BB%E4%B9%A6%E6%B1%87/2023/">2023</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/b586b4ed01bc.html">
+            
+            Alist与RaiDrive实现把网盘挂载在本地</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              
+
+解决网盘账号太多，需要下载不同的客户端，登录不同的账号问题
+让网盘变成类似我们系统的磁盘一样使用
+
+
+Alist一个支持多种存储的文件列表程序
+官网地址：https://alist.nn.ci/zh/
+守护进程用 .VBS 脚本启动和停止，分别创建两个脚本 分别是 启动.vbs 和 停止.vbs
+直接在和Alist启动程序同级文件夹里面双击启动即可，不用担心没有反应 直接去 浏览器访问即可
+启
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-14 00:00" pubdate>
+                  2023-11-14
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/">实用方法</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/215c93d2ee10.html">
+            
+            Windows自启动设置</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              设置自启动
+打开运行 Win + R 
+打开注册表 regedit
+在下面两个地方增加项即可
+
+
+
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-13 00:00" pubdate>
+                  2023-11-13
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/">实用方法</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202311/6742ef5505a1.html">
+            
+            TVBox打包记录</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              TVBox 观影神器介绍一款开源的、可玩性极强的多端影音工具，用户可以自定义资源，市面上大部分影音工具都基于此二次开发。
+开源地址：
+https://github.com/CatVodTVOfficial/TVBoxOSC
+
+特点
+支持各类爬虫源、XP源、采集源等
+无限制，无广告
+支持本地功能，聚合模式
+支持去片头、片尾等
+
+接口地址https://raw.liucn.cc/box/m.json
+
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-11-05 00:00" pubdate>
+                  2023-11-05
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202310/355bba90d6e7.html">
+            
+            文件跨平台共享</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              文件跨平台共享介绍LocalSend 一款开源的跨平台文件传送软件，不需要互联网连接，依靠共享 Wifi 分享文件,与其他依赖外部服务器的消息传递应用程序不同，LocalSend 不需要互联网连接或第三方服务器，使其成为快速可靠的本地通信解决方案
+官网：https://localsend.org
+GitHub：https://github.com/localsend/localsend
+特点
+无需
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-10-25 00:00" pubdate>
+                  2023-10-25
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202310/bd0081249342.html">
+            
+            手机投屏到电脑</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              软件介绍源码地址：https://github.com/Tomotoes/scrcpy-gui
+Scrcpy 是由流行的Android模拟器Genymotion背后的团队创建的，但它本身并不是Android模拟器，它显示和控制通过USB（或通过TCP/IP）连接的Android设备，它不需要任何root访问权限，它适用于GNU/Linux、Windows和MacOS。
+如果你想在桌面上看到你的An
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2023-10-24 00:00" pubdate>
+                  2023-10-24
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+</div>
+</div>
+
+    <nav aria-label="navigation">
+      <span class="pagination" id="pagination">
+        <a class="extend prev" rel="prev" href="/page/4/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">&gt;</a>
+      </span>
+    </nav>
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>

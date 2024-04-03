@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Git 相关知识 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="Git 相关知识"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>Git 相关知识</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2023-08-10 20:19" pubdate>
+          2023-08-10
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 3.8k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        36
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">Git 相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">git常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.1.</span> <span class="toc-text">git add 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">将修改文件提交到暂存区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-restore-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.2.</span> <span class="toc-text">git restore 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">撤销提交到暂存区的文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.3.</span> <span class="toc-text">git remote 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%89%80%E6%9C%89%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">显示所有远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%9F%90%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">显示某个远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">添加远程版本库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">删除远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%BB%93%E5%BA%93%E5%90%8D"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">修改仓库名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.4.</span> <span class="toc-text">git branch 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">查看分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%BD%E8%B8%AA%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">追踪远程分支</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.5.</span> <span class="toc-text">git checkout 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">切换分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%B0%E6%96%B0%E5%88%86%E6%94%AF"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">创建新分支并切换到新分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF%E5%86%85%E7%9A%84%E6%89%80%E6%9C%89%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">删除分支内的所有内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.6.</span> <span class="toc-text">git merge 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E6%96%87%E4%BB%B6%EF%BC%8C%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">恢复文件，撤销修改</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.</span> <span class="toc-text">git stash 贮藏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">贮藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">应用贮藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%8E%B0%E6%9C%89%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.3.</span> <span class="toc-text">查看现有贮藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.4.</span> <span class="toc-text">移除贮藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%B4%AE%E8%97%8F%E9%87%8C%E5%85%B7%E4%BD%93%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.7.5.</span> <span class="toc-text">查看贮藏里具体内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E7%A9%BA%E8%B4%AE%E8%97%8F"><span class="toc-number">1.1.7.6.</span> <span class="toc-text">清空贮藏</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff-%E6%AF%94%E8%BE%83"><span class="toc-number">1.1.8.</span> <span class="toc-text">git diff 比较</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%B7%AE%E5%BC%82"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">比较差异</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">git配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">设置代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">.gitignore文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">1.3.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%BF%BD%E7%95%A5"><span class="toc-number">1.3.3.</span> <span class="toc-text">设置忽略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.3.4.</span> <span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">1.4.</span> <span class="toc-text">其它</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB"><span class="toc-number">2.</span> <span class="toc-text">问题汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-status-%E6%97%B6%E6%9C%89Untracked-files-%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">2.1.</span> <span class="toc-text">git status 时有Untracked files 的文件，原因分析及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">2.1.2.</span> <span class="toc-text">问题解决</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">第一种情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%83%85%E5%86%B5"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">第二种情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D%E6%83%85%E5%86%B5"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">第三种情况</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="Git-相关知识"><a href="#Git-相关知识" class="headerlink" title="Git 相关知识"></a>Git 相关知识</h1><h2 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h2><h3 id="git-add-命令"><a href="#git-add-命令" class="headerlink" title="git add 命令"></a>git add 命令</h3><h4 id="将修改文件提交到暂存区"><a href="#将修改文件提交到暂存区" class="headerlink" title="将修改文件提交到暂存区"></a>将修改文件提交到暂存区</h4><ul>
+<li>git add</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有文件提交到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将指定文件提交暂存区</span></span><br><span class="line">git add a.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-restore-命令"><a href="#git-restore-命令" class="headerlink" title="git restore 命令"></a>git restore 命令</h3><h4 id="撤销提交到暂存区的文件"><a href="#撤销提交到暂存区的文件" class="headerlink" title="撤销提交到暂存区的文件"></a>撤销提交到暂存区的文件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore --staged add.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="git-remote-命令"><a href="#git-remote-命令" class="headerlink" title="git remote 命令"></a>git remote 命令</h3><h4 id="显示所有远程仓库"><a href="#显示所有远程仓库" class="headerlink" title="显示所有远程仓库"></a>显示所有远程仓库</h4><ul>
+<li>git remote -v 显示所有远程仓库</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin	https://gitee.com/hf_app/spring-shop.git (fetch)</span><br><span class="line">origin	https://gitee.com/hf_app/spring-shop.git (push)</span><br></pre></td></tr></table></figure>
+
+<p>这里 origin 为远程地址的别名</p>
+<h4 id="显示某个远程仓库"><a href="#显示某个远程仓库" class="headerlink" title="显示某个远程仓库"></a>显示某个远程仓库</h4><ul>
+<li>git remote show xxx（xxx为远程地址的别名）显示某个远程仓库的信息</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git remote show origin</span><br><span class="line">* remote origin</span><br><span class="line">  Fetch URL: https://gitee.com/hf_app/spring-shop.git</span><br><span class="line">  Push  URL: https://gitee.com/hf_app/spring-shop.git</span><br><span class="line">  HEAD branch: master</span><br><span class="line">  Remote branches:</span><br><span class="line">    dev    tracked</span><br><span class="line">    master tracked</span><br><span class="line">  Local branches configured <span class="keyword">for</span> <span class="string">&#x27;git pull&#x27;</span>:</span><br><span class="line">    dev    merges with remote dev</span><br><span class="line">    master merges with remote master</span><br><span class="line">  Local refs configured <span class="keyword">for</span> <span class="string">&#x27;git push&#x27;</span>:</span><br><span class="line">    dev    pushes to dev    (up to <span class="built_in">date</span>)</span><br><span class="line">    master pushes to master (up to <span class="built_in">date</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h4 id="添加远程版本库"><a href="#添加远程版本库" class="headerlink" title="添加远程版本库"></a>添加远程版本库</h4><ul>
+<li>git remote add [name] [url] 作用是添加远程版本库</li>
+</ul>
+<p>name 是自己取的仓库的名字 </p>
+<p>url 是地址</p>
+<blockquote>
+<p>这个也是经常用到的，添加之后 一般都是使用 git fetch –all 拉取代码</p>
+<p>然后 git push name HEAD:refs&#x2F;for&#x2F;分支名  提交代码</p>
+<p>这里的 name 就是刚才取的名字</p>
+</blockquote>
+<h4 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h4><ul>
+<li>git remote rm name 删除远程仓库</li>
+</ul>
+<h4 id="修改仓库名"><a href="#修改仓库名" class="headerlink" title="修改仓库名"></a>修改仓库名</h4><ul>
+<li>git remote rename old_name new_name 修改仓库名</li>
+</ul>
+<h3 id="git-branch-命令"><a href="#git-branch-命令" class="headerlink" title="git branch 命令"></a>git branch 命令</h3><h4 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看本地分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程分支</span></span><br><span class="line">git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有分支（远程+本地）</span></span><br><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<h4 id="追踪远程分支"><a href="#追踪远程分支" class="headerlink" title="追踪远程分支"></a>追踪远程分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 本地分支名称 --track remotes/origin/source</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-checkout-命令"><a href="#git-checkout-命令" class="headerlink" title="git checkout 命令"></a>git checkout 命令</h3><h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout [branch name]</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建新分支并切换到新分支"><a href="#创建新分支并切换到新分支" class="headerlink" title="创建新分支并切换到新分支"></a>创建新分支并切换到新分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b [branch name]</span><br><span class="line"><span class="comment"># 从指定分支创建新分支</span></span><br><span class="line"><span class="comment"># 1.切换到指定分支</span></span><br><span class="line"><span class="comment"># 2.拉取代码</span></span><br><span class="line"><span class="comment"># 3.创建分支</span></span><br><span class="line"><span class="comment"># 4.推送</span></span><br><span class="line"></span><br><span class="line">git checkout --orphan [branch name]</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除分支内的所有内容"><a href="#删除分支内的所有内容" class="headerlink" title="删除分支内的所有内容"></a>删除分支内的所有内容</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> -rf .</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="git-merge-命令"><a href="#git-merge-命令" class="headerlink" title="git merge 命令"></a>git merge 命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比如从master 合并到 dev</span></span><br><span class="line"><span class="comment"># 1. 切换到 master</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 2. 拉取代码到最新</span></span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 3. 切换到 dev</span></span><br><span class="line">git checkout dev</span><br><span class="line"><span class="comment"># 4. 合并，可以用 git status 查看合并状态检查是否有冲突</span></span><br><span class="line">git merge master</span><br><span class="line"><span class="comment"># 5. 提交</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复文件，撤销修改"><a href="#恢复文件，撤销修改" class="headerlink" title="恢复文件，撤销修改"></a>恢复文件，撤销修改</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复所有文件，撤销所有修改</span></span><br><span class="line">git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个文件，如a.txt</span></span><br><span class="line">git checkout a.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-stash-贮藏"><a href="#git-stash-贮藏" class="headerlink" title="git stash 贮藏"></a>git stash 贮藏</h3><h4 id="贮藏"><a href="#贮藏" class="headerlink" title="贮藏"></a>贮藏</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存当前修改不提交，且仓库状态恢复至上一次提交</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实际应用中推荐给每个stash加一个message，用于记录版本，使用git stash save取代git stash命令</span></span><br><span class="line">git stash save <span class="string">&quot;test-stash&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="应用贮藏"><a href="#应用贮藏" class="headerlink" title="应用贮藏"></a>应用贮藏</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下</span></span><br><span class="line">git stash pop</span><br><span class="line"><span class="comment"># 将缓存堆栈中的stash多次应用到工作目录中，但并不删除stash拷贝</span></span><br><span class="line">git stash apply</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看现有贮藏"><a href="#查看现有贮藏" class="headerlink" title="查看现有贮藏"></a>查看现有贮藏</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br><span class="line"><span class="comment"># 结果示例</span></span><br><span class="line">stash@&#123;0&#125;: WIP on main: ff1853b aaa</span><br><span class="line">stash@&#123;1&#125;: On main: hexo配置</span><br></pre></td></tr></table></figure>
+
+<h4 id="移除贮藏"><a href="#移除贮藏" class="headerlink" title="移除贮藏"></a>移除贮藏</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop stash@&#123;1&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看贮藏里具体内容"><a href="#查看贮藏里具体内容" class="headerlink" title="查看贮藏里具体内容"></a>查看贮藏里具体内容</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash show -p </span><br></pre></td></tr></table></figure>
+
+<h4 id="清空贮藏"><a href="#清空贮藏" class="headerlink" title="清空贮藏"></a>清空贮藏</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash clear</span><br></pre></td></tr></table></figure>
+
+<h3 id="git-diff-比较"><a href="#git-diff-比较" class="headerlink" title="git diff 比较"></a>git diff 比较</h3><h4 id="比较差异"><a href="#比较差异" class="headerlink" title="比较差异"></a>比较差异</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff [文件]</span><br></pre></td></tr></table></figure>
+
+<h2 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config -l</span><br><span class="line"><span class="comment">#列出配置文件中设置的所有变量及其值</span></span><br><span class="line"></span><br><span class="line">git config -e </span><br><span class="line"><span class="comment">#  Opens an editor to modify the specified config file; either --system, --global, or repository (default).</span></span><br><span class="line"><span class="comment">#  打开编辑器以修改指定的配置文件；系统、全局或存储库（默认）。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代理地址是可用的才行</span></span><br><span class="line">git config http.proxy socks5://127.0.0.1:1081</span><br><span class="line">git config https.proxy socks5://127.0.0.1:1081</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消代理</span></span><br><span class="line">git config <span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --<span class="built_in">local</span> <span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global <span class="built_in">unset</span> http.proxy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title=".gitignore文件"></a>.gitignore文件</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>在任何当前工作的 Git 仓库中，每个文件都是这样的：</p>
+<ul>
+<li><strong>追踪的（tracked）</strong>- 这些是 Git 所知道的所有文件或目录。这些是新添加（用 <code>git add</code> 添加）和提交（用 <code>git commit</code> 提交）到主仓库的文件和目录。</li>
+<li><strong>未被追踪的（untracked）</strong> - 这些是在工作目录中创建的，但还没有被暂存（或用 <code>git add</code> 命令添加）的任何新文件或目录。</li>
+<li><strong>被忽略的（ignored）</strong> - 这些是 Git 知道的要全部排除、忽略或在 Git 仓库中不需要注意的所有文件或目录。本质上，这是一种告诉 Git 哪些未被追踪的文件应该保持不被追踪并且永远不会被提交的方法。</li>
+</ul>
+<p>所有被忽略的文件都会被保存在一个 <code>.gitignore</code> 文件中。</p>
+<p><code>.gitignore</code> 文件是一个纯文本文件，包含了项目中所有指定的文件和文件夹的列表，这些文件和文件夹是 Git 应该忽略和不追踪的。</p>
+<p>在 <code>.gitignore</code> 中，你可以通过提及特定文件或文件夹的名称或模式来告诉 Git 只忽略一个文件或一个文件夹。你也可以用同样的方法告诉 Git 忽略多个文件或文件夹。</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>通常，一个 <code>.gitignore</code> 文件会被放在仓库的根目录下。根目录也被称为父目录和当前工作目录。根目录包含了组成项目的所有文件和其他文件夹。</p>
+<p>也就是说，你可以把它放在版本库的任何文件夹中。你甚至可以有多个 <code>.gitignore</code> 文件。</p>
+<p>要在基于 Unix 的系统（如 macOS 或 Linux）上用命令行创建一个 <code>.gitignore</code> 文件，打开终端程序（如 macOS 上的 Terminal.app）。然后，用 <code>cd</code> 命令导航到包含项目的根文件夹，并输入以下命令，为你的目录创建一个 <code>.gitignore</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> .gitignore</span><br></pre></td></tr></table></figure>
+
+<p>名字前面有点（<code>.</code>）的文件默认是隐藏的。</p>
+<p>当单独使用 <code>ls</code> 命令时，隐藏的文件是不可见的。要从命令行查看所有的文件–包括隐藏的文件–请在 <code>ls</code> 命令中使用 <code>-a</code> 标志，如图所示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>在 .gitignore 文件中应包括什么？</strong></em></p>
+<p>你应该考虑添加到 <code>.gitignore</code> 文件中的文件类型是任何不需要被提交的文件。</p>
+<p>你可能出于安全原因不想提交它们，或者因为它们是你的本地文件，因此对与你在同一项目上工作的其他开发者来说是不必要的。</p>
+<p>其中一些可能包括：</p>
+<ul>
+<li>操作系统文件。每个操作系统（如 macOS、Windows 和 Linux）都会生成系统特定的隐藏文件，其他开发者不需要使用这些文件，因为他们的系统也会生成这些文件。例如，在 macOS 上，Finder 会生成一个 <code>.DS_Store</code> 文件，其中包括用户对文件夹的外观和显示的偏好，如图标的大小和位置。</li>
+<li>由代码编辑器和 IDE（IDE 代表集成开发环境）等应用程序生成的配置文件。这些文件是为你、你的配置和你的偏好设置定制的。</li>
+<li>从你的项目中使用的编程语言或框架自动生成的文件，以及编译后的代码特定文件，如 <code>.o</code> 文件。</li>
+<li>由软件包管理器生成的文件夹，如 npm 的 <code>node_modules</code> 文件夹。这是一个用于保存和跟踪你在本地安装的每个软件包的依赖关系的文件夹。</li>
+<li>包含敏感数据和个人信息的文件。这类文件的一些例子是含有你的凭证（用户名和密码）的文件和含有环境变量的文件，如 <code>.env</code> 文件（<code>.env</code> 文件含有需要保持安全和隐私的 API 密钥）。</li>
+<li>运行时文件，如 <code>.log</code> 文件。它们提供关于操作系统的使用活动和错误的信息，以及在操作系统中发生的事件的历史。</li>
+</ul>
+<h3 id="设置忽略"><a href="#设置忽略" class="headerlink" title="设置忽略"></a>设置忽略</h3><p>如果你想只忽略一个特定的文件，你需要提供该文件在项目根目录下的完整路径。</p>
+<p>例如，如果你想忽略位于根目录下的 <code>text.txt</code> 文件，你可以做如下操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/text.txt</span><br></pre></td></tr></table></figure>
+
+<p>而如果你想忽略一个位于根目录下的 <code>test</code> 目录中的 <code>text.txt</code> 文件，你要做的是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/test/text.txt</span><br></pre></td></tr></table></figure>
+
+<p>你也可以这样写上述内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>/text.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果你想忽略所有具有特定名称的文件，你需要写出该文件的字面名称。</p>
+<p>例如，如果你想忽略任何 <code>text.txt</code> 文件，你可以在 <code>.gitignore</code> 中添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.txt</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，你不需要提供特定文件的完整路径。这种模式将忽略位于项目中任何地方的具有该特定名称的所有文件。</p>
+<p>要忽略整个目录及其所有内容，你需要包括目录的名称，并在最后加上斜线 <code>/</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>/</span><br></pre></td></tr></table></figure>
+
+<p>这个命令将忽略位于你的项目中任何地方的名为 <code>test</code> 的目录（包括目录中的其他文件和其他子目录）。</p>
+<p>需要注意的是，如果你只写一个文件的名字或者只写目录的名字而不写斜线 <code>/</code>，那么这个模式将同时匹配任何带有这个名字的文件或目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 匹配任何名字带有 test 的文件和目录</span></span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你想忽略任何以特定单词开头的文件或目录怎么办？</p>
+<p>例如，你想忽略所有名称以 <code>img</code> 开头的文件和目录。要做到这一点，你需要指定你想忽略的名称，后面跟着 <code>*</code> 通配符选择器，像这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img*</span><br></pre></td></tr></table></figure>
+
+<p>这个命令将忽略所有名字以 <code>img</code> 开头的文件和目录。</p>
+<p>但是，如果你想忽略任何以特定单词结尾的文件或目录呢？</p>
+<p>如果你想忽略所有以特定文件扩展名结尾的文件，你需要使用 <code>*</code> 通配符选择器，后面跟你想忽略的文件扩展名。</p>
+<p>例如，如果你想忽略所有以 <code>.md</code> 文件扩展名结尾的 markdown 文件，你可以在你的 <code>.gitignore</code> 文件中添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.md</span><br></pre></td></tr></table></figure>
+
+<p>这个模式将匹配位于项目中任何地方的以 <code>.md</code> 为扩展名的任何文件。</p>
+<p>前面，你看到了如何忽略所有以特定后缀结尾的文件。当你想做一个例外，而有一个后缀的文件你不想忽略的时候，会发生什么？</p>
+<p>假设你在你的 <code>.gitignore</code> 文件中添加了以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.md</span><br></pre></td></tr></table></figure>
+
+<p>这个模式会忽略所有以 <code>.md</code> 结尾的文件，但你不希望 Git 忽略一个 <code>README.md</code> 文件。</p>
+<p>要做到这一点，你需要使用带有感叹号的否定模式，即 <code>!</code>，来排除一个本来会被忽略的文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 忽略所有 .md 文件</span></span><br><span class="line">.md</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不忽略 README.md 文件</span></span><br><span class="line">!README.md</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>.gitignore</code> 文件中使用这两种模式，所有以 <code>.md</code> 结尾的文件都会被忽略，除了 <code>README.md</code> 文件。</p>
+<p>需要记住的是，如果你忽略了整个目录，这个模式就不起作用。</p>
+<p>例如，你忽略了所有的 <code>test</code> 目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>/</span><br></pre></td></tr></table></figure>
+
+<p>假设在一个 <code>test</code> 文件夹内，你有一个文件，<code>example.md</code>，你不想忽略它。</p>
+<p>你不能像这样在一个被忽略的目录内排除一个文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 忽略所有名字带有 test 的目录</span></span><br><span class="line"><span class="built_in">test</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 试图在一个被忽略的目录内排除一个文件是行不通的</span></span><br><span class="line">!<span class="built_in">test</span>/example.md</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><em><strong>如何忽略以前提交的文件</strong></em></p>
+<p>当你创建一个新的仓库时，最好的做法是创建一个 <code>.gitignore</code> 文件，包含所有你想忽略的文件和不同的文件模式–在提交之前。</p>
+<p>Git 只能忽略尚未提交到仓库的未被追踪的文件。</p>
+<p>如果你过去已经提交了一个文件，但希望没有提交，会发生什么？</p>
+<p>比如你不小心提交了一个存储环境变量的 <code>.env</code> 文件。</p>
+<p>你首先需要更新 <code>.gitignore</code> 文件以包括 <code>.env</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给 .gitignore 添加 .env 文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;.env&quot;</span> &gt;&gt; .gitignore</span><br></pre></td></tr></table></figure>
+
+<p>现在，你需要告诉 Git 不要追踪这个文件，把它从索引中删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git rm</code> 命令，连同 <code>--cached</code> 选项，从版本库中删除文件，但不删除实际的文件。这意味着该文件仍然在你的本地系统和工作目录中作为一个被忽略的文件。</p>
+<p><code>git status</code> 会显示该文件已不在版本库中，而输入 <code>ls</code> 命令会显示该文件存在于你的本地文件系统中。</p>
+<p>如果你想从版本库和你的本地系统中删除该文件，省略 <code>--cached</code> 选项。</p>
+<p>接下来，用 <code>git add</code> 命令将 <code>.gitignore</code> 添加到暂存区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .gitignore</span><br></pre></td></tr></table></figure>
+
+<p>最后，用 <code>git commit</code> 命令提交 <code>.gitignore</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;update ignored files&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>如何检查被忽略的文件是被.gitignore中的哪一行生效的</strong></em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例如查询 Readme.md是被哪一行生效的</span></span><br><span class="line">git check-ignore -v Readme.md</span><br></pre></td></tr></table></figure>
+
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p><em><strong>git中文件名中文乱码问题</strong></em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.quotepath <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h1><h2 id="git-status-时有Untracked-files-的文件，原因分析及解决方案"><a href="#git-status-时有Untracked-files-的文件，原因分析及解决方案" class="headerlink" title="git status 时有Untracked files 的文件，原因分析及解决方案"></a>git status 时有Untracked files 的文件，原因分析及解决方案</h2><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-46-39.6lzv1e1c30o0.webp"></p>
+<h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><p>我们要真正弄明白问题的原因，我们就要先知道文件的几个状态。<br>git在未 <strong>commit</strong> 之前有三种状态：</p>
+<ol>
+<li>Untracked files 未跟踪</li>
+<li>Changes not staged for commit 未提交的更改</li>
+<li>Changes to be committed 提交的更改</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-50-19.1tcm818hkshs.webp"></p>
+<p>什么文件会是未跟踪的呢？<br>那些新创建的或者从未add过的文件就是未跟踪的。<br>此时有几种情况：</p>
+<p>**<font color=red>1. 我们创建了准备提交上去的，这种好办只要add了就可以了</font>**。</p>
+<p><strong><font color=red>2. 必须放在git工具目录中，但又不能提交的，比如保存了数据库密码的配置文件等的东西。</font></strong></p>
+<p><strong><font color=red>3. 我们不准备提交又没用的。</font></strong></p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="第一种情况"><a href="#第一种情况" class="headerlink" title="第一种情况"></a>第一种情况</h4><p>直接add</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add xxx.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二种情况"><a href="#第二种情况" class="headerlink" title="第二种情况"></a>第二种情况</h4><p>在git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去，git就会自动忽略这些文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-03_08-56-07.7fejp4587tw0.webp"></p>
+<p>.gitignore 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">personal_tax.access_log</span><br><span class="line">personal_tax.error_log</span><br><span class="line">~$管理大屏显示接口文档.docx</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240403085725.1ichvmdhnhls.webp"></p>
+<h4 id="第三种情况"><a href="#第三种情况" class="headerlink" title="第三种情况"></a>第三种情况</h4><p>我们不需要就删除就可以了：clean<br>git clean 是从你的工作目录种删除所有没有tracked(未跟踪)过的文件。<br>要知道这个命令很危险，删除了就找不到了。但是如果已经git add . 就不会被删除。<br>参数说明：<br>n：显示将要被删除的文件以及目录<br>d：删除未被添加到git路径中的文件以及目录（将.gitignore文件标记的文件全部删除）。<br>f：强制执行（只会删除文件）<br>x：删除没有被track的文件</p>
+<p><strong>使用</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 是一个演习，告诉你那些文件会被删除，不会真正删除</span></span><br><span class="line">git clean -n</span><br><span class="line"><span class="comment">## 删除当前目录下所有没有track过的文件，.gitignore文件里指定的不会删除。</span></span><br><span class="line">git clean -f</span><br><span class="line"><span class="comment">## 删除指定路径下的没有被track过的文件</span></span><br><span class="line">git clean -f &lt;path&gt;</span><br><span class="line"><span class="comment">## 强制删除所有没有被track过的文件和文件夹，</span></span><br><span class="line">git clean -<span class="built_in">df</span></span><br><span class="line"><span class="comment">## 强制删除所有没有被track过的文件（.gitignore文件里指定的也不能避免）</span></span><br><span class="line">git clean -fx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/07-Git%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">07-Git相关笔记</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/git/"># git</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202308/c3cf87f83277.html">https://blog.nucbadaomen.link/202308/c3cf87f83277.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+      document.addEventListener('copy', function (event) {
+      const clipboardData = event.clipboardData || window.clipboardData;
+      if (!clipboardData) { return; }
+      const text = window.getSelection().toString();
+      if (text) {
+        event.preventDefault();
+        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
+      }
+    });
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
