@@ -16,6 +16,6 @@ categories:
 2. 打开注册表 regedit
 3. 在下面两个地方增加项即可
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231113/自启动2.4nv59wk0eg80.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231113/自启动2.4nv59wk0eg80.webp)
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231113/自启动1.29zh3xvpyizo.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231113/自启动1.29zh3xvpyizo.webp)

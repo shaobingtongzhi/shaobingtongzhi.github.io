@@ -40,9 +40,9 @@ IHDR 在PNG格式图像中，文件头数据块（IHDR）是第一个出现的�
 
 1. 打开微信，保持停留在登录二维码界面
 2. 打开CE，附加微信进程，附加后搜索IHDR，校正地址-c，显示出 png
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230919/CE附加微信.6b10rojxepg0.webp)
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230919/CE查询IHDR.5g6n51qoiwk0.webp)
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230919/CE寻找二维码地址.5cbt3v5vqj00.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE附加微信.6b10rojxepg0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE查询IHDR.5g6n51qoiwk0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE寻找二维码地址.5cbt3v5vqj00.webp)
 3. 打开OD，附件微信进程，dd找出来的指针地址
 补充：
 通过dc [地址] 查看内容
@@ -72,7 +72,7 @@ ret
 6C286A0D    6A 00           push 0x0
 6C286A0F    8B01            mov eax,dword ptr ds:[ecx]               ; WeChatWi.6DFC13C8
 ```
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230919/二维码hook地址.2g1ke18by3f.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/二维码hook地址.2g1ke18by3f.webp)
 二维码Hook偏移：  376A05 = 指令地址-WechatWin.dll基址 = 6C286A05-6BF10000
 二维码图片地址偏移： 3230 = 064FB580-064F8350(ECX)   
 二维码图片地址： ECX + 3230

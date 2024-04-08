@@ -18,7 +18,7 @@ Quicker 操作更少，收获更多，您的指尖工作箱
 
 [官网地址](https://getquicker.net/Download)
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20240110/2024-01-10_110709.ysyyq6hn8n4.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240110/2024-01-10_110709.ysyyq6hn8n4.webp)
 
 大小仅有<span style="color:#ff0000 !important;">**25M**</span>左右
 

@@ -20,7 +20,7 @@ categories:
 
 [https://github.com/CatVodTVOfficial/TVBoxOSC](https://github.com/CatVodTVOfficial/TVBoxOSC)
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231105/2023-11-05_174108.jfb3a6k9e9c.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231105/2023-11-05_174108.jfb3a6k9e9c.webp)
 
 ## 特点
 
@@ -45,7 +45,7 @@ Android Studio
 
 版本：
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231105/AndroidStudio版本.4wkupa6lafm0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231105/AndroidStudio版本.4wkupa6lafm0.webp)
 
 第二步：拉取源代码
 
@@ -59,7 +59,7 @@ git clone https://github.com/CatVodTVOfficial/TVBoxOSC.git
 
 参照链接：[https://blog.csdn.net/crasowas/article/details/130002017](https://blog.csdn.net/crasowas/article/details/130002017)
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231105/动画.7l1z1v638ng0.gif)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231105/动画.7l1z1v638ng0.gif)
 
 
 

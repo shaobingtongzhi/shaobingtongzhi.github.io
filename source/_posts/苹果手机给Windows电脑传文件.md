@@ -27,37 +27,37 @@ categories:
 
 我的电脑->右键管理->系统工具->本地用户和组->用户->新建用户
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095010.6qfh019kjps0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095010.6qfh019kjps0.webp)
 
 设置密码永不过期
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095147.dsv6ijmz74o.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095147.dsv6ijmz74o.webp)
 
 ## 在桌面新建一个文件夹并设置共享权限
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095709.blp8lja82ls.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095709.blp8lja82ls.webp)
 
 输入刚才设置的用户名，并点击检查名称
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095813.7hi9kleow5s0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095813.7hi9kleow5s0.webp)
 
 设置权限
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095852.1ih4h5fd5oow.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_095852.1ih4h5fd5oow.webp)
 
 设置共享
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_100257.2jh1otjl98o0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_100257.2jh1otjl98o0.webp)
 
 ## 手机端设置
 
 将手机和电脑连入同一个局域网，或者手机开放热点给电脑也行，然后查看电脑的ip地址
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_101554.2mvxhae9gia0.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_101554.2mvxhae9gia0.webp)
 
 4. 苹果手机->文件->浏览->右上角3个点->连接服务器->输入上面电脑的ip和之前设置好的用户名和密码即可
 
-![](https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_112547.zspowivmzwg.webp)
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_112547.zspowivmzwg.webp)
 
 
 

@@ -562,3 +562,18 @@ git clean -fx
 
 ```
 
+## 如何将本地项目推送到远程仓库
+
+第一步：把在本地项目文件夹下执行 git init 
+
+第二步：设置忽略文件内容 .gitignore
+
+第三步：执行 git add .  
+
+第四步：git commit -m "初始化msg"
+
+第五步：**在gitee 或者github 建立远程仓库**
+
+第六步：将本地仓库和远程仓库建立关联（git remote add origin https://gitee.com/xxx/xxx.git）
+
+第七步：推送到远程仓库（git push -u origin master）
