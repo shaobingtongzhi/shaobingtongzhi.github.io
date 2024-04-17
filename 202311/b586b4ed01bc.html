@@ -525,36 +525,36 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>官网地址：<a target="_blank" rel="noopener" href="https://www.raidrive.com/">RaiDrive</a></p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://app.raidrive.com/d86ea6fa40f74010914976063f94774b/release/stable/RaiDrive_2023.9.16.8_x64.msi">下载</a></p>
 <h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><p>默认安装就可以了，由于网络问题可能一次安装不成功，多尝试吧</p>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_164119.7kq5osta0q80.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_164119.7kq5osta0q80.webp"></p>
 <p><strong>实在是安装不上就采用下面的方式吧</strong></p>
 <h1 id="rclone"><a href="#rclone" class="headerlink" title="rclone"></a>rclone</h1><p>除了RaiDrive以外，rclone也可以把Alist映射到本地，并且是开源免费的，不会有弹窗广告，但是对新手不太友好</p>
 <h2 id="准备软件"><a href="#准备软件" class="headerlink" title="准备软件"></a>准备软件</h2><ol>
 <li>下载rclone安装包，<a target="_blank" rel="noopener" href="https://github.com/rclone">下载地址</a>，根据情况下载对应的版本就可以了</li>
 </ol>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_165752.3wwzb15g7zg0.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_165752.3wwzb15g7zg0.webp"></p>
 <ol start="2">
 <li>下载winfsp，<a target="_blank" rel="noopener" href="https://winfsp.dev/rel/">下载地址</a> 在windows操作系统下是必须的</li>
 </ol>
 <h2 id="安装配置-1"><a href="#安装配置-1" class="headerlink" title="安装配置"></a>安装配置</h2><ol>
 <li>解压rclone-v1.65.0-windows-amd64.zip，并把解压出来的文件直接拷贝到自己的安装目录即可。我一般是D:\Program</li>
 </ol>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170614.q51caic82jk.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170614.q51caic82jk.webp"></p>
 <ol start="2">
 <li>安装winfsp，选择好安装目录，其他的默认安装就可以了</li>
 <li>进入rclone.exe所在目录进行配置</li>
 </ol>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_171216.5nhxok1dvg80.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_171216.5nhxok1dvg80.webp"></p>
 <p>默认生成的配置文件在：C:\Users\xxx\AppData\Roaming\rclone\rclone.conf</p>
 <ol start="4">
 <li>进入rclone.exe所在目录执行挂载命令</li>
 </ol>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170911.4cx3dc2x6ly0.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170911.4cx3dc2x6ly0.webp"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone mount 远程磁盘: k: --network-mode --header <span class="string">&quot;Referer:&quot;</span> --multi-thread-streams 8 --buffer-size 512M  --vfs-fast-fingerprint --vfs-cache-mode full --no-modtime --file-perms 0777</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>这个时候就可以看到已经挂载完成了</li>
 </ol>
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_172306.38ulgd6nkxq0.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_172306.38ulgd6nkxq0.webp"></p>
 <h2 id="开机自启动"><a href="#开机自启动" class="headerlink" title="开机自启动"></a>开机自启动</h2><ol>
 <li><p>将配置文件拷贝到rclone安装目录</p>
 </li>

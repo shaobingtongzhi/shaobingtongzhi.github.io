@@ -508,7 +508,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>第二步：打开终端输入下面命令，记住U盘的名字</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20231213/%E6%88%AA%E5%B1%8F2023-12-13-%E4%B8%8B%E5%8D%8812.14.46.5e8muw6vjcg0.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231213/%E6%88%AA%E5%B1%8F2023-12-13-%E4%B8%8B%E5%8D%8812.14.46.5e8muw6vjcg0.png"></p>
 <p>第三步：在&#x2F;etc目录下创建一个文件fstab，并写入下面的内容</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建fstab文件</span></span><br><span class="line">sudo <span class="built_in">touch</span> /etc/fstab</span><br><span class="line">sudo vim /etc/fstab</span><br><span class="line"><span class="comment">#写入下面内容</span></span><br><span class="line">LABEl=U启动U盘 none ntfs rw,auto,nobrowse</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
 

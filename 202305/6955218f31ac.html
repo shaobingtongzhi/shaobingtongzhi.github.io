@@ -541,7 +541,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <h3 id="3-2-设置SpringSecurity允许OPTIONS请求访问"><a href="#3-2-设置SpringSecurity允许OPTIONS请求访问" class="headerlink" title="3.2 设置SpringSecurity允许OPTIONS请求访问"></a>3.2 设置SpringSecurity允许OPTIONS请求访问</h3><p>设置完上面后，发现OPTIONS预检请求无法通过认证，则说明SpringBoot 整合的 SpringSecurity 没有对OPTION请求放开认证。那么我们就需要进行如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.antMatchers(HttpMethod.OPTIONS)<span class="comment">//跨域请求会先进行一次options请求</span></span><br><span class="line">.permitAll()</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://jsd.cdn.zzko.cn/gh/hfshaobing/picx-images-hosting@master/20230814/security%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE.2r5j7q6whje0.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230814/security%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE.2r5j7q6whje0.webp"></p>
 
       </div>
     </div>
