@@ -25,17 +25,43 @@ https://archive.apache.org/dist/maven/maven-3/
 
 # Maven 的安装与配置
 
-1. 解压至非中文无空格目录D:\Programs
+1. 解压至非中文无空格目录，比如：D:\Programs
 
-2. 配置环境变量 ，
+## Windows下的环境变量配置
+
+1. 环境变量 ，
 
    1）名称：M2_HOME 值：D:\Programs\apache-maven-3.9.6
 
    2）Path里追加：%M2_HOME%\bin 
 
-3. 验证maven是否可用，打开cmd , 输入命令：mvn -v 
+2. 验证maven是否可用，打开cmd , 输入命令：mvn -v 
 
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/企业微信截图_20240408083756.2ulsmzl8d1a0.webp)
+
+## MAC下的环境变量配置
+
+在终端打开配置环境变量到文件：
+
+1）在终端输入  vim ~/.bash_profile，进入到环境变量配置文件里面；
+
+2）进入后，是read模式，按下 i (编辑)键，进入insert模式；
+
+3）将环境变量加入其实，环境变量如下：
+
+export MAVEN_HOME=/Users/mac/maven/apache-maven-3.8.1
+
+export PATH=$PATH:$MAVEN_HOME/bin
+
+4）按下 ESC，退出insert模式；
+
+5）输入 :wq (保存修改)退出当前文件；
+
+6）使修改的环境变量bash_profile文件生效，输入 source ~/.bash_profile，按下Enter键即可.
+
+## setting.xml配置文件设置
+
+maven的安装包中conf文件夹下的setting.xml文件指定正确的仓库
 
 4. 配置本地仓库位置
 
@@ -76,7 +102,7 @@ https://archive.apache.org/dist/maven/maven-3/
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</xmaven.compiler.compilerVersion>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
 </profile>
 ```
