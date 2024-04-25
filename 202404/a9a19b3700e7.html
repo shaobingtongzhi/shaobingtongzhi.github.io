@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>Maven的安装与配置 - 因为有你，所以精彩</title>
+    <title>Springboot 集成 swagger - 因为有你，所以精彩</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
     <meta name="author" content="nuc_八道门">
     <meta name="keywords" content="">
-    <meta property="og:title" content="Maven的安装与配置"/>
+    <meta property="og:title" content="Springboot 集成 swagger"/>
     <style>
 
 
@@ -449,7 +449,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>Maven的安装与配置</h3>
+  <h3>Springboot 集成 swagger</h3>
     
       <span class="post-meta-label">
         nuc_八道门
@@ -458,8 +458,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2024-04-08 00:00" pubdate>
-          2024-04-08
+        <time datetime="2024-04-18 00:00" pubdate>
+          2024-04-18
         </time>
       </span>
     
@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 581 字
+        共 604 字
       </span>
     
     
@@ -495,66 +495,51 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">前置环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Maven-%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.</span> <span class="toc-text">Maven 下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Maven-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">Maven 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E4%B8%8B%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">Windows下的环境变量配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC%E4%B8%8B%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">MAC下的环境变量配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setting-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">setting.xml配置文件设置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEMaven%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">IDEA中配置Maven插件</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">引入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">增加配置类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">常用注解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">报错处理</span></a></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ul>
-<li>windows 10 </li>
-<li>jdk 1.8</li>
-</ul>
-<h1 id="Maven-下载"><a href="#Maven-下载" class="headerlink" title="Maven 下载"></a>Maven 下载</h1><p><a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408082830.2667so4c9wzk.webp"></p>
-<p>或者</p>
-<p><a target="_blank" rel="noopener" href="https://archive.apache.org/dist/maven/maven-3/">https://archive.apache.org/dist/maven/maven-3/</a></p>
-<h1 id="Maven-的安装与配置"><a href="#Maven-的安装与配置" class="headerlink" title="Maven 的安装与配置"></a>Maven 的安装与配置</h1><ol>
-<li>解压至非中文无空格目录，比如：D:\Programs</li>
-</ol>
-<h2 id="Windows下的环境变量配置"><a href="#Windows下的环境变量配置" class="headerlink" title="Windows下的环境变量配置"></a>Windows下的环境变量配置</h2><ol>
-<li><p>环境变量 ，</p>
-<p>1）名称：M2_HOME 值：D:\Programs\apache-maven-3.9.6</p>
-<p>2）Path里追加：%M2_HOME%\bin </p>
-</li>
-<li><p>验证maven是否可用，打开cmd , 输入命令：mvn -v</p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408083756.2ulsmzl8d1a0.webp"></p>
-<h2 id="MAC下的环境变量配置"><a href="#MAC下的环境变量配置" class="headerlink" title="MAC下的环境变量配置"></a>MAC下的环境变量配置</h2><p>在终端打开配置环境变量到文件：</p>
-<p>1）在终端输入  vim ~&#x2F;.bash_profile，进入到环境变量配置文件里面；</p>
-<p>2）进入后，是read模式，按下 i (编辑)键，进入insert模式；</p>
-<p>3）将环境变量加入其实，环境变量如下：</p>
-<p>export MAVEN_HOME&#x3D;&#x2F;Users&#x2F;mac&#x2F;maven&#x2F;apache-maven-3.8.1</p>
-<p>export PATH&#x3D;$PATH:$MAVEN_HOME&#x2F;bin</p>
-<p>4）按下 ESC，退出insert模式；</p>
-<p>5）输入 :wq (保存修改)退出当前文件；</p>
-<p>6）使修改的环境变量bash_profile文件生效，输入 source ~&#x2F;.bash_profile，按下Enter键即可.</p>
-<h2 id="setting-xml配置文件设置"><a href="#setting-xml配置文件设置" class="headerlink" title="setting.xml配置文件设置"></a>setting.xml配置文件设置</h2><p>maven的安装包中conf文件夹下的setting.xml文件指定正确的仓库</p>
-<ol start="4">
-<li>配置本地仓库位置</li>
-</ol>
-<p>​		1）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		2）把注释中的 <localRepository>&#x2F;path&#x2F;to&#x2F;local&#x2F;repo</localRepository> 复制出来，修改路径：D:&#x2F;mvn_repository ，大概在 <strong>53行</strong> 左右</p>
-<ol start="5">
-<li>配置阿里云镜像加速</li>
-</ol>
-<p>​		1）查看配置指南 <a target="_blank" rel="noopener" href="https://developer.aliyun.com/mvn/guide">https://developer.aliyun.com/mvn/guide</a></p>
-<p>​		2）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		3）复制下面的代码到 <mirrors></mirrors> 标签里,大概在 <strong>159行</strong> 左右</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ol start="6">
-<li>配置 jdk 版本</li>
-</ol>
-<p>​		1）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		2）复制下面的代码到 <profiles></profiles> 标签里，大概在 <strong>196行</strong> 左右</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="增加配置类"><a href="#增加配置类" class="headerlink" title="增加配置类"></a>增加配置类</h1><p>配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwaggerConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;swagger.title&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;swagger.description&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;swagger.version&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String version;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;swagger.basePackage&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String basePackage;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Docket <span class="title function_">api</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(basePackage)) <span class="comment">// 指定扫描的controller路径</span></span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build().apiInfo(apiInfo());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfo</span>(title,</span><br><span class="line">                description,</span><br><span class="line">                version,</span><br><span class="line">                <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Contact</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>),</span><br><span class="line">                <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ArrayList</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="IDEA中配置Maven插件"><a href="#IDEA中配置Maven插件" class="headerlink" title="IDEA中配置Maven插件"></a>IDEA中配置Maven插件</h1><ol>
-<li>打开设置-》构建、执行、部署-》构建工具-》Maven</li>
-<li>配置 Maven 主路径，用户配置文件、本地仓库</li>
+<p>配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">swagger:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">智博综合能源智慧管理平台</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">平台接口文档</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line">  <span class="attr">basePackage:</span> <span class="string">net.zhiboredian.controller</span> <span class="comment"># 指定扫描的controller路径</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h1><p><strong>@Api</strong></p>
+<p>将类标记为Swagger资源。默认情况下，Swagger Core将只包括和内省使用@Api注释的类，并将忽略其他资源（JAX-RS端点、Servlet等）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_09-30-47.1acl5wosz9r4.webp"></p>
+<p><strong>@Tag</strong></p>
+<p>注释可以应用于类或方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_09-31-06.imy7z9duuqg.webp"></p>
+<p><strong>@ApiOperation</strong></p>
+<p>描述针对特定路径的操作，通常是HTTP方法。<br>具有等效路径的操作被分组在单个操作对象中。HTTP方法和路径的组合创建了一个唯一的操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_09-36-33.1044vq08xkfk.webp"></p>
+<p><strong>@ApiParam</strong></p>
+<p>为操作参数添加其他元数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_09-38-40.1fxy30ztvxi8.webp"></p>
+<p><strong>@ApiModelProperty</strong></p>
+<p>添加和操作模型特性的数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_09-40-14.6a9cpp1oz9s0.webp"></p>
+<h1 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h1><ol>
+<li>Failed to start bean ‘documentationPluginsBootstrapper’</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408092153.29xlrix3usro.webp"></p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49523761/article/details/122305980">https://blog.csdn.net/weixin_49523761/article/details/122305980</a></p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qiziyu520/article/details/123685295">https://blog.csdn.net/qiziyu520/article/details/123685295</a></p>
+<p>方案一：添加配置项（治标）</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">mvc:</span></span><br><span class="line">    	<span class="attr">pathmatch:</span></span><br><span class="line">      		<span class="attr">matching-strategy:</span> <span class="string">ant_path_matcher</span></span><br></pre></td></tr></table></figure>
+
+<p>方案二：在项目里添加这个 bean ：（加在配置类里就可）(治本)，没试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> BeanPostProcessor <span class="title function_">springfoxHandlerProviderBeanPostProcessor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BeanPostProcessor</span>() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Object <span class="title function_">postProcessAfterInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException &#123;</span><br><span class="line">            <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> WebMvcRequestHandlerProvider || bean <span class="keyword">instanceof</span> WebFluxRequestHandlerProvider) &#123;</span><br><span class="line">                customizeSpringfoxHandlerMappings(getHandlerMappings(bean));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> bean;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> &lt;T <span class="keyword">extends</span> <span class="title class_">RequestMappingInfoHandlerMapping</span>&gt; <span class="keyword">void</span> <span class="title function_">customizeSpringfoxHandlerMappings</span><span class="params">(List&lt;T&gt; mappings)</span> &#123;</span><br><span class="line">            List&lt;T&gt; copy = mappings.stream()</span><br><span class="line">                    .filter(mapping -&gt; mapping.getPatternParser() == <span class="literal">null</span>)</span><br><span class="line">                    .collect(Collectors.toList());</span><br><span class="line">            mappings.clear();</span><br><span class="line">            mappings.addAll(copy);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">        <span class="keyword">private</span> List&lt;RequestMappingInfoHandlerMapping&gt; <span class="title function_">getHandlerMappings</span><span class="params">(Object bean)</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> ReflectionUtils.findField(bean.getClass(), <span class="string">&quot;handlerMappings&quot;</span>);</span><br><span class="line">                field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">return</span> (List&lt;RequestMappingInfoHandlerMapping&gt;) field.get(bean);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalArgumentException | IllegalAccessException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalStateException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改swagger的日志级别，用来屏蔽”swagger中整型参数无法设置默认值WARN提示”问题</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">file:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">log/log.log</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">root:</span> <span class="string">info</span></span><br><span class="line">    <span class="attr">net.zhiboredian :</span> <span class="string">info</span></span><br><span class="line">    <span class="attr">io:</span></span><br><span class="line">      <span class="attr">swagger:</span> <span class="string">error</span> <span class="comment">#将swagger的日志级别调试为error，用来屏蔽&quot;swagger中整型参数无法设置默认值WARN提示&quot;问题</span></span><br></pre></td></tr></table></figure>
+
 
       </div>
     </div>
@@ -565,14 +550,18 @@ header .header__right .dropdown-menus .dropdown-menu {
     <div id="p-meta-i">
         
               
-                <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
               
-                <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Maven/">Maven</a>
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
               
           
           
               
-                <a class="hover-with-bg" href="/tags/Maven/"># Maven</a>
+                <a class="hover-with-bg" href="/tags/Springboot/"># Springboot</a>
+              
+                <a class="hover-with-bg" href="/tags/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90/"># 接口文档生成</a>
+              
+                <a class="hover-with-bg" href="/tags/swagger/"># swagger</a>
               
           
     </div>
@@ -584,7 +573,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
   <div class="post-copyright">
     <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
-    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202404/15e9783b8316.html">https://blog.nucbadaomen.link/202404/15e9783b8316.html</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202404/a9a19b3700e7.html">https://blog.nucbadaomen.link/202404/a9a19b3700e7.html</a></p>
     <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
   </div>
   

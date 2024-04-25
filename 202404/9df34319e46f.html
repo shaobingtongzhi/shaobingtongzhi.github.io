@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>Maven的安装与配置 - 因为有你，所以精彩</title>
+    <title>Arthas的使用 - 因为有你，所以精彩</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
     <meta name="author" content="nuc_八道门">
     <meta name="keywords" content="">
-    <meta property="og:title" content="Maven的安装与配置"/>
+    <meta property="og:title" content="Arthas的使用"/>
     <style>
 
 
@@ -449,7 +449,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>Maven的安装与配置</h3>
+  <h3>Arthas的使用</h3>
     
       <span class="post-meta-label">
         nuc_八道门
@@ -458,8 +458,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2024-04-08 00:00" pubdate>
-          2024-04-08
+        <time datetime="2024-04-23 00:00" pubdate>
+          2024-04-23
         </time>
       </span>
     
@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 581 字
+        共 437 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        7
+        4
          分钟
       </span>
     
@@ -495,66 +495,34 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">前置环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Maven-%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.</span> <span class="toc-text">Maven 下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Maven-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">Maven 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E4%B8%8B%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">Windows下的环境变量配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MAC%E4%B8%8B%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">MAC下的环境变量配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setting-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">setting.xml配置文件设置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEMaven%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">IDEA中配置Maven插件</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">2.1.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jad"><span class="toc-number">2.2.1.</span> <span class="toc-text">jad</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thread"><span class="toc-number">2.2.2.</span> <span class="toc-text">thread</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trace"><span class="toc-number">2.2.3.</span> <span class="toc-text">trace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#watch"><span class="toc-number">2.2.4.</span> <span class="toc-text">watch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt"><span class="toc-number">2.2.5.</span> <span class="toc-text">tt</span></a></li></ol></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h1><ul>
-<li>windows 10 </li>
-<li>jdk 1.8</li>
-</ul>
-<h1 id="Maven-下载"><a href="#Maven-下载" class="headerlink" title="Maven 下载"></a>Maven 下载</h1><p><a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408082830.2667so4c9wzk.webp"></p>
-<p>或者</p>
-<p><a target="_blank" rel="noopener" href="https://archive.apache.org/dist/maven/maven-3/">https://archive.apache.org/dist/maven/maven-3/</a></p>
-<h1 id="Maven-的安装与配置"><a href="#Maven-的安装与配置" class="headerlink" title="Maven 的安装与配置"></a>Maven 的安装与配置</h1><ol>
-<li>解压至非中文无空格目录，比如：D:\Programs</li>
-</ol>
-<h2 id="Windows下的环境变量配置"><a href="#Windows下的环境变量配置" class="headerlink" title="Windows下的环境变量配置"></a>Windows下的环境变量配置</h2><ol>
-<li><p>环境变量 ，</p>
-<p>1）名称：M2_HOME 值：D:\Programs\apache-maven-3.9.6</p>
-<p>2）Path里追加：%M2_HOME%\bin </p>
-</li>
-<li><p>验证maven是否可用，打开cmd , 输入命令：mvn -v</p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408083756.2ulsmzl8d1a0.webp"></p>
-<h2 id="MAC下的环境变量配置"><a href="#MAC下的环境变量配置" class="headerlink" title="MAC下的环境变量配置"></a>MAC下的环境变量配置</h2><p>在终端打开配置环境变量到文件：</p>
-<p>1）在终端输入  vim ~&#x2F;.bash_profile，进入到环境变量配置文件里面；</p>
-<p>2）进入后，是read模式，按下 i (编辑)键，进入insert模式；</p>
-<p>3）将环境变量加入其实，环境变量如下：</p>
-<p>export MAVEN_HOME&#x3D;&#x2F;Users&#x2F;mac&#x2F;maven&#x2F;apache-maven-3.8.1</p>
-<p>export PATH&#x3D;$PATH:$MAVEN_HOME&#x2F;bin</p>
-<p>4）按下 ESC，退出insert模式；</p>
-<p>5）输入 :wq (保存修改)退出当前文件；</p>
-<p>6）使修改的环境变量bash_profile文件生效，输入 source ~&#x2F;.bash_profile，按下Enter键即可.</p>
-<h2 id="setting-xml配置文件设置"><a href="#setting-xml配置文件设置" class="headerlink" title="setting.xml配置文件设置"></a>setting.xml配置文件设置</h2><p>maven的安装包中conf文件夹下的setting.xml文件指定正确的仓库</p>
-<ol start="4">
-<li>配置本地仓库位置</li>
-</ol>
-<p>​		1）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		2）把注释中的 <localRepository>&#x2F;path&#x2F;to&#x2F;local&#x2F;repo</localRepository> 复制出来，修改路径：D:&#x2F;mvn_repository ，大概在 <strong>53行</strong> 左右</p>
-<ol start="5">
-<li>配置阿里云镜像加速</li>
-</ol>
-<p>​		1）查看配置指南 <a target="_blank" rel="noopener" href="https://developer.aliyun.com/mvn/guide">https://developer.aliyun.com/mvn/guide</a></p>
-<p>​		2）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		3）复制下面的代码到 <mirrors></mirrors> 标签里,大概在 <strong>159行</strong> 左右</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>背景：项目采用的 Springboot + docker部署 的方式，需要在线排查问题</p>
+<p>Arthas 官网地址：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/">https://arthas.aliyun.com/</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Arthas 是一款线上监控诊断产品，通过全局视角实时查看应用 load、内存、gc、线程的状态信息，并能在不修改应用代码的情况下，对业务问题进行诊断，包括查看方法调用的出入参、异常，监测方法执行耗时，类加载信息等，大大提升线上问题排查效率</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>将下载的 arthas 包导入到 docker 容器内</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar arthas-boot.jar</span><br></pre></td></tr></table></figure>
 
-<ol start="6">
-<li>配置 jdk 版本</li>
-</ol>
-<p>​		1）打开 D:\Programs\apache-maven-3.9.6\conf\settings.xml</p>
-<p>​		2）复制下面的代码到 <profiles></profiles> 标签里，大概在 <strong>196行</strong> 左右</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="jad"><a href="#jad" class="headerlink" title="jad"></a>jad</h3><p>反编译指定已加载类的源码，可以查看代码是否更新正确了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jad net.zhiboredian.controller.Device</span><br></pre></td></tr></table></figure>
 
-<h1 id="IDEA中配置Maven插件"><a href="#IDEA中配置Maven插件" class="headerlink" title="IDEA中配置Maven插件"></a>IDEA中配置Maven插件</h1><ol>
-<li>打开设置-》构建、执行、部署-》构建工具-》Maven</li>
-<li>配置 Maven 主路径，用户配置文件、本地仓库</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240408092153.29xlrix3usro.webp"></p>
+<h3 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h3><p>查看当前线程信息，查看线程的堆栈</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定最忙的前 3 个线程并打印堆栈</span></span><br><span class="line">thread -3</span><br><span class="line"><span class="comment"># 查看指定线程pid的堆栈</span></span><br><span class="line">thread 17</span><br></pre></td></tr></table></figure>
+
+<h3 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h3><p>可以用来排查性能问题，由于命令难写，可以在IDEA中安装 arthas 插件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询接口informationList中执行耗时超过1秒的方法</span></span><br><span class="line">trace net.zhiboredian.controller.Device informationList  -n 5 --skipJDKMethod <span class="literal">false</span> <span class="string">&#x27;#cost&gt;1000&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p>能方便的观察到指定函数的调用情况，比如说入参、返回值，相当于本地的debug</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch net.zhiboredian.controller.Device getDeviceByWord <span class="string">&#x27;&#123;params,returnObj,throwExp&#125;&#x27;</span>  -n 5  -x 3 </span><br></pre></td></tr></table></figure>
+
+<h3 id="tt"><a href="#tt" class="headerlink" title="tt"></a>tt</h3><p>方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 记录</span></span><br><span class="line">tt -t net.zhiboredian.controller.Device getDeviceByWord -n 5 </span><br><span class="line"><span class="comment"># 回看</span></span><br><span class="line">tt -p -i 1000</span><br><span class="line"></span><br><span class="line"><span class="comment"># tt 相关功能在使用完之后，需要手动释放内存，否则长时间可能导致OOM</span></span><br><span class="line">tt --delete-all</span><br></pre></td></tr></table></figure>
+
+
+
 
       </div>
     </div>
@@ -565,15 +533,11 @@ header .header__right .dropdown-menus .dropdown-menu {
     <div id="p-meta-i">
         
               
-                <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
               
-                <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Maven/">Maven</a>
+                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/09-java%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">09-java相关笔记</a>
               
           
-          
-              
-                <a class="hover-with-bg" href="/tags/Maven/"># Maven</a>
-              
           
     </div>
 </div>
@@ -584,7 +548,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
   <div class="post-copyright">
     <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
-    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202404/15e9783b8316.html">https://blog.nucbadaomen.link/202404/15e9783b8316.html</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202404/9df34319e46f.html">https://blog.nucbadaomen.link/202404/9df34319e46f.html</a></p>
     <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
   </div>
   
