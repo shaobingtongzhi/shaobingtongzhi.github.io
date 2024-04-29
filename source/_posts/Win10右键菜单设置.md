@@ -41,6 +41,20 @@ Windows操作系统下自定义右键菜单功能有的时候可以实实在在�
 
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231225/2023-12-25_153818.5r2bz5ao0vg0.webp)
 
+## 情况三
+
+在文件上右键
+
+```
+计算机\HKEY_CLASSES_ROOT\*\shell\
+```
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240429/Snipaste_2024-04-29_11-35-19.3jvem6jy35i0.webp)
+
+实际效果：
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240429/Snipaste_2024-04-29_11-39-53.64s14kawhjo0.webp)
+
 # 其他
 
 关于 <font color=red>**鼠标单击右键时，菜单移动到鼠标左侧的问题**</font>
