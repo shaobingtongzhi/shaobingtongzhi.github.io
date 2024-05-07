@@ -31,7 +31,7 @@ server {
     server_name  172.16.10.101;
     location / {
     	# 代理的真实服务地址，可以是ip、域名
-    	# proxy_pass http://localhost:8080
+    	# proxy_pass http://localhost:8080;
     	proxy_pass http://ietest.zhiboredian.net/;
     }
 }
