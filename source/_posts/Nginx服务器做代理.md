@@ -49,5 +49,7 @@ server {
 ./nginx -s stop
 # 加载配置文件
 ./nginx -s reload
+# 强制关闭nginx
+taskkill /f /t /im nginx.exe
 ```
 

@@ -47,6 +47,12 @@ CentOS版本：7.9.2009 x86_64
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230907/安装盘片_2.hyq7tp9edi8.webp)
 ### 网络设置
 
+
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240509/Snipaste_2024-05-09_15-15-09.5xjhu8ijkig0.webp)
+
+
+
 网卡1:NAT网络
 
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230907/网卡_1.4cqzlfn58nc0.webp)

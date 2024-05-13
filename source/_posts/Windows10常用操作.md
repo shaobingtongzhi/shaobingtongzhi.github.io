@@ -28,3 +28,13 @@ categories:
 Windows安全中心-》病毒和威胁防护-》管理设置-》添加和删除排除项
 
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240507/Snipaste_2024-05-07_14-36-50.z3lso0qbfhs.png)
+
+4. 防火墙开启后无法 ping 通？
+
+要允许ICMP数据包（例如ping请求）通过Windows防火墙，您需要修改入站规则来允许ICMP通信。
+
+控制面板-》系统和安全-》Windows Defender防火墙-》高级设置-》入站规则
+
+在右侧，滚动找到和选择名为“文件和打印机共享 (Echo Request - ICMPv4-In)”的规则，右键启用规则
+
+![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240509/Snipaste_2024-05-09_11-01-23.2myzdbtw9li0.webp)
