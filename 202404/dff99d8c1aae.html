@@ -532,7 +532,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li>然后打开windows的“任务计划程序”，就可以看到刚才创建的那一条。如果不想用命令执行，也可以去“任务计划程序”界面化创建。</li>
 </ol>
 <p>计算机管理-》任务计划程序-》创建基本任务</p>
-<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240403090754.1c56hm7ma3ds.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240403090754.1c56hm7ma3ds.149enkm3gt5s.jpg"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /sc minute /mo 5 /tn &quot;自动更新-git&quot; /tr &quot;D:\code\zb-three-js\run.vbs&quot;</span><br><span class="line"></span><br><span class="line"># 参数说明：</span><br><span class="line">schtasks /create : 固定写法</span><br><span class="line">/sc minute : /sc就指这条schtasks的类型。minute是分钟的意思，就是分钟类型，类型有很多，每小时每天每个月，具体的自己看文档</span><br><span class="line">/mo 5 : /mo就是运行的频率，5就是每5分钟运行一次，假如/sc类型是hourly，就是每5个小时运行一次。</span><br><span class="line">/tn &quot;自动更新-git&quot; : /tn就是给这个计划任务取个名字。随意写</span><br><span class="line">/tr &quot;D:\XXXX.bat&quot;: /tr就是你要运行的路径，其实只要把创建的bat完整路径贴过来即可</span><br></pre></td></tr></table></figure>
 
 
