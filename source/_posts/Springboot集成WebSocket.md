@@ -238,3 +238,56 @@ public class WebSocketServer {
 ![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240423/Snipaste_2024-04-23_11-48-52.1dpeiksozy0w.webp)
 
 参考链接：https://blog.csdn.net/m0_52208135/article/details/127613516
+
+# 扩展
+
+## 带参数的websocket地址
+
+```java
+@ServerEndpoint("/device/alarm/{type}")
+@Component
+public class WebSocketServer {
+    private final static Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
+    //与某个客户端的连接会话，需要通过它来给客户端发送数据
+    private static final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
+    @OnOpen
+    public void onOpen(@PathParam("type") String type, Session session) throws IOException {
+        sessions.put(type,session);
+        HashMap<String, String> mess = new HashMap<>();
+        mess.put("code","200");
+        mess.put("msg","连接成功");
+        String s = JSONUtil.toJsonStr(mess);
+        sendMessage(type,s);
+        logger.info("websocket open ...");
+        System.out.println("websocket open ...");
+    }
+    @OnClose
+    public void onClose(@PathParam("type") String type) throws IOException{
+        System.out.println("websocket close !!!");
+        logger.info("websocket close !!!");
+        //从set中删除
+        sessions.remove(type);
+    }
+    //收到客户端消息后调用的方法
+    @OnMessage
+    public void onMessage(String mess,@PathParam("type") String type){
+        logger.info("客户端：{} ，received mess: {}",type,mess);
+    }
+    @OnError
+    public void onError(Throwable err){
+        logger.error("出错了！！！");
+        System.out.println("出错了！！！");
+        err.printStackTrace();
+    }
+    public static void sendInfo(String type,String message) throws IOException{
+        WebSocketServer webSocketServer = new WebSocketServer();
+        webSocketServer.sendMessage(type,message);
+    }
+    public void sendMessage(String type,String message) throws IOException {
+        if(sessions.size() > 0 && sessions.get(type) != null){
+            sessions.get(type).getBasicRemote().sendText(message);
+        }
+    }
+}
+```
+
