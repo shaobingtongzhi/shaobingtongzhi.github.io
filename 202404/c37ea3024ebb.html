@@ -507,13 +507,13 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.xxx.jni;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AddJni</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">Add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">Sub</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">Mul</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">Div</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-16-51.5zo75wjzxeo0.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-16-51.5zo75wjzxeo0.webp"></p>
 <ol start="2">
 <li>执行javah命令，生成 .h文件，为了链接 c 程序所用</li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意执行当前命令所在的目录是 项目/src/main/java 目录</span></span><br><span class="line">javah net.xxx.jni.AddJni</span><br><span class="line"><span class="comment">#执行完成后会在 项目/src/main/java 目录下生成一个 .h 的文件，把这个文件拷贝到 项目/src/main/resources/native 目录下，很关键</span></span><br><span class="line"><span class="comment"># .h 头文件包含了本地方法的声明</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-20-21.3ko24hy2jh40.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-20-21.3ko24hy2jh40.webp"></p>
 <h2 id="编写本地-C-语言方法的代码"><a href="#编写本地-C-语言方法的代码" class="headerlink" title="编写本地 C 语言方法的代码"></a>编写本地 C 语言方法的代码</h2><ol>
 <li>在 项目&#x2F;src&#x2F;main&#x2F;resources&#x2F;native 目录下新建一个 add.c 文件</li>
 </ol>
@@ -522,7 +522,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <blockquote>
 <p>注意这个 C 文件里方法的名称必须和头文件 net_xxx_jni_AddJni.h 中的方法名称完全一致</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-23-14.3oubcd610lu0.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-23-14.3oubcd610lu0.webp"></p>
 <ol start="2">
 <li>生成动态链接库文件 .so 或者 .dll 结尾的文件，.so 实在 Linux 系统下使用，.dll 是在 Windows 系统下使用</li>
 </ol>
@@ -538,7 +538,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NativeLoader.loader(<span class="string">&quot;native&quot;</span>); <span class="comment">//会自动加载 native 目录下的 动态链接库文件</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-24-40.4jup764060e0.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-24-40.4jup764060e0.webp"></p>
 <h2 id="调用本地方法"><a href="#调用本地方法" class="headerlink" title="调用本地方法"></a>调用本地方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">add</span> <span class="operator">=</span> AddJni.Add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">sub</span> <span class="operator">=</span> AddJni.Sub(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">mul</span> <span class="operator">=</span> AddJni.Mul(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">div</span> <span class="operator">=</span> AddJni.Div(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 
 

@@ -502,13 +502,13 @@ header .header__right .dropdown-menus .dropdown-menu {
       <div id="post-content" class="markdown-body textretty">
         <h1 id="Hook原理介绍"><a href="#Hook原理介绍" class="headerlink" title="Hook原理介绍"></a>Hook原理介绍</h1><h2 id="什么是hook"><a href="#什么是hook" class="headerlink" title="什么是hook"></a>什么是hook</h2><p>英文意思：钩子</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>如下图：</p>
-<p><img src="https://cdn.statically.io/gh/hfshaobing/picx-images-hosting@master/20230919/Hook%E5%8E%9F%E7%90%86.6uz0r235zl80.webp"></p>
+<p><img src="https://cdn.statically.io/gh/hfshaobing/picx-images-hosting/raw/master/20230919/Hook%E5%8E%9F%E7%90%86.6uz0r235zl80.webp"></p>
 <h1 id="微信二维码获取"><a href="#微信二维码获取" class="headerlink" title="微信二维码获取"></a>微信二维码获取</h1><h2 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h2><p>OD 全称 OllyDebug，一种反汇编软件，动态追踪工具，Ring 3 级的调试器</p>
 <p>CE 全称 Cheat Engine，是一款专注于游戏的修改器。它可以用来扫描游戏中的内存，并允许修改它们。</p>
 <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>IHDR 在PNG格式图像中，文件头数据块（IHDR）是第一个出现的数据块，用于描述整个图像的基本属性和特征。文件头数据块的标识符为IHDR，包含13个字节的数据。</p>
 <h2 id="获取相关信息"><a href="#获取相关信息" class="headerlink" title="获取相关信息"></a>获取相关信息</h2><h3 id="获取二维码图片偏移"><a href="#获取二维码图片偏移" class="headerlink" title="获取二维码图片偏移"></a>获取二维码图片偏移</h3><ol>
 <li>打开微信，保持停留在登录二维码界面</li>
-<li>打开CE，附加微信进程，附加后搜索IHDR，校正地址-c，显示出 png<br><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE%E9%99%84%E5%8A%A0%E5%BE%AE%E4%BF%A1.6b10rojxepg0.webp"><br><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE%E6%9F%A5%E8%AF%A2IHDR.5g6n51qoiwk0.webp"><br><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/CE%E5%AF%BB%E6%89%BE%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%9C%B0%E5%9D%80.5cbt3v5vqj00.webp"></li>
+<li>打开CE，附加微信进程，附加后搜索IHDR，校正地址-c，显示出 png<br><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20230919/CE%E9%99%84%E5%8A%A0%E5%BE%AE%E4%BF%A1.6b10rojxepg0.webp"><br><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20230919/CE%E6%9F%A5%E8%AF%A2IHDR.5g6n51qoiwk0.webp"><br><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20230919/CE%E5%AF%BB%E6%89%BE%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%9C%B0%E5%9D%80.5cbt3v5vqj00.webp"></li>
 <li>打开OD，附件微信进程，dd找出来的指针地址<br>补充：<br>通过dc [地址] 查看内容</li>
 </ol>
 <p>通过dm 命令打印内容</p>
@@ -519,7 +519,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 </ol>
 <h3 id="获取二维码hook偏移"><a href="#获取二维码hook偏移" class="headerlink" title="获取二维码hook偏移"></a>获取二维码hook偏移</h3><p>在数据窗口找到的地址上，下一个内存写入断点，通过刷新二维码进行单步调试，直到找到合适的hook地址，最好找到一个寄存器中的地址与数据窗口中的图片地址相近的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6C2869FE    8B4F 30         mov ecx,dword ptr ds:[edi+0x30]</span><br><span class="line">6C286A01    6A 01           push 0x1</span><br><span class="line">6C286A03    6A 00           push 0x0</span><br><span class="line">6C286A05    E8 2886FB00     call WeChatWi.6D23F032                   ; 这里也可以hook</span><br><span class="line">6C286A0A    8B4F 38         mov ecx,dword ptr ds:[edi+0x38]</span><br><span class="line">6C286A0D    6A 00           push 0x0</span><br><span class="line">6C286A0F    8B01            mov eax,dword ptr ds:[ecx]               ; WeChatWi.6DFC13C8</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20230919/%E4%BA%8C%E7%BB%B4%E7%A0%81hook%E5%9C%B0%E5%9D%80.2g1ke18by3f.webp"><br>二维码Hook偏移：  376A05 &#x3D; 指令地址-WechatWin.dll基址 &#x3D; 6C286A05-6BF10000<br>二维码图片地址偏移： 3230 &#x3D; 064FB580-064F8350(ECX)<br>二维码图片地址： ECX + 3230<br>二维码图片大小地址： ECX + 0x3230 + 0x4</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20230919/%E4%BA%8C%E7%BB%B4%E7%A0%81hook%E5%9C%B0%E5%9D%80.2g1ke18by3f.webp"><br>二维码Hook偏移：  376A05 &#x3D; 指令地址-WechatWin.dll基址 &#x3D; 6C286A05-6BF10000<br>二维码图片地址偏移： 3230 &#x3D; 064FB580-064F8350(ECX)<br>二维码图片地址： ECX + 3230<br>二维码图片大小地址： ECX + 0x3230 + 0x4</p>
 <p>WechatWin.dll的基址可以在OD上方工具栏的e中进行查看，也可以在CE中手动填加地址获取</p>
 <h3 id="获取指令A的偏移"><a href="#获取指令A的偏移" class="headerlink" title="获取指令A的偏移"></a>获取指令A的偏移</h3><p>call偏移： 132F032 &#x3D; 6D23F032-6BF10000</p>
 <h3 id="获取指令B的偏移"><a href="#获取指令B的偏移" class="headerlink" title="获取指令B的偏移"></a>获取指令B的偏移</h3><p>要返回的地址偏移： 376A0A &#x3D; 6C286A0A-6BF10000</p>

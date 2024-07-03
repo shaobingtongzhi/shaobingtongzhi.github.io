@@ -502,13 +502,13 @@ header .header__right .dropdown-menus .dropdown-menu {
       <div id="post-content" class="markdown-body textretty">
         <h1 id="查看mysql是否开启了定时任务"><a href="#查看mysql是否开启了定时任务" class="headerlink" title="查看mysql是否开启了定时任务"></a>查看mysql是否开启了定时任务</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;event_scheduler&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240430/Snipaste_2024-04-30_16-16-31.dcf7w6rwpio.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240430/Snipaste_2024-04-30_16-16-31.dcf7w6rwpio.webp"></p>
 <p>查看event_scheduler如果为OFF或0就表示关闭 </p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#开启命令</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> event_scheduler <span class="operator">=</span> <span class="keyword">on</span>;</span><br></pre></td></tr></table></figure>
 
 <p>这个时候，如果重启了mysql服务，发现 event_scheduler 又成 off 了，所以需要在mysql的配置文件my.ini中进行配置</p>
 <p>只需要在my.ini配置文件的**[mysqld]<strong>部分加上</strong>event_scheduler&#x3D;ON** 即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240430/Snipaste_2024-04-30_16-20-16.6wg6wcq9zvo0.webp"></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240430/Snipaste_2024-04-30_16-20-16.6wg6wcq9zvo0.webp"></p>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangjunli/article/details/129928308">https://blog.csdn.net/zhangjunli/article/details/129928308</a></p>
 
       </div>
