@@ -11,7 +11,7 @@ tags:
 
 # Quartz简介
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240606/Snipaste_2024-06-06_15-20-56.7493xv9cdao0.jpg)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/Snipaste_2024-06-06_15-20-56.7493xv9cdao0.jpg)
 
 **Job** 表示一个工作，要执行的具体<font color="red">**业务内容**</font>。
 

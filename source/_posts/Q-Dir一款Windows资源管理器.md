@@ -22,8 +22,8 @@ Q-Dir有4 个窗口，特别适用于**频繁在各个目录间跳跃复制粘�
 - 体积小，仅有2M
 - 个性化设置丰富
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240104/2024-01-04_003048.7k1n22xo5fs0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240104/2024-01-04_003048.7k1n22xo5fs0.webp)
 
 下载地址：https://www.majorgeeks.com/files/details/q_dir.html
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240104/2024-01-04_003828.5jmpgy1l13k0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240104/2024-01-04_003828.5jmpgy1l13k0.webp)

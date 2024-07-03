@@ -15,10 +15,10 @@ categories:
 
 直接安装即可！
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240103/截屏2024-01-03-下午5.09.47.5ruoune3osg0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240103/截屏2024-01-03-下午5.09.47.5ruoune3osg0.webp)
 
 使用截图
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240103/截屏2024-01-03-下午5.33.32.6516s3rqrd40.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240103/截屏2024-01-03-下午5.33.32.6516s3rqrd40.webp)
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240103/截屏2024-01-03-下午5.36.54.4y8ism3qjp80.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240103/截屏2024-01-03-下午5.36.54.4y8ism3qjp80.webp)

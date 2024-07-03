@@ -46,7 +46,7 @@ categories:
 
 放置位置如下图所示：
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/放置语言包.y0wpym1lbww.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/放置语言包.y0wpym1lbww.webp)
 
 
 
@@ -63,13 +63,13 @@ png转ico：[https://www.aconvert.com/cn/icon/png-to-ico](https://www.aconvert.c
 1. 使用脚本向导创建一个新的脚本
 2. 下一步。。。
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/选择语言包.rltatgkgllc.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/选择语言包.rltatgkgllc.webp)
 
 注意：这次是可以选择中文语言包了
 
 ***BUG 1***
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/乱码.1cgekw0bftnk.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/乱码.1cgekw0bftnk.webp)
 
 ***解决方案***
 
@@ -77,11 +77,11 @@ png转ico：[https://www.aconvert.com/cn/icon/png-to-ico](https://www.aconvert.c
 
 ## 几个重要信息的设置
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/配置安装信息.12ky74ym1lg0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/配置安装信息.12ky74ym1lg0.webp)
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/应用名称发布者.58qfd7buhf40.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/应用名称发布者.58qfd7buhf40.webp)
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231010/设置默认安装目录.6jdfntw2jx80.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231010/设置默认安装目录.6jdfntw2jx80.webp)
 
 ## 修改安装包图标
 

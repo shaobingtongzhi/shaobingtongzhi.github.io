@@ -17,7 +17,7 @@ categories:
 
 第一步：右键开始菜单，选择Windows PowerShell（管理员）
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_221928.1wqm3vvlwoao.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231204/2023-12-04_221928.1wqm3vvlwoao.webp)
 
 第二步：进入安装包安装目录，执行安装命令即可
 
@@ -25,7 +25,7 @@ categories:
 msiexec /package xxx.msi
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_222054.2jmgnb8qk2m0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231204/2023-12-04_222054.2jmgnb8qk2m0.webp)
 
 # 卸载
 
@@ -33,13 +33,13 @@ msiexec /package xxx.msi
 
 第一步：进入安装程序目录 C:\Windows\Installer
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_231136.3b4m6xhqciy0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231204/2023-12-04_231136.3b4m6xhqciy0.webp)
 
 第二步：执行下面3个步骤就可以找到对应程序的msi了
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_231255.10whr236xedc.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231204/2023-12-04_231255.10whr236xedc.webp)
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231204/2023-12-04_231427.375g6xpe0tu0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231204/2023-12-04_231427.375g6xpe0tu0.webp)
 
 第三步：管理员进入Windows PowerSheel
 
@@ -61,10 +61,10 @@ xxx.msi
 
 1. 找到Temp这个文件夹，然后右键属性-》高级-》添加
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164705.1a6aarsqzykg.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231222/2023-12-22_164705.1a6aarsqzykg.webp)
 
 2. 选择主体-》填入当前账号名称-》把权限都勾上即可
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164848.6zhs0hayz08.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231222/2023-12-22_164848.6zhs0hayz08.webp)
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231222/2023-12-22_164958.6548nzbrzmg0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231222/2023-12-22_164958.6548nzbrzmg0.webp)

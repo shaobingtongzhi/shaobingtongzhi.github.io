@@ -32,7 +32,7 @@ public class WebSocketConfig {
 }
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240423/Snipaste_2024-04-23_11-21-35.v9nnyb6nlow.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240423/Snipaste_2024-04-23_11-21-35.v9nnyb6nlow.webp)
 
 # 创建 WebSocketServer 工具类
 
@@ -93,7 +93,7 @@ public class WebSocketServer {
 }
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240423/Snipaste_2024-04-23_11-25-32.6k6z2umn93c0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240423/Snipaste_2024-04-23_11-25-32.6k6z2umn93c0.webp)
 
 # 创建测试接口
 
@@ -112,7 +112,7 @@ public class WebSocketServer {
 
 测试地址：http://www.jsons.cn/websocket/
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240423/Snipaste_2024-04-23_11-28-41.4eenoyalrew0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240423/Snipaste_2024-04-23_11-28-41.4eenoyalrew0.webp)
 
 
 
@@ -235,7 +235,7 @@ public class WebSocketServer {
 </html>
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240423/Snipaste_2024-04-23_11-48-52.1dpeiksozy0w.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240423/Snipaste_2024-04-23_11-48-52.1dpeiksozy0w.webp)
 
 参考链接：https://blog.csdn.net/m0_52208135/article/details/127613516
 

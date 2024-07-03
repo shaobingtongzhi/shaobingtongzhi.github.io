@@ -136,7 +136,7 @@ exit
 
 输入任务名称，选择：构建一个自由风格的软件项目 ，确定
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-31-08.rm7hiew55c0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-31-08.rm7hiew55c0.webp)
 
 ## 配置
 
@@ -144,21 +144,21 @@ exit
 
 1. 勾选：参数化构建过程
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-37-25.4zqkub4a3ao0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-37-25.4zqkub4a3ao0.webp)
 
 2. 添加参数-》选项参数
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-39-39.2xcum1tr0jm0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-39-39.2xcum1tr0jm0.webp)
 
 3. 添加参数-》字符参数
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-41-15.61lf3bblsjg0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-41-15.61lf3bblsjg0.webp)
 
 ### 源码管理
 
 填写代码远程仓库地址
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-46-33.4ffhg36vio8.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-46-33.4ffhg36vio8.webp)
 
 ### 构建触发器
 
@@ -201,7 +201,7 @@ esac
 
 选择高级-》勾选：只有构建成功时归档
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_15-56-25.7gofj4tran40.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_15-56-25.7gofj4tran40.webp)
 
 第二步：增加构建后操作步骤-》**Send build artifacts over SSH**
 
@@ -209,11 +209,11 @@ esac
 
 > 这一步的意思是要把构建好的jar包通过ssh publishers 传到部署服务器上
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_16-24-20.3s7pyqbkxq20.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_16-24-20.3s7pyqbkxq20.webp)
 
 设置源地址、目标地址以及在目标服务器上执行的命令
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240529/Snipaste_2024-05-29_16-18-21.5qewcal04480.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240529/Snipaste_2024-05-29_16-18-21.5qewcal04480.webp)
 
 > 注意：在目标服务器上执行的指令需要采用全路径（上面的第四步在生产环境有问题），例如直接填写即可：C:/JavaWorkspace/restart.bat
 

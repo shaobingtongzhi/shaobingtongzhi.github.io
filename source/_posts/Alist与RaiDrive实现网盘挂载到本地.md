@@ -63,7 +63,7 @@ Wscript.quit
 
 默认安装就可以了，由于网络问题可能一次安装不成功，多尝试吧
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_164119.7kq5osta0q80.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_164119.7kq5osta0q80.webp)
 
 **实在是安装不上就采用下面的方式吧**
 
@@ -75,7 +75,7 @@ Wscript.quit
 
 1. 下载rclone安装包，[下载地址](https://github.com/rclone)，根据情况下载对应的版本就可以了
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_165752.3wwzb15g7zg0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_165752.3wwzb15g7zg0.webp)
 
 2. 下载winfsp，[下载地址](https://winfsp.dev/rel/) 在windows操作系统下是必须的
 
@@ -83,18 +83,18 @@ Wscript.quit
 
 1. 解压rclone-v1.65.0-windows-amd64.zip，并把解压出来的文件直接拷贝到自己的安装目录即可。我一般是D:\Program
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170614.q51caic82jk.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_170614.q51caic82jk.webp)
 
 2. 安装winfsp，选择好安装目录，其他的默认安装就可以了
 3. 进入rclone.exe所在目录进行配置
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_171216.5nhxok1dvg80.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_171216.5nhxok1dvg80.webp)
 
 默认生成的配置文件在：C:\Users\xxx\AppData\Roaming\rclone\rclone.conf
 
 4. 进入rclone.exe所在目录执行挂载命令
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_170911.4cx3dc2x6ly0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_170911.4cx3dc2x6ly0.webp)
 
 ```sh
 rclone mount 远程磁盘: k: --network-mode --header "Referer:" --multi-thread-streams 8 --buffer-size 512M  --vfs-fast-fingerprint --vfs-cache-mode full --no-modtime --file-perms 0777
@@ -102,7 +102,7 @@ rclone mount 远程磁盘: k: --network-mode --header "Referer:" --multi-thread-
 
 5. 这个时候就可以看到已经挂载完成了
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231226/2023-12-26_172306.38ulgd6nkxq0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231226/2023-12-26_172306.38ulgd6nkxq0.webp)
 
 ## 开机自启动
 

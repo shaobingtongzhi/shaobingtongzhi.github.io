@@ -17,7 +17,7 @@ tags:
 
 https://maven.apache.org/download.cgi
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/企业微信截图_20240408082830.2667so4c9wzk.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/企业微信截图_20240408082830.2667so4c9wzk.webp)
 
 或者
 
@@ -37,7 +37,7 @@ https://archive.apache.org/dist/maven/maven-3/
 
 2. 验证maven是否可用，打开cmd , 输入命令：mvn -v 
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/企业微信截图_20240408083756.2ulsmzl8d1a0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/企业微信截图_20240408083756.2ulsmzl8d1a0.webp)
 
 ## MAC下的环境变量配置
 
@@ -112,4 +112,4 @@ maven的安装包中conf文件夹下的setting.xml文件指定正确的仓库
 1. 打开设置-》构建、执行、部署-》构建工具-》Maven
 2. 配置 Maven 主路径，用户配置文件、本地仓库
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/企业微信截图_20240408092153.29xlrix3usro.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/企业微信截图_20240408092153.29xlrix3usro.webp)

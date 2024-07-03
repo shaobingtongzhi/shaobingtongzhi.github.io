@@ -16,7 +16,7 @@ tags:
 show variables like 'event_scheduler';
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240430/Snipaste_2024-04-30_16-16-31.dcf7w6rwpio.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240430/Snipaste_2024-04-30_16-16-31.dcf7w6rwpio.webp)
 
 查看event_scheduler如果为OFF或0就表示关闭 
 
@@ -29,7 +29,7 @@ set global event_scheduler = on;
 
 只需要在my.ini配置文件的**[mysqld]**部分加上**event_scheduler=ON** 即可
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240430/Snipaste_2024-04-30_16-20-16.6wg6wcq9zvo0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240430/Snipaste_2024-04-30_16-20-16.6wg6wcq9zvo0.webp)
 
 
 

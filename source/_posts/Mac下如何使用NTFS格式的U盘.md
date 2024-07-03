@@ -24,7 +24,7 @@ categories:
 diskutil list
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231213/%E6%88%AA%E5%B1%8F2023-12-13-%E4%B8%8B%E5%8D%8812.14.46.5e8muw6vjcg0.png)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231213/%E6%88%AA%E5%B1%8F2023-12-13-%E4%B8%8B%E5%8D%8812.14.46.5e8muw6vjcg0.png)
 
 第三步：在/etc目录下创建一个文件fstab，并写入下面的内容
 

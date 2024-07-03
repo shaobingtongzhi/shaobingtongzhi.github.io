@@ -28,7 +28,7 @@ https://github.com/Chuyu-Team/Dism-Multi-language
 
 # 开始使用
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240104/2024-01-04_232219.55i1j1pjf780.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240104/2024-01-04_232219.55i1j1pjf780.webp)
 
 
 

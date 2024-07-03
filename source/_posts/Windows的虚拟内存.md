@@ -13,10 +13,10 @@ categories:
 
 1. 通过显示隐藏文件查看C盘根目录下虚拟内存文件占用大小
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231216/2023-12-15_235853.4yl8276g3bs0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231216/2023-12-15_235853.4yl8276g3bs0.webp)
 
 2. 设置到非系统盘
 
 ​		计算机->属性->高级系统设置->性能->设置->高级->更改；一般设置为真实内存的1.5 ~ 2倍即可
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20231216/2023-12-16_001519.119zdju73xfk.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20231216/2023-12-16_001519.119zdju73xfk.webp)

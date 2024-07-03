@@ -26,7 +26,7 @@ https://github.com/AlexanderPro/SmartSystemMenu
 
 # 开始使用
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240104/2024-01-04_234956.5l711ht0qg00.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240104/2024-01-04_234956.5l711ht0qg00.webp)
 
 >链接: https://pan.baidu.com/s/1U5cvScwctHVj_hzvfIgMww?pwd=x95w
 >

@@ -15,19 +15,19 @@ categories:
 
 **控制面板\系统和安全\系统**
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240124/Snipaste_2024-01-24_18-56-16.1v4bn7fvyjeo.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240124/Snipaste_2024-01-24_18-56-16.1v4bn7fvyjeo.webp)
 
 2. 桌面显示 计算机、控制面板等
 
 右键-》个性化-》主题-》桌面图标设置
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240124/Snipaste_2024-01-24_18-58-22.17gwl5u19l1c.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240124/Snipaste_2024-01-24_18-58-22.17gwl5u19l1c.webp)
 
 3. 关闭Windows defender拦截
 
 Windows安全中心-》病毒和威胁防护-》管理设置-》添加和删除排除项
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240507/Snipaste_2024-05-07_14-36-50.z3lso0qbfhs.png)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240507/Snipaste_2024-05-07_14-36-50.z3lso0qbfhs.png)
 
 4. 防火墙开启后无法 ping 通？
 
@@ -37,4 +37,4 @@ Windows安全中心-》病毒和威胁防护-》管理设置-》添加和删除�
 
 在右侧，滚动找到和选择名为“文件和打印机共享 (Echo Request - ICMPv4-In)”的规则，右键启用规则
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20240509/Snipaste_2024-05-09_11-01-23.2myzdbtw9li0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240509/Snipaste_2024-05-09_11-01-23.2myzdbtw9li0.webp)

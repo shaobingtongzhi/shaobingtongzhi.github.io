@@ -34,7 +34,7 @@ public class AddJni {
 }
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-16-51.5zo75wjzxeo0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-16-51.5zo75wjzxeo0.webp)
 
 
 
@@ -47,7 +47,7 @@ javah net.xxx.jni.AddJni
 # .h 头文件包含了本地方法的声明
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-20-21.3ko24hy2jh40.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-20-21.3ko24hy2jh40.webp)
 
 ## 编写本地 C 语言方法的代码
 
@@ -75,7 +75,7 @@ JNIEXPORT jint JNICALL Java_net_zhiboredian_jni_AddJni_Div
 
 > 注意这个 C 文件里方法的名称必须和头文件 net_xxx_jni_AddJni.h 中的方法名称完全一致
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-23-14.3oubcd610lu0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-23-14.3oubcd610lu0.webp)
 
 2. 生成动态链接库文件 .so 或者 .dll 结尾的文件，.so 实在 Linux 系统下使用，.dll 是在 Windows 系统下使用
 
@@ -244,7 +244,7 @@ public class NativeLoader {
 NativeLoader.loader("native"); //会自动加载 native 目录下的 动态链接库文件
 ```
 
-![](https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/Snipaste_2024-04-25_15-24-40.4jup764060e0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-25_15-24-40.4jup764060e0.webp)
 
 ## 调用本地方法
 
