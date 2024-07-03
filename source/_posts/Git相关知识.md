@@ -486,7 +486,7 @@ git check-ignore -v Readme.md
 
 ## git status 时有Untracked files 的文件，原因分析及解决方案
 
-![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-03_08-46-39.6lzv1e1c30o0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/Snipaste_2024-04-03_08-46-39.6lzv1e1c30o0.1xsx05m3cbgg.jpg)
 
 ### 原因分析
 
@@ -497,7 +497,7 @@ git在未 **commit** 之前有三种状态：
 2. Changes not staged for commit 未提交的更改
 3. Changes to be committed 提交的更改
 
-![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-03_08-50-19.1tcm818hkshs.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/Snipaste_2024-04-03_08-50-19.1tcm818hkshs.1ii0dug5j75s.jpg)
 
 什么文件会是未跟踪的呢？
 那些新创建的或者从未add过的文件就是未跟踪的。
@@ -523,7 +523,7 @@ git add xxx.txt
 
 在git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去，git就会自动忽略这些文件
 
-![](https://github.com/hfshaobing/picx-images-hosting/raw/master/Snipaste_2024-04-03_08-56-07.7fejp4587tw0.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/Snipaste_2024-04-03_08-56-07.7fejp4587tw0.27t72rk5jdhc.jpg)
 
 .gitignore 文件
 
@@ -533,7 +533,7 @@ personal_tax.error_log
 ~$管理大屏显示接口文档.docx
 ```
 
-![](https://github.com/hfshaobing/picx-images-hosting/raw/master/企业微信截图_20240403085725.1ichvmdhnhls.webp)
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/企业微信截图_20240403085725.1ichvmdhnhls.4nxicsakg360.jpg)
 
 #### 第三种情况
 
