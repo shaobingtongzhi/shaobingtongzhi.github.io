@@ -35,9 +35,9 @@ tags:
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-quartz</artifactId>
-    <version>2.7.18</version>
+    <groupId>org.quartz-scheduler</groupId>
+    <artifactId>quartz</artifactId>
+    <version>2.3.2</version>
 </dependency>
 ```
 
@@ -79,13 +79,23 @@ public class MyJob extends QuartzJobBean
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         //业务代码
-        logger.info("开始执行业务代码了。。。");
-		try {
+        LOGGER.info("开始执行业务代码了。。。");
+        //记录上一次执行时间，
+        long lastFiretime = context.getFireTime().getTime();
+        long nextFireTime = context.getNextFireTime().getTime();
+		JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
+        Integer id = (Integer) jobDataMap.get("id");
+
+        try {
             Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }	
-        logger.info("业务代码执行完成了！！！！");
+        }
+        LOGGER.info("业务代码执行完成了！！！！");
+
+        //下一次执行时间
+        long now = DateUtil.current();
+        nextFireTime = nextFireTime > now ? nextFireTime : now;
     }
 }
 ```
@@ -349,6 +359,22 @@ public class ScheduleLogServiceImpl implements ScheduleLogService, CommandLineRu
     }
 }
 ```
+
+ScheduleLogService.java
+
+```java
+public interface ScheduleLogService {
+    List<ScheduleLog> getScheduleList();
+    boolean add(Map data);
+    boolean del(Integer id);
+    boolean edit(Map data);
+    List<ScheduleLog> getEnableScheduleList();
+
+    boolean update(Map data);
+}
+```
+
+
 
 至此基本就实现了定时任务的管理了，controller 里的内容包含了对定时任务进行管理的接口，就不写了
 

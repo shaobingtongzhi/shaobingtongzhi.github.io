@@ -110,6 +110,14 @@ nodejs和npm是包含关系，nodejs中含有npm，安装好nodejs，cmd输入np
 
 ### 基本使用
 
+### 查看配置
+
+```sh
+npm config list
+```
+
+
+
 #### 查看当前源
 
 ```sh
@@ -119,10 +127,13 @@ npm get registry
 #### 设置镜像源
 
 ```sh
-# 设置淘宝镜像源
-npm config set registry https://registry.npm.taobao.org 
+# 设置淘宝镜像源(注意：淘宝镜像https://registry.npm.taobao.org已经于2022年5月过期了)，现在变成了 https://registry.npmmirror.com
+npm config set registry https://registry.npmmirror.com
 # 设置官方镜像源
 npm config set registry https://registry.npmjs.org
+
+# 自动切换回官方源
+npm config delete registry
 ```
 
 #### 升级指定版本
