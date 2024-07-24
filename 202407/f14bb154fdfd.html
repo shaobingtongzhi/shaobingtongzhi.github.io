@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>Node 相关知识 - 因为有你，所以精彩</title>
+    <title>Windows 服务器安装 MQTT 服务 - 因为有你，所以精彩</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
     <meta name="author" content="nuc_八道门">
     <meta name="keywords" content="">
-    <meta property="og:title" content="Node 相关知识"/>
+    <meta property="og:title" content="Windows 服务器安装 MQTT 服务"/>
     <style>
 
 
@@ -449,7 +449,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>Node 相关知识</h3>
+  <h3>Windows 服务器安装 MQTT 服务</h3>
     
       <span class="post-meta-label">
         nuc_八道门
@@ -458,8 +458,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2020-02-01 00:00" pubdate>
-          2020-02-01
+        <time datetime="2024-07-23 00:00" pubdate>
+          2024-07-23
         </time>
       </span>
     
@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 809 字
+        共 846 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        8
+        9
          分钟
       </span>
     
@@ -495,53 +495,58 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#node%E4%B8%8Enpm-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">node与npm 知识总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#node-%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="toc-number">1.1.</span> <span class="toc-text">node 版本更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-n"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用 n</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-nvm-%E8%BF%9B%E8%A1%8C%E6%9B%B4%E6%96%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">使用 nvm 进行更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">基本使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-node-%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.4.</span> <span class="toc-text">查看 node 安装路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">npm 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-3"><span class="toc-number">1.2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.3.</span> <span class="toc-text">查看配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%BA%90"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">查看当前源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">设置镜像源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">升级指定版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E7%90%86%E7%BC%93%E5%AD%98"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">清理缓存</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#depcheck-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">depcheck 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-4"><span class="toc-number">1.3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">基本使用</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MQTT-Broker-%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">MQTT Broker 搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">环境说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDemqx"><span class="toc-number">2.2.</span> <span class="toc-text">下载emqx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="toc-number">2.3.</span> <span class="toc-text">安装部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A7%A3%E5%8E%8B"><span class="toc-number">2.3.1.</span> <span class="toc-text">1. 解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%90%AF%E5%8A%A8"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. 启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%81%9C%E6%AD%A2"><span class="toc-number">2.3.3.</span> <span class="toc-text">3. 停止</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81"><span class="toc-number">2.4.1.</span> <span class="toc-text">查看服务状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.2.</span> <span class="toc-text">查看报错信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-number">2.4.3.</span> <span class="toc-text">端口占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E7%9B%91%E5%90%AC"><span class="toc-number">2.4.4.</span> <span class="toc-text">查看端口监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">问题处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4-1883-%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.5.1.</span> <span class="toc-text">修改默认 1883 端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-UI-18083-%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.5.2.</span> <span class="toc-text">修改 UI 18083 端口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MQTT-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">MQTT 客户端</span></a></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="node与npm-知识总结"><a href="#node与npm-知识总结" class="headerlink" title="node与npm 知识总结"></a>node与npm 知识总结</h1><h2 id="node-版本更新"><a href="#node-版本更新" class="headerlink" title="node 版本更新"></a>node 版本更新</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>node.js是javascript的一种运行环境，是对Google V8引擎进行的封装，是一个服务器端的javascript的解释器。</p>
-<h3 id="使用-n"><a href="#使用-n" class="headerlink" title="使用 n"></a>使用 n</h3><p>注意：n命令不支持windows系統，只支持mac</p>
-<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>一个简易的node版本管理工具</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前版本</span></span><br><span class="line">node -v</span><br><span class="line"><span class="comment"># 清理本地包缓存</span></span><br><span class="line">npm cache clean -f</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm i -g n</span><br><span class="line"><span class="comment"># 查看n是否安装成功</span></span><br><span class="line">n -V</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n stable // 把当前系统的 Node 更新成最新的 “稳定版本”</span><br><span class="line">n lts // 长期支持版</span><br><span class="line">n latest // 最新版</span><br><span class="line">n 16.13.1 // 指定安装版本</span><br><span class="line">n ls-remote --all //查看仓库中所有版本清单</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-nvm-进行更新"><a href="#使用-nvm-进行更新" class="headerlink" title="使用 nvm 进行更新"></a>使用 nvm 进行更新</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>nvm全名node.js version management，是一个node的版本管理工具。通过它可以安装和切换不同版本的nodejs</p>
-<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><ul>
-<li>windows</li>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>EMQX</strong> 是基于 Erlang&#x2F;OTP 平台开发的开源物联网 <strong>MQTT 消息服务器</strong>，目前广泛应用于全球各行业物联网平台建设中。其设计目标是实现高可靠承载海量物联网终端的 MQTT 连接，支持在海量物联网设备间低延时消息路由</p>
+<p><strong>MQTT</strong> 是一种基于标准的消息传递协议或规则集，用于机器对机器的通信。智能传感器、可穿戴设备和其他物联网（IoT）设备通常必须通过带宽有限的资源受限网络传输和接收数据。这些物联网设备使用 MQTT 进行数据传输，因为它易于实施，并且可以有效地传输物联网数据。MQTT 支持设备到云端和云端到设备之间的消息传递</p>
+<p>下图展示了 MQTT 发布&#x2F;订阅过程。温度传感器作为客户端连接到 MQTT Broker，并通过发布操作将温度数据发布到一个特定主题（例如 <code>Temperature</code>）。MQTT Broker 接收到该消息后会负责将其转发给订阅了相应主题（<code>Temperature</code>）的订阅者客户端。</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240606/Snipaste_2024-07-23_09-18-54.ts3ckf40sb4.jpg"></p>
+<h1 id="MQTT-Broker-搭建"><a href="#MQTT-Broker-搭建" class="headerlink" title="MQTT Broker 搭建"></a>MQTT Broker 搭建</h1><h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><ul>
+<li><p>Windows Server 2022 Datacenter</p>
+</li>
+<li><p>emqx-5.0.26-windows-amd64.zip</p>
+</li>
 </ul>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a> 下载其中的 nvm-step.exe 安装即可</p>
-<ul>
-<li>mac、linux</li>
-</ul>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm</a></p>
-<p>nvm安装参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46516647/article/details/130108878">https://blog.csdn.net/weixin_46516647/article/details/130108878</a></p>
-<p>nvm解决慢的问题<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/liujiajie1990/article/details/131410885">https://blog.csdn.net/liujiajie1990/article/details/131410885</a></p>
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有可用的node版本</span></span><br><span class="line"><span class="comment">## Windows</span></span><br><span class="line">nvm list available</span><br><span class="line"><span class="comment">## Mac、Linux</span></span><br><span class="line">nvm ls-remote</span><br><span class="line"><span class="comment"># 列出安装了node的哪些版本</span></span><br><span class="line">nvm list</span><br><span class="line"><span class="comment"># 安装指定版本的node</span></span><br><span class="line">nvm install xx.xx.xx</span><br><span class="line"><span class="comment"># 切换到指定版本的node</span></span><br><span class="line">nvm use xx.xx.xx</span><br></pre></td></tr></table></figure>
+<h2 id="下载emqx"><a href="#下载emqx" class="headerlink" title="下载emqx"></a>下载emqx</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www.emqx.com/zh/downloads/broker/5.0.26/emqx-5.0.26-windows-amd64.zip">https://www.emqx.com/zh/downloads/broker/5.0.26/emqx-5.0.26-windows-amd64.zip</a></p>
+<p>文档地址：<a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/v5.0/deploy/install-windows.html">https://docs.emqx.com/zh/emqx/v5.0/deploy/install-windows.html</a></p>
+<h2 id="安装部署"><a href="#安装部署" class="headerlink" title="安装部署"></a>安装部署</h2><h3 id="1-解压"><a href="#1-解压" class="headerlink" title="1. 解压"></a>1. 解压</h3><p>解压 emqx-5.0.26-windows-amd64.zip 到服务器的指定路径，注意：<font color=red>指定路径不能有空格</font> ,我这里把它解压到了C：&#x2F;emqx</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_09-30-26.5ihnc2hdr280.jpg"></p>
+<h3 id="2-启动"><a href="#2-启动" class="headerlink" title="2. 启动"></a>2. 启动</h3><p>通过 cmd 进入 bin 目录下执行启动命令</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> bin</span><br><span class="line">emqx <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="查看-node-安装路径"><a href="#查看-node-安装路径" class="headerlink" title="查看 node 安装路径"></a>查看 node 安装路径</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mac、linux 使用</span></span><br><span class="line"><span class="built_in">which</span> node</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\emqx\bin&gt;emqx start</span><br><span class="line">EMQX_LOG__CONSOLE_HANDLER__ENABLE [log.console.enable]: <span class="literal">true</span></span><br><span class="line">EMQX_NODE__DB_ROLE [node.role]: core</span><br><span class="line">EMQX_NODE__DB_BACKEND [node.db_backend]: mnesia</span><br></pre></td></tr></table></figure>
+
+<p>通过 URL：<a target="_blank" rel="noopener" href="http://localhost:18083/">http://localhost:18083/</a> 访问 EMQX Broker 对其进行配置。默认用户名：admin 密码：public</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_09-45-23.6ta9offhdrk0.jpg"></p>
+<h3 id="3-停止"><a href="#3-停止" class="headerlink" title="3. 停止"></a>3. 停止</h3><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emqx stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="查看服务状态"><a href="#查看服务状态" class="headerlink" title="查看服务状态"></a>查看服务状态</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">emqx ctl status</span><br><span class="line"><span class="comment"># 正常情况</span></span><br><span class="line">C:\emqx\bin&gt;emqx ctl status</span><br><span class="line">Node <span class="string">&#x27;emqx@127.0.0.1&#x27;</span> 5.0.26 is started</span><br><span class="line"></span><br><span class="line"><span class="comment"># 非正常情况</span></span><br><span class="line">C:\emqx\bin&gt;emqx ctl status</span><br><span class="line">Node <span class="string">&#x27;emqx@127.0.0.1&#x27;</span> not responding to pings.</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看报错信息"><a href="#查看报错信息" class="headerlink" title="查看报错信息"></a>查看报错信息</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">emqx console</span><br><span class="line"><span class="comment"># 可以看到是什么原因导致的非正常情况</span></span><br><span class="line">[error] tcp:default failed to listen on 1883 - eaddrinuse (address already <span class="keyword">in</span> use)</span><br><span class="line"><span class="comment"># 我这里报错说是 1883 端口被占用了</span></span><br><span class="line"><span class="comment"># 解决办法：找到被占用的 1883 端口的进程，关闭即可，若该进程是其他有用的进程，则考虑 更换其他服务的端口或者更换emqx默认的1883端口</span></span><br><span class="line"><span class="comment"># 我通过修改emqx默认的1883端口为2883后启动正常了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h3><p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_10-03-28.4zoiekmfpw00.jpg"></p>
+<p>端口配置文档：<a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/latest/configuration/listener.html#%E9%85%8D%E7%BD%AE-tcp-%E7%9B%91%E5%90%AC%E5%99%A8">https://docs.emqx.com/zh/emqx/latest/configuration/listener.html#%E9%85%8D%E7%BD%AE-tcp-%E7%9B%91%E5%90%AC%E5%99%A8</a></p>
+<h3 id="查看端口监听"><a href="#查看端口监听" class="headerlink" title="查看端口监听"></a>查看端口监听</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看监听器</span></span><br><span class="line">emqx ctl listeners</span><br><span class="line"></span><br><span class="line"><span class="comment">#停止监听ws端口</span></span><br><span class="line">emqx ctl listeners stop ws:default</span><br><span class="line">emqx ctl listeners stop wss:default</span><br><span class="line"></span><br><span class="line"><span class="comment">#开启监听端口</span></span><br><span class="line">emqx ctl listeners start ws:default</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="npm-命令"><a href="#npm-命令" class="headerlink" title="npm 命令"></a>npm 命令</h2><h3 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h3><p>npm是nodejs的包管理器（package manager）。<br>nodejs和npm是包含关系，nodejs中含有npm，安装好nodejs，cmd输入npm -v会发现npm的版本号，说明npm已经安装好。</p>
-<p>其实我们在Node.js上开发时，会用到很多别人已经写好的javascript代码，如果每当我们需要别人的代码时，都根据名字搜索一下，下载源码，解压，再使用，会非常麻烦。于是就出现了包管理器npm。大家把自己写好的源码上传到npm官网上，如果要用某个或某些个，直接通过npm安装就可以了，不用管那个源码在哪里。并且如果我们要使用模块A，而模块A又依赖模块B，模块B又依赖模块C和D，此时npm会根据依赖关系，把所有依赖的包都下载下来并且管理起来</p>
-<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><h3 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config list</span><br></pre></td></tr></table></figure>
 
+<h2 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h2><h3 id="修改默认-1883-端口"><a href="#修改默认-1883-端口" class="headerlink" title="修改默认 1883 端口"></a>修改默认 1883 端口</h3><p>etc&#x2F;emqx.conf</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">listeners.tcp.default &#123;</span><br><span class="line">  <span class="built_in">bind</span> = <span class="string">&quot;0.0.0.0:2883&quot;</span></span><br><span class="line">  max_connections = 1024000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_09-54-56.7kfbs0431k80.jpg"></p>
+<h3 id="修改-UI-18083-端口"><a href="#修改-UI-18083-端口" class="headerlink" title="修改 UI 18083 端口"></a>修改 UI 18083 端口</h3><p>etc&#x2F;emqx.conf</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dashboard &#123;</span><br><span class="line">    listeners.http &#123;</span><br><span class="line">        <span class="built_in">bind</span> = 28083</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="查看当前源"><a href="#查看当前源" class="headerlink" title="查看当前源"></a>查看当前源</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm get registry</span><br></pre></td></tr></table></figure>
-
-<h4 id="设置镜像源"><a href="#设置镜像源" class="headerlink" title="设置镜像源"></a>设置镜像源</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置淘宝镜像源(注意：淘宝镜像https://registry.npm.taobao.org已经于2022年5月过期了)，现在变成了 https://registry.npmmirror.com</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br><span class="line"><span class="comment"># 设置官方镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动切换回官方源</span></span><br><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>
-
-<h4 id="升级指定版本"><a href="#升级指定版本" class="headerlink" title="升级指定版本"></a>升级指定版本</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install npm@6.14.13 -g</span><br></pre></td></tr></table></figure>
-
-<h4 id="清理缓存"><a href="#清理缓存" class="headerlink" title="清理缓存"></a>清理缓存</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean --force</span><br></pre></td></tr></table></figure>
-
-<h2 id="depcheck-命令"><a href="#depcheck-命令" class="headerlink" title="depcheck 命令"></a>depcheck 命令</h2><h3 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h3><p>Depcheck 是一款用于分析项目中依赖关系的工具，它可以帮助我们找出以下问题：在 package.json 中，每个依赖包如何被使用、哪些依赖包没有用处、哪些依赖包缺失。它是解决前端项目中依赖包清理问题的一个常用工具</p>
-<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g depcheck</span><br></pre></td></tr></table></figure>
-
-<h3 id="基本使用-2"><a href="#基本使用-2" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在package.json所在目录执行如下命令</span></span><br><span class="line">depcheck</span><br></pre></td></tr></table></figure>
-
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_09-59-01.5s16t37lnrk0.jpg"></p>
+<h1 id="MQTT-客户端"><a href="#MQTT-客户端" class="headerlink" title="MQTT 客户端"></a>MQTT 客户端</h1><p>MQTTX 全功能 MQTT 客户端工具</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://mqttx.app/zh/downloads">https://mqttx.app/zh/downloads</a></p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20240723/Snipaste_2024-07-23_10-11-30.2i9q0xtnv520.jpg"></p>
+<p>下载对应的版本即可</p>
+<p>通过客户端可以测试连接到服务端！！！</p>
+<p>至此完成了 MQTT 服务器的搭建！！！</p>
 
       </div>
     </div>
@@ -552,20 +557,18 @@ header .header__right .dropdown-menus .dropdown-menu {
     <div id="p-meta-i">
         
               
-                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
               
-                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/05-Node%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">05-Node相关知识</a>
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/Windows%E6%9C%8D%E5%8A%A1%E5%99%A8/">Windows服务器</a>
               
           
           
               
-                <a class="hover-with-bg" href="/tags/node/"># node</a>
+                <a class="hover-with-bg" href="/tags/windows-server-2022/"># windows server 2022</a>
               
-                <a class="hover-with-bg" href="/tags/npm/"># npm</a>
+                <a class="hover-with-bg" href="/tags/emqx/"># emqx</a>
               
-                <a class="hover-with-bg" href="/tags/nvm/"># nvm</a>
-              
-                <a class="hover-with-bg" href="/tags/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB/"># 依赖关系</a>
+                <a class="hover-with-bg" href="/tags/mqtt%E6%9C%8D%E5%8A%A1/"># mqtt服务</a>
               
           
     </div>
@@ -577,7 +580,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
   <div class="post-copyright">
     <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
-    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202002/338072c120c8.html">https://blog.nucbadaomen.link/202002/338072c120c8.html</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://blog.nucbadaomen.link/202407/f14bb154fdfd.html">https://blog.nucbadaomen.link/202407/f14bb154fdfd.html</a></p>
     <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
   </div>
   
