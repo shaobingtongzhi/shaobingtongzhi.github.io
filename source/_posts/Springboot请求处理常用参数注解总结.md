@@ -5,6 +5,7 @@ categories:
   - 学习笔记
   - 01-Spring学习笔记
 ---
+注意：GET请求一般采用 RequestParam 接收，POST请求一般采用 RequestBody 接收，前端传参时，设置ContentType = "application/json"
 
 # 路径变量
 
@@ -110,4 +111,8 @@ public Map testRequestBody(@RequestBody String content){
 ```java
 //使用场景：浏览器禁用cookie后，无法获得服务器端的session_id
 ```
+
+
+
+
 
