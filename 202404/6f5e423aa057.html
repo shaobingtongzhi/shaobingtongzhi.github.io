@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 420 字
+        共 454 字
       </span>
     
     
@@ -500,7 +500,8 @@ header .header__right .dropdown-menus .dropdown-menu {
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="路径变量"><a href="#路径变量" class="headerlink" title="路径变量"></a>路径变量</h1><p>@PathVariable</p>
+        <p>注意：GET请求一般采用 RequestParam 接收，POST请求一般采用 RequestBody 接收，前端传参时，设置ContentType &#x3D; “application&#x2F;json”</p>
+<h1 id="路径变量"><a href="#路径变量" class="headerlink" title="路径变量"></a>路径变量</h1><p>@PathVariable</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求地址：/car/3/name/zhangsan  =&gt;  /car/&#123;id&#125;/name/&#123;uname&#125;</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/car/&#123;id&#125;/name/&#123;uname&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title function_">index</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Integer id,</span></span><br><span class="line"><span class="params">                                <span class="meta">@PathVariable(&quot;name&quot;)</span> String name,</span></span><br><span class="line"><span class="params">                                <span class="meta">@PathVariable</span> Map&lt;String,String&gt; pv</span></span><br><span class="line"><span class="params">                               )</span>&#123;</span><br><span class="line">    Map&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    map.put(<span class="string">&quot;id&quot;</span>,id);</span><br><span class="line">    map.put(<span class="string">&quot;name&quot;</span>,name);</span><br><span class="line">    map.put(<span class="string">&quot;pv&quot;</span>,pv);</span><br><span class="line">    <span class="keyword">return</span> map;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="获取请求头"><a href="#获取请求头" class="headerlink" title="获取请求头"></a>获取请求头</h1><p>@RequestHeader</p>
@@ -520,6 +521,10 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 <h1 id="矩阵变量"><a href="#矩阵变量" class="headerlink" title="矩阵变量"></a>矩阵变量</h1><p>@MatrixVariable</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用场景：浏览器禁用cookie后，无法获得服务器端的session_id</span></span><br></pre></td></tr></table></figure>
+
+
+
+
 
 
       </div>

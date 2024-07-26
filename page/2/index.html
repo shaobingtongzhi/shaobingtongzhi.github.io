@@ -570,8 +570,9 @@ header .header__right .dropdown-menus .dropdown-menu {
               
                 
               
-              路径变量@PathVariable
-123456789101112//请求地址：/car/3/name/zhangsan  =&gt;  /car/&#123;id&#125;/name/&#123;uname&#125;@GetMapping(&quot;/car/&#123;id&#125;/name/&#123;uname&#125;&quot;)public Map&lt;String,O
+              注意：GET请求一般采用 RequestParam 接收，POST请求一般采用 RequestBody 接收，前端传参时，设置ContentType &#x3D; “application&#x2F;json”
+路径变量@PathVariable
+123456789101112//请求地址：/car/3/name/zhangsan  =&gt;  /car/&#123;id&#125;/name/
           </p>
           <div class="index-btm post-metas">
             
