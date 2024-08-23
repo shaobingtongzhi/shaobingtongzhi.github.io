@@ -231,7 +231,7 @@ post:
         cc: false
         # 复制内容时追加版权
         clipboard: 
-            enable: true
+            enable: false
             content: '很荣幸能帮到你'
 
     # 文末打赏

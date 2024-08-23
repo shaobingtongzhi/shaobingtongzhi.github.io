@@ -219,6 +219,8 @@ esac
 
 # docker 容器
 
+## 安装nvm
+
 在 jenkins 的容器内安装nvm
 
 由于jenkins容器默认用户是jenkins，且没有用户根目录，安装完nvm后，无法使用设置环境变量，当前把环境变量设置在了 /etc/bash.bashrc
@@ -230,3 +232,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 ```
 
+## 安装 node
+
+2024年8月23日，突然发现jenkins里 **全局工具配置** 中配置的NodeJS 自动安装不行了，因为访问不到nodejs.org这个站了，所以只能手动下载安装了
+
+下载地址：https://nodejs.org/dist/v17.9.1/node-v17.9.1-linux-x64.tar.xz
+
+下载好后，把这个包解压到指定目录下，我这里是放在了 /var/jenkins_home/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/Node_17.9.1 这个目录
+
+然后配置安装目录即可！
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240823/Snipaste_2024-08-23_14-58-59.56xqi7lwr9s0.webp)

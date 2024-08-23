@@ -160,3 +160,14 @@ MQTTX 全功能 MQTT 客户端工具
 通过客户端可以测试连接到服务端！！！
 
 至此完成了 MQTT 服务器的搭建！！！
+
+
+
+# docker 安装EMQX
+
+```sh
+docker pull emqx:5.0.26
+
+docker run -d --name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 -v E:/docker/emqx/data:/opt/emqx/data -v E:/docker/emqx/log:/opt/emqx/log emqx:5.0.26
+```
+
