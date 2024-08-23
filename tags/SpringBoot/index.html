@@ -513,15 +513,53 @@ header .header__right .dropdown-menus .dropdown-menu {
     
 
     
-      document.addEventListener('copy', function (event) {
-      const clipboardData = event.clipboardData || window.clipboardData;
-      if (!clipboardData) { return; }
-      const text = window.getSelection().toString();
-      if (text) {
-        event.preventDefault();
-        clipboardData.setData('text/plain', text + '很荣幸能帮到你');
-      }
-    });
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
+s://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
     
   /* 小彩蛋: 饮茶先啦 */
   setTimeout(() => {
