@@ -86,7 +86,7 @@ custom_domains = xxx.your_domain.com
 
 ```toml
 [common]
-server_addr = 39.99.149.236
+server_addr = xxx.xx.xx.xx # 公网服务器IP
 server_port = 7000
 token = shaobingtongzhi
 
