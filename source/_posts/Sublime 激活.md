@@ -46,3 +46,75 @@ codesign --remove-signature Sublime\ Text.app/
 相关软件下载地址：
 百度云盘链接:[https://pan.baidu.com/s/1m_bKaPyxGmV-byDUSF47TQ](https://pan.baidu.com/s/1m_bKaPyxGmV-byDUSF47TQ)
 提取码: x2ga
+
+
+
+# 使用
+
+## 查寻文件快捷键
+
+```sh
+ctrl + p
+```
+
+## 分屏
+
+```sh
+shift + alt + 2
+# 2表示分两个栏
+```
+
+## 在控制器里找方法
+
+```sh
+ctrl + r
+```
+
+## 折叠代码块
+
+```sh
+# “ctrl + 1” 中的数字代码折叠级数
+# 按住ctrl不松手，按下 k 松开，再按下 1
+ctrl+k,ctrl+1
+```
+
+## 安装phpmd工具
+
+phpmd工具可以用来查看php文件中哪些变量没有用到
+
+**安装phpmd**
+
+```sh
+composer global require phpmd/phpmd
+```
+
+**创建自定义 Build System**
+
+1. 打开 Sublime Text，点击 `Tools > Build System > New Build System`。
+
+2. 在新打开的文件中，添加如下内容：
+
+   ```
+   {
+       "cmd": ["cmd","/c","phpmd", "$file", "text", "cleancode,codesize,unusedcode"],
+       "file_regex": "^(...*?):([0-9]*):?([0-9]*)",
+       "selector": "source.php"
+   }
+   ```
+
+3. 保存文件为 `phpmd.sublime-build`。
+
+**使用 Build System 检查未使用的变量**
+
+1. 打开 PHP 文件。
+2. 点击 `Tools > Build System`，选择 `phpmd`。
+3. 按 `Ctrl+B` 来运行 `phpmd`，会在 Sublime Text 下方的控制台中显示检测结果。
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240911/Snipaste_2024-09-11_16-30-38.5jzsx9lizbk0.webp)
+
+## 恢复关闭的标签页
+
+```sh
+ctrl + shift + t
+```
+
