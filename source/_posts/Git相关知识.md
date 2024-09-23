@@ -577,3 +577,16 @@ git clean -fx
 第六步：将本地仓库和远程仓库建立关联（git remote add origin https://gitee.com/xxx/xxx.git）
 
 第七步：推送到远程仓库（git push -u origin master）
+
+## git clone 报错：error: xxxx bytes of body are still expected
+
+可能原因：项目过大
+
+解决办法：
+
+```sh
+git config --global http.lowSpeedLimit 0 
+
+git config --global http.lowSpeedTime 999999 
+```
+
