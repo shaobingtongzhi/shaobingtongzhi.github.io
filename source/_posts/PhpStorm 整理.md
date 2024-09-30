@@ -28,6 +28,7 @@ categories:
 
 - CodeGlance 代码迷你地图
 - Chinese(Simplified) Language 中文语言包，汉化
+- BrowseWordAtCaret 选中相同文字高亮
 
 ## 常用配置
 
@@ -114,3 +115,17 @@ $DATE$ $TIME$ By 爱拆东西的程序员
 ctrl + shift + f 键失灵问题
 
 > 关闭系统输入法的热键占用：输入法-》设置-》按键-》热键 
+
+## 插件配置
+
+### BrowseWordAtCaret
+
+Setting（设置） -》 Editor（编辑器） -》 General（编辑器） -》 Appearance（外观） -》 Browse Word At Caret 下面选项勾选上
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240929/Snipaste_2024-09-29_10-46-47.79vjutfary40.webp)
+
+配色方案：
+
+Setting（设置） -》 Editor（编辑器） -》 配色方案 -》Browse Word At Caret 
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20240929/Snipaste_2024-09-29_10-47-55.68b5cehyop80.webp)
