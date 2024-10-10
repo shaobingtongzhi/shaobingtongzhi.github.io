@@ -426,7 +426,7 @@ test/
 
 ### 补充
 
-***如何忽略以前提交的文件***
+***<font color=red>如何忽略以前提交的文件</font>***
 
 当你创建一个新的仓库时，最好的做法是创建一个 `.gitignore` 文件，包含所有你想忽略的文件和不同的文件模式--在提交之前。
 
@@ -436,14 +436,14 @@ Git 只能忽略尚未提交到仓库的未被追踪的文件。
 
 比如你不小心提交了一个存储环境变量的 `.env` 文件。
 
-你首先需要更新 `.gitignore` 文件以包括 `.env` 文件：
+<font color=red>第一步：你首先需要更新 `.gitignore` 文件以包括 `.env` 文件</font>：
 
 ```bash
 # 给 .gitignore 添加 .env 文件
 echo ".env" >> .gitignore
 ```
 
-现在，你需要告诉 Git 不要追踪这个文件，把它从索引中删除：
+<font color=red>第二步：现在，你需要告诉 Git 不要追踪这个文件，把它从索引中删除：</font>
 
 ```bash
 git rm --cached .env
@@ -455,13 +455,13 @@ git rm --cached .env
 
 如果你想从版本库和你的本地系统中删除该文件，省略 `--cached` 选项。
 
-接下来，用 `git add` 命令将 `.gitignore` 添加到暂存区：
+<font color=red>第三步：接下来，用 `git add` 命令将 `.gitignore` 添加到暂存区：</font>
 
 ```bash
 git add .gitignore
 ```
 
-最后，用 `git commit` 命令提交 `.gitignore` 文件：
+<font color=red>第四步：最后，用 `git commit` 命令提交 `.gitignore` 文件：</font>
 
 ```bash
 git commit -m "update ignored files"
