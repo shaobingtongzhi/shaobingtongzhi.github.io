@@ -655,24 +655,24 @@ header .header__right .dropdown-menus .dropdown-menu {
 <p>你不能像这样在一个被忽略的目录内排除一个文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 忽略所有名字带有 test 的目录</span></span><br><span class="line"><span class="built_in">test</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 试图在一个被忽略的目录内排除一个文件是行不通的</span></span><br><span class="line">!<span class="built_in">test</span>/example.md</span><br></pre></td></tr></table></figure>
 
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><em><strong>如何忽略以前提交的文件</strong></em></p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><em><strong><font color=red>如何忽略以前提交的文件</font></strong></em></p>
 <p>当你创建一个新的仓库时，最好的做法是创建一个 <code>.gitignore</code> 文件，包含所有你想忽略的文件和不同的文件模式–在提交之前。</p>
 <p>Git 只能忽略尚未提交到仓库的未被追踪的文件。</p>
 <p>如果你过去已经提交了一个文件，但希望没有提交，会发生什么？</p>
 <p>比如你不小心提交了一个存储环境变量的 <code>.env</code> 文件。</p>
-<p>你首先需要更新 <code>.gitignore</code> 文件以包括 <code>.env</code> 文件：</p>
+<p><font color=red>第一步：你首先需要更新 <code>.gitignore</code> 文件以包括 <code>.env</code> 文件</font>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给 .gitignore 添加 .env 文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;.env&quot;</span> &gt;&gt; .gitignore</span><br></pre></td></tr></table></figure>
 
-<p>现在，你需要告诉 Git 不要追踪这个文件，把它从索引中删除：</p>
+<p><font color=red>第二步：现在，你需要告诉 Git 不要追踪这个文件，把它从索引中删除：</font></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
 
 <p><code>git rm</code> 命令，连同 <code>--cached</code> 选项，从版本库中删除文件，但不删除实际的文件。这意味着该文件仍然在你的本地系统和工作目录中作为一个被忽略的文件。</p>
 <p><code>git status</code> 会显示该文件已不在版本库中，而输入 <code>ls</code> 命令会显示该文件存在于你的本地文件系统中。</p>
 <p>如果你想从版本库和你的本地系统中删除该文件，省略 <code>--cached</code> 选项。</p>
-<p>接下来，用 <code>git add</code> 命令将 <code>.gitignore</code> 添加到暂存区：</p>
+<p><font color=red>第三步：接下来，用 <code>git add</code> 命令将 <code>.gitignore</code> 添加到暂存区：</font></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .gitignore</span><br></pre></td></tr></table></figure>
 
-<p>最后，用 <code>git commit</code> 命令提交 <code>.gitignore</code> 文件：</p>
+<p><font color=red>第四步：最后，用 <code>git commit</code> 命令提交 <code>.gitignore</code> 文件：</font></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;update ignored files&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><em><strong>如何检查被忽略的文件是被.gitignore中的哪一行生效的</strong></em></p>
