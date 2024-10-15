@@ -118,3 +118,63 @@ composer global require phpmd/phpmd
 ctrl + shift + t
 ```
 
+
+
+## 自定义插件
+
+### 注释插件
+
+Sublime Text 本身的代码片段 (`.sublime-snippet`) 语法没有内置功能来动态获取当前时间，因此不能直接在代码片段中插入自动更新的时间。不过，有一些变通的方案可以在 Sublime Text 中实现通过其他方式插入时间：
+
+### 步骤 1: 创建自定义 Python 插件
+
+1. 打开 `Tools` -> `Developer` -> `New Plugin...`。
+
+2. 删除默认的代码，并粘贴以下代码：
+
+   ```python
+   import datetime
+   import sublime
+   import sublime_plugin
+   
+   class InsertCommentWithTimestampCommand(sublime_plugin.TextCommand):
+       def run(self, edit):
+           # 获取当前时间并格式化为指定格式
+           timestamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
+           # 插入注释模版，包含当前时间
+           template = "/**\n 	* \n 	* @param \n 	* @return \n 	* {} By 爱拆东西的程序员\n 	*/".format(timestamp)
+           self.view.insert(edit, self.view.sel()[0].begin(), template)
+   ```
+
+3. 保存文件，命名为 `insert_comment_with_timestamp.py`，并放置到 `Packages/User/` 目录下。
+
+### 步骤 2: 设置键绑定
+
+现在需要设置键绑定，让这个插件通过快捷键触发：
+
+1. 点击 `Preferences` -> `Key Bindings`。
+
+2. 在右侧的用户键绑定文件中添加以下代码：
+
+   ```json
+   [{
+       "keys": ["ctrl+alt+/"],
+       "command": "insert_comment_with_timestamp"
+   }]
+   ```
+
+3. 这样，就可以通过 `Ctrl + Alt + / 快捷键来插入带有当前时间的注释。
+
+### 使用效果：
+
+当按下 `Ctrl + Alt + /，Sublime Text 会自动插入类似以下的注释：
+
+```php
+/**
+ * 
+ * @param 
+ * @return 
+ * 2024/10/14 09:02 By 爱拆东西的程序员
+ */
+```
+
