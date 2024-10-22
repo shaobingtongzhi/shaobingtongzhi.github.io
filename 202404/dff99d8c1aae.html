@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 534 字
+        共 705 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        5
+        7
          分钟
       </span>
     
@@ -495,7 +495,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.</span> <span class="toc-text">详细步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">安装软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81"><span class="toc-number">3.2.</span> <span class="toc-text">拉取代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9A%E6%97%B6%E6%9B%B4%E6%96%B0"><span class="toc-number">3.3.</span> <span class="toc-text">配置定时更新</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.</span> <span class="toc-text">详细步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">安装软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81"><span class="toc-number">3.2.</span> <span class="toc-text">拉取代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9A%E6%97%B6%E6%9B%B4%E6%96%B0"><span class="toc-number">3.3.</span> <span class="toc-text">配置定时更新</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.1.</span> <span class="toc-text">设置任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.2.</span> <span class="toc-text">检查任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.3.</span> <span class="toc-text">删除任务</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
@@ -536,6 +536,15 @@ header .header__right .dropdown-menus .dropdown-menu {
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /sc minute /mo 5 /tn &quot;自动更新-git&quot; /tr &quot;D:\code\zb-three-js\run.vbs&quot;</span><br><span class="line"></span><br><span class="line"># 参数说明：</span><br><span class="line">schtasks /create : 固定写法</span><br><span class="line">/sc minute : /sc就指这条schtasks的类型。minute是分钟的意思，就是分钟类型，类型有很多，每小时每天每个月，具体的自己看文档</span><br><span class="line">/mo 5 : /mo就是运行的频率，5就是每5分钟运行一次，假如/sc类型是hourly，就是每5个小时运行一次。</span><br><span class="line">/tn &quot;自动更新-git&quot; : /tn就是给这个计划任务取个名字。随意写</span><br><span class="line">/tr &quot;D:\XXXX.bat&quot;: /tr就是你要运行的路径，其实只要把创建的bat完整路径贴过来即可</span><br></pre></td></tr></table></figure>
 
 
+
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>windows server上的定时任务配置</p>
+<h2 id="设置任务"><a href="#设置任务" class="headerlink" title="设置任务"></a>设置任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每5分钟执行一次拉取任务</span></span><br><span class="line">schtasks /create /sc minute /mo 5 /tn <span class="string">&quot;自动更新-git&quot;</span> /tr <span class="string">&quot;D:\code\zb-three-js\run.vbs&quot;</span></span><br><span class="line"><span class="comment"># 每天凌晨01:00执行一次脚本</span></span><br><span class="line">schtasks /create /sc daily /st 01:00 /tn <span class="string">&quot;自动备份数据&quot;</span> /tr <span class="string">&quot;C:\Scripts\backup.bat&quot;</span> </span><br><span class="line"><span class="comment"># /st：设置任务开始的时间（这里设置为 01:00，即凌晨1点）</span></span><br><span class="line"><span class="comment"># /sc：设置任务的计划类型，这里使用 daily 表示每天</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="检查任务"><a href="#检查任务" class="headerlink" title="检查任务"></a>检查任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /query /tn <span class="string">&quot;自动备份数据&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除任务"><a href="#删除任务" class="headerlink" title="删除任务"></a>删除任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">schtasks /delete /tn <span class="string">&quot;自动备份数据&quot;</span> /f</span><br><span class="line"></span><br><span class="line"><span class="comment"># /f：表示强制删除任务，无需确认</span></span><br></pre></td></tr></table></figure>
+
+
       </div>
     </div>
 </div>
@@ -556,7 +565,11 @@ header .header__right .dropdown-menus .dropdown-menu {
               
                 <a class="hover-with-bg" href="/tags/%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/"># 自动更新</a>
               
+                <a class="hover-with-bg" href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"># 定时任务</a>
+              
                 <a class="hover-with-bg" href="/tags/%E8%87%AA%E5%8A%A8%E6%8B%89%E5%8F%96/"># 自动拉取</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92/"># 定时计划</a>
               
           
     </div>
