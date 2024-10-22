@@ -38,3 +38,19 @@ du -sm ./* |sort -rn
 ```sh
 df -h
 ```
+Linux 基本信息展示
+```sh
+# 可显示电脑以及操作系统的相关信息。
+uname -a
+# 显示正在运行内核版本信息
+cat /proc/version
+# 显示的是发行版本信息
+cat /etc/issue
+```
+
+ 
+
+
+
+ 
+
