@@ -447,232 +447,26 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
-            <a href="/202406/0540bec94519.html">
+            <a href="/201603/e31e38164ad3.html">
             
-            Springboot读取自定义的yml配置文件</a>
+            CentOS 安装 JDK 环境</a>
           </h3>
           <p class="index-excerpt">
               
               
                 
               
-              在开发中经常会遇到读取自定义的yml配置文件
-第一步：添加配置类
-123456789@Configurationpublic class LoadCustomYmlConfig &#123;    @Bean    public YamlPropertiesFactoryBean alarmParamBean()&#123;        YamlPropertiesFactoryBean ypf
+              centos安装jdk源码下载jdk源码包
+https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.tar.gz
+
+安装解压123456#在目录usr/local下新建目录jdk,并将下载的jdk源码包传到当前目录下cd /usr/localmkdir jdkcd jdk#解压tar -zxvf xxxx.tar.gz
+配置环
           </p>
           <div class="index-btm post-metas">
             
               
-                <time datetime="2024-06-04 00:00" pubdate>
-                  2024-06-04
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202405/b85230591bb1.html">
-            
-            Jenkins实现自动化部署</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              安装123456docker pull jenkins/jenkinsdocker run -d -p 10240:8080 -p 10241:50000 -v E:/docker/jenkins/jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins:latest# 查看初始密码docker logs jenkins
-
-插件管理
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-05-28 00:00" pubdate>
-                  2024-05-28
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">Web服务器部署</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202405/2a476d867a41.html">
-            
-            Windows 服务器安装 OpenSSH 服务</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              首先要确定自己的服务器是否支持安装openssh，下面是具体步骤
-参考连接：https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui
-
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-05-28 00:00" pubdate>
-                  2024-05-28
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Windows%E6%9C%8D%E5%8A%A1%E5%99%A8/">Windows服务器</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/af90b0421e68.html">
-            
-            Nginx服务器做代理服务器</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              问题如何通过nginx代理实现，从另一台电脑访问本地部署的开发环境项目
-解决1. 下载nginx服务软件https://nginx.org/en/download.html
-2. 进行配置找到目录 conf，里面有文件 nginx.conf。可以通过这个文件配置Nginx。
-1234567891011server &#123;	# 监听要开放服务的主机的8000端口（也就是部署了项目的的主机）  
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-30 00:00" pubdate>
-                  2024-04-30
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">Web服务器部署</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/e801f08789ed.html">
-            
-            mysql navicat 自动执行定时任务/事件</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              查看mysql是否开启了定时任务1show variables like &#x27;event_scheduler&#x27;;
-
-
-查看event_scheduler如果为OFF或0就表示关闭 
-12#开启命令set global event_scheduler = on;
-
-这个时候，如果重启了mysql服务，发现 event_scheduler 又成 off 了，所以需要在mysql的配置
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-30 00:00" pubdate>
-                  2024-04-30
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Mysql%E6%9C%8D%E5%8A%A1%E5%99%A8/">Mysql服务器</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/c37ea3024ebb.html">
-            
-            Springboot环境下java调用c语言生成的动态链接库文件</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              背景在项目中要求部分算法程序必须使用 C 或 C++ 进行开发，而项目使用的是 Java 程序，框架是Springboot，好在java中提供了JNI机制，允许 Java 代码调用本地（Native）代码，比如 C 或 C++ 编写的代码
-基本流程生成JNI头文件用于链接动态链接库
-
-编写一个Java类 AddJni.java
-
-12345678package net.xxx.jni;public
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-25 00:00" pubdate>
-                  2024-04-25
+                <time datetime="2016-03-01 00:00" pubdate>
+                  2016-03-01
                 </time>
               
             
@@ -682,160 +476,6 @@ header .header__right .dropdown-menus .dropdown-menu {
                   <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
                 
                   <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/09-java%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">09-java相关笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/9df34319e46f.html">
-            
-            Arthas的使用</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              背景：项目采用的 Springboot + docker部署 的方式，需要在线排查问题
-Arthas 官网地址：https://arthas.aliyun.com/
-简介Arthas 是一款线上监控诊断产品，通过全局视角实时查看应用 load、内存、gc、线程的状态信息，并能在不修改应用代码的情况下，对业务问题进行诊断，包括查看方法调用的出入参、异常，监测方法执行耗时，类加载信息等，大大提升线上问
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-23 00:00" pubdate>
-                  2024-04-23
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/09-java%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">09-java相关笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/3f96fa1fe4a8.html">
-            
-            Springboot 集成 WebSocket</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              引入依赖12345&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;    &lt;version&gt;2.7.18&lt;/version&gt;&lt
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-23 00:00" pubdate>
-                  2024-04-23
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/382ee04ec34e.html">
-            
-            智博热电智慧大屏项目部署</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              后端Docker方式部署采用 docker 容器化技术进行部署
-数据库服务搭建创建my.cnf123456789[mysql]default-character-set=utf8[mysqld]character-set-server=utf8default-time_zone=&#x27;+8:00&#x27;log-error=/var/log/mysqld.logsql-mode=NO_AU
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-22 00:00" pubdate>
-                  2024-04-22
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/a9a19b3700e7.html">
-            
-            Springboot 集成 swagger</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              引入pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;io.springfox&lt;/groupId&gt;    &lt;artifactId&gt;springfox-boot-starter&lt;/artifactId&gt;    &lt;version&gt;3.0.0&lt;/version&gt;&lt;/dependency&g
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-18 00:00" pubdate>
-                  2024-04-18
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-Spring学习笔记</a>
                 
               
             
@@ -849,7 +489,7 @@ Arthas 官网地址：https://arthas.aliyun.com/
 
     <nav aria-label="navigation">
       <span class="pagination" id="pagination">
-        <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
+        <a class="extend prev" rel="prev" href="/page/12/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span>
       </span>
     </nav>
 
