@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>局域网内实现https访问 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="局域网内实现https访问"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>局域网内实现https访问</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2024-11-14 00:00" pubdate>
+          2024-11-14
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 3.1k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        29
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%B9%E8%AF%81%E4%B9%A6%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">创建根证书的意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E6%A0%B9%E8%AF%81%E4%B9%A6%EF%BC%9F"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">为什么要有根证书？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E5%92%8C%E7%A7%81%E9%92%A5%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">1.0.2.</span> <span class="toc-text">证书和私钥的生成</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-number">2.</span> <span class="toc-text">方案一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85mkcert"><span class="toc-number">2.1.</span> <span class="toc-text">第一步：安装mkcert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">2.2.</span> <span class="toc-text">第二步：生成根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E5%92%8C%E5%AF%86%E9%92%A5%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">2.3.</span> <span class="toc-text">第三步：生成证书和密钥，并配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%9C%A8%E5%AE%A2%E6%88%B7%E7%AB%AFPC%E4%B8%8A%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">2.4.</span> <span class="toc-text">第四步：在客户端PC上安装根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.5.</span> <span class="toc-text">第五步：访问服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-number">3.</span> <span class="toc-text">方案二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD-OpenSSL"><span class="toc-number">3.1.</span> <span class="toc-text">1. 下载 OpenSSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-OpenSSL"><span class="toc-number">3.2.</span> <span class="toc-text">2. 安装 OpenSSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE-PATH-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E5%A6%82%E6%9C%89%E9%9C%80%E8%A6%81%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">3. 配置 PATH 环境变量（如有需要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%AA%8C%E8%AF%81-OpenSSL-%E5%AE%89%E8%A3%85"><span class="toc-number">3.4.</span> <span class="toc-text">4. 验证 OpenSSL 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%86%E5%A4%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.5.</span> <span class="toc-text">5. 准备配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%94%9F%E6%88%90%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">3.6.</span> <span class="toc-text">6. 生成根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E8%AF%81%E4%B9%A6%E8%AF%B7%E6%B1%82"><span class="toc-number">3.7.</span> <span class="toc-text">7.  生成一个新的证书请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E5%92%8C%E5%AF%86%E9%92%A5%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">3.8.</span> <span class="toc-text">8. 生成证书和密钥，并配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.9.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在内网环境下，能否实现通过 https 的方式访问内网服务器提供的服务呢？且不希望看到浏览器的证书警告。答案是肯定的，我们可以在这台服务器上使用 <code>mkcert</code> 生成 HTTPS 证书，并<font color=red>在所有需要访问该服务的客户端 PC 上安装**根证书 **</font> ！！！</p>
+<h3 id="创建根证书的意义"><a href="#创建根证书的意义" class="headerlink" title="创建根证书的意义"></a>创建根证书的意义</h3><p>当我们说 <strong>创建根证书</strong> 时，指的是生成一个 <strong>自签名证书</strong>，这个证书本身是“根证书颁发机构（CA）”的身份象征，意味着它是信任链的起点。在公钥基础设施（PKI）中，根证书（CA 证书）是所有信任证书的基础。</p>
+<h4 id="为什么要有根证书？"><a href="#为什么要有根证书？" class="headerlink" title="为什么要有根证书？"></a>为什么要有根证书？</h4><ol>
+<li><strong>信任链</strong>：<ul>
+<li>现代浏览器和操作系统都建立了 <strong>信任链</strong>。浏览器或者操作系统通过验证证书的签发方来判断一个网站的安全性。如果证书是由一个受信任的根证书颁发的，那么它就会被认为是可信的。</li>
+<li>如果我们只是生成一个普通的证书和私钥，而没有根证书，那么生成的证书不会被浏览器信任，用户就会看到“不受信任的证书”的警告。</li>
+</ul>
+</li>
+<li><strong>自签名证书的应用场景</strong>：<ul>
+<li>在 <strong>本地开发</strong> 环境或者 <strong>企业内部系统</strong> 中，可能不希望依赖外部的证书颁发机构（CA）来申请和管理证书，这时候就可以使用 <code>mkcert</code> 来创建一个 <strong>本地根证书</strong>。</li>
+<li><code>mkcert</code> 会创建一个 <strong>本地自签名根证书</strong>，并将它安装到你的操作系统或者浏览器的信任根证书存储中。这样，你自己生成的证书就会被信任，不会触发浏览器的警告。</li>
+</ul>
+</li>
+</ol>
+<h3 id="证书和私钥的生成"><a href="#证书和私钥的生成" class="headerlink" title="证书和私钥的生成"></a>证书和私钥的生成</h3><p>直接生成证书和私钥当然是可以的，但没有根证书的情况下，浏览器和操作系统无法识别该证书的有效性，因为它不属于任何一个受信任的证书链。</p>
+<p><code>mkcert</code> 通过 <strong>创建根证书并信任它</strong>，来让生成的证书能够在浏览器中被信任。</p>
+<ul>
+<li>如果只是生成一个证书和私钥，而没有创建根证书，那么它会被视为自签名证书。即使你自己信任它，浏览器依然会警告“不受信任的证书”。</li>
+<li>通过 <code>mkcert</code> 创建根证书后，这个根证书被添加到信任的证书存储中，这样 <strong>所有由这个根证书签发的证书</strong> 都会被自动信任。</li>
+</ul>
+<h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><p>优点：快捷、省事</p>
+<p>缺点：有效期不可控，默认2年3个月</p>
+<h2 id="第一步：安装mkcert"><a href="#第一步：安装mkcert" class="headerlink" title="第一步：安装mkcert"></a>第一步：安装mkcert</h2><ul>
+<li>下载地址：<a target="_blank" rel="noopener" href="https://github.com/FiloSottile/mkcert">https://github.com/FiloSottile/mkcert</a></li>
+</ul>
+<p>我这里的测试服务器是windows server的，我就在当前服务器上安装 <a target="_blank" rel="noopener" href="https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-windows-amd64.exe">mkcert-v1.4.4-windows-amd64.exe </a> 就行，并将名字重新命名为mkcert.exe即可，把这个mkcert.exe的存放路径配置到环境变量，方便在任何地方使用命令，这里说的安装就是放在一个目录下即可</p>
+<h2 id="第二步：生成根证书"><a href="#第二步：生成根证书" class="headerlink" title="第二步：生成根证书"></a>第二步：生成根证书</h2><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 安装根证书</span><br><span class="line">mkcert -install</span><br><span class="line"></span><br><span class="line"># 保存路径</span><br><span class="line"># macOS/Linux：$HOME/.mkcert</span><br><span class="line"># Windows：<span class="variable">%LOCALAPPDATA%</span>\mkcert</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20241114/Snipaste_2024-11-14_10-02-15.4ro0fayvfs80.webp"></p>
+<p>把生成的rootCA.pem拷贝出来，因为这个要在<strong>第四步</strong>安装到客户端PC</p>
+<p>到这里这一步就结束了，这个命令已经默认把证书安装到了本机了，所以在本机不用管<strong>第四步</strong>了</p>
+<h2 id="第三步：生成证书和密钥，并配置"><a href="#第三步：生成证书和密钥，并配置" class="headerlink" title="第三步：生成证书和密钥，并配置"></a>第三步：生成证书和密钥，并配置</h2><p>生成证书时，指定一个或多个域名（可以是 localhost、IP 地址或你自己定义的域名）。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkcert example.com &quot;*.example.com&quot; localhost <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> ::<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这个命令会为以下域名生成证书：</p>
+<ul>
+<li><code>example.com</code></li>
+<li><code>*.example.com</code>（包含子域名）</li>
+<li><code>localhost</code></li>
+<li><code>127.0.0.1</code>（IPv4 地址）</li>
+<li><code>::1</code>（IPv6 地址）</li>
+</ul>
+<p><code>mkcert</code> 会为这些域名生成 <code>example.com+2.pem</code> 和 <code>example.com+2-key.pem</code> 文件：</p>
+<ul>
+<li><code>.pem</code> 文件是公钥证书</li>
+<li><code>.key</code> 文件是私钥</li>
+</ul>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20241114/Snipaste_2024-11-14_10-07-42.5thyrtqr2840.webp"></p>
+<p>把证书配置到服务中去，这里就不再详细讲了</p>
+<h2 id="第四步：在客户端PC上安装根证书"><a href="#第四步：在客户端PC上安装根证书" class="headerlink" title="第四步：在客户端PC上安装根证书"></a>第四步：在客户端PC上安装根证书</h2><p>Windows 提供了 <strong>证书管理器</strong> 工具，可以用来查看和管理证书。你可以将 <code>.pem</code> 文件导入证书存储区。</p>
+<p>步骤：</p>
+<ol>
+<li><p><strong>打开证书管理器</strong>：</p>
+<ul>
+<li>按下 <strong>Win + R</strong>，在运行框中输入 <code>mmc</code> 并按 <strong>Enter</strong>。</li>
+<li>在 MMC（Microsoft Management Console）中，点击 <strong>文件</strong> &gt; <strong>添加&#x2F;删除管理单元</strong>。</li>
+<li>在管理单元窗口中，选择 <strong>证书</strong>，点击 <strong>添加</strong>。</li>
+<li>选择 <strong>计算机账户</strong>，然后点击 <strong>下一步</strong> &gt; <strong>完成</strong>。</li>
+</ul>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20241114/Snipaste_2024-11-14_10-15-28.4yb6iex6p8s0.webp"></p>
+</li>
+<li><p><strong>导入证书</strong>：</p>
+<ul>
+<li>在左侧窗格中，展开 <strong>证书</strong> &gt; <strong>受信任的根证书颁发机构</strong>。</li>
+<li>右键点击 <strong>证书</strong> 文件夹，选择 <strong>所有任务</strong> &gt; <strong>导入</strong>。</li>
+<li>在导入向导中，点击 <strong>浏览</strong>，选择你的 <code>rootCA.pem</code> 文件。</li>
+<li>点击 <strong>下一步</strong> 并完成导入。</li>
+</ul>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20241114/Snipaste_2024-11-14_10-17-52.6x3q37f67x40.webp"></p>
+</li>
+<li><p>完成后，你可以查看证书是否已成功添加到 <strong>证书管理器</strong> 中。</p>
+</li>
+</ol>
+<h2 id="第五步：访问服务"><a href="#第五步：访问服务" class="headerlink" title="第五步：访问服务"></a>第五步：访问服务</h2><p>至此就完成了，查看证书有效期为2年3个月</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20241114/Snipaste_2024-11-14_10-19-04.25cvhbr6et6o.webp"></p>
+<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><p>mkcert 本身是不能控制生成的根证书的有效期的，那么我们可以通过openssl来生成自定义有效期的根证书</p>
+<p>优点：有效期可控</p>
+<p>缺点：不方便、需要专业知识</p>
+<h2 id="1-下载-OpenSSL"><a href="#1-下载-OpenSSL" class="headerlink" title="1. 下载 OpenSSL"></a>1. 下载 OpenSSL</h2><p>目前，OpenSSL 官方不提供直接的 Windows 版安装包，但可以通过第三方编译的版本（例如 <strong>Shining Light Productions</strong> 提供的安装包）来安装。你可以从以下链接下载 Windows 版的 OpenSSL：</p>
+<ul>
+<li>Shining Light Productions: <a target="_blank" rel="noopener" href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a></li>
+</ul>
+<p>下载页面上通常会提供 <strong>32 位</strong> 和 <strong>64 位</strong> 的版本，根据你的系统选择合适的版本下载。</p>
+<h2 id="2-安装-OpenSSL"><a href="#2-安装-OpenSSL" class="headerlink" title="2. 安装 OpenSSL"></a>2. 安装 OpenSSL</h2><ol>
+<li>下载完成后，运行安装程序。</li>
+<li>安装过程中的关键选项：<ul>
+<li>选择安装目录。建议安装到 <code>C:\OpenSSL-Win64</code> 或 <code>C:\OpenSSL-Win32</code>。</li>
+<li>选择是否将 OpenSSL 二进制文件目录添加到系统 PATH 中（推荐勾选）。</li>
+<li>选择是否安装 Visual C++ Redistributable，如果系统已经有该组件，可以跳过。</li>
+</ul>
+</li>
+<li>完成安装后，如果安装时选择添加了 OpenSSL 到系统 PATH，则无需手动设置。如果没有，则需要手动添加 OpenSSL 的安装目录到 PATH 环境变量中。</li>
+</ol>
+<h2 id="3-配置-PATH-环境变量（如有需要）"><a href="#3-配置-PATH-环境变量（如有需要）" class="headerlink" title="3. 配置 PATH 环境变量（如有需要）"></a>3. 配置 PATH 环境变量（如有需要）</h2><p>如果在安装过程中没有勾选“添加 OpenSSL 到系统 PATH”，可以手动配置环境变量：</p>
+<ol>
+<li><strong>右键“此电脑”</strong> 或 <strong>“我的电脑”</strong> &gt; <strong>属性</strong>。</li>
+<li>点击 <strong>高级系统设置</strong> &gt; <strong>环境变量</strong>。</li>
+<li>在“系统变量”部分，找到 <strong>Path</strong>，双击打开。</li>
+<li>点击 <strong>新建</strong>，然后输入 OpenSSL 的安装目录路径（例如 <code>C:\OpenSSL-Win64\bin</code>）。</li>
+<li>确认后关闭窗口。</li>
+</ol>
+<h2 id="4-验证-OpenSSL-安装"><a href="#4-验证-OpenSSL-安装" class="headerlink" title="4. 验证 OpenSSL 安装"></a>4. 验证 OpenSSL 安装</h2><ol>
+<li><p>打开命令提示符（CMD）或 PowerShell。</p>
+</li>
+<li><p>输入以下命令检查是否安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line">复制代码</span><br><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果安装成功，会显示 OpenSSL 的版本信息。</p>
+</li>
+</ol>
+<h2 id="5-准备配置文件"><a href="#5-准备配置文件" class="headerlink" title="5. 准备配置文件"></a>5. 准备配置文件</h2><ol>
+<li>CA.cnf</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">distinguished_name  = req_distinguished_name</span><br><span class="line">x509_extensions     = root_ca</span><br><span class="line"> </span><br><span class="line">[ req_distinguished_name ]</span><br><span class="line"> </span><br><span class="line"># 以下内容可随意填写</span><br><span class="line">countryName             = CN (2 letter code)</span><br><span class="line">countryName_min         = 2</span><br><span class="line">countryName_max         = 2</span><br><span class="line">stateOrProvinceName     = shanxi</span><br><span class="line">localityName            = taiyuan</span><br><span class="line">0.organizationName      = zhiboredian</span><br><span class="line">organizationalUnitName  = technology </span><br><span class="line">commonName              = zhibo</span><br><span class="line">commonName_max          = 64</span><br><span class="line">emailAddress            =  </span><br><span class="line">emailAddress_max        = 64</span><br><span class="line"> </span><br><span class="line">[ root_ca ]</span><br><span class="line">basicConstraints        = critical, CA:true</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>ServerCA.ext</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">subjectAltName = @zhibo</span><br><span class="line">extendedKeyUsage = serverAuth</span><br><span class="line"> </span><br><span class="line">[zhibo]</span><br><span class="line"> </span><br><span class="line"># 域名，如有多个用DNS.2,DNS.3…来增加</span><br><span class="line">DNS.1 = test2.com</span><br><span class="line"># IP地址</span><br><span class="line"># IP.1 = 192.168.137.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-生成根证书"><a href="#6-生成根证书" class="headerlink" title="6. 生成根证书"></a>6. 生成根证书</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -x509 -newkey rsa:2048 -out rootCA.cer -outform PEM -keyout rootCA.pvk -days 365 -verbose -config CA.cnf -nodes -sha256 -subj <span class="string">&quot;/CN=ZhiBo RSA SSL CA 2024/O=ZhiBo Inc/OU=xxx.xxx.xx&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>-x509</code> 表示输出一个X.509证书，<code>x509</code> 是证书的标准格式。</p>
+</li>
+<li><p><code>-newkey rsa:2048</code> 表示生成一个新的密钥对，<code>rsa:2048</code> 表示使用 RSA 算法，并且密钥长度为 2048 位。RSA 是一种常用的非对称加密算法。</p>
+</li>
+<li><p><code>-out rootCA.cer</code> 指定了输出的证书文件名。</p>
+</li>
+<li><p><code>-outform PEM</code> 指定证书的输出格式为 PEM（Base64 编码的 ASCII 格式）。PEM 格式常用于证书文件的存储。</p>
+</li>
+<li><p><code>-keyout rootCA.pvk</code>这个选项指定了生成的私钥文件的输出名称。在这里，私钥将保存为 <code>rootCA.pvk</code> 文件。</p>
+</li>
+<li><p><code>-days 365</code>这个选项指定证书的有效期为 365 天。自签名证书的有效期通常较短，主要用于测试或内部使用。</p>
+</li>
+<li><p><code>-verbose</code>启用详细模式，在执行过程中输出更多的调试信息。</p>
+</li>
+<li><p><code>-config CA.cnf</code>指定 OpenSSL 使用的配置文件。在这里，<code>CA.cnf</code> 是一个配置文件，通常包含有关证书生成的详细设置，例如扩展字段、路径等。</p>
+</li>
+<li><p><code>-nodes</code>这个选项表示生成的私钥不加密。通常情况下，私钥会被加密以增加安全性，但此选项用于跳过私钥加密，通常用于自动化部署。</p>
+</li>
+<li><p><code>-sha256</code>这个选项指定使用 SHA-256 哈希算法来生成证书的签名。SHA-256 是一种广泛使用的安全哈希算法，提供了较强的抗碰撞性。</p>
+</li>
+<li><p><code>-subj &quot;/CN=ZhiBo RSA SSL CA 2024/O=ZhiBo Inc/OU=xxx.xxx.xx&quot;</code>这个选项设置证书的主题（Subject），即证书的基本信息。<code>/CN=ZhiBo RSA SSL CA 2024</code> 是证书的通用名称（Common Name），<code>/O=ZhiBo Inc</code> 是组织名称（Organization），<code>/OU=xxx.xxx.xx</code> 是组织单位（Organizational Unit）。这通常用于标识证书的发行机构或所有者，可设置为官网。</p>
+</li>
+</ul>
+<h2 id="7-生成一个新的证书请求"><a href="#7-生成一个新的证书请求" class="headerlink" title="7.  生成一个新的证书请求"></a>7.  生成一个新的证书请求</h2><p>生成的证书请求（<code>ServerCA.req</code>）通常会被提交给证书颁发机构（CA）进行签发。如果这是自签名证书的请求，你可以自己签发证书，也可以使用该请求文件让其他证书颁发机构签发证书。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:2048 -keyout ServerCA.pvk -out ServerCA.req -subj /CN=test2.com -sha256 -nodes</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-生成证书和密钥，并配置"><a href="#8-生成证书和密钥，并配置" class="headerlink" title="8. 生成证书和密钥，并配置"></a>8. 生成证书和密钥，并配置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -CA rootCA.cer -CAkey rootCA.pvk -<span class="keyword">in</span> ServerCA.req -out ServerCA.cer -days 365 -extfile ServerCA.ext -sha256 -set_serial 0x1111</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>openssl x509</code></li>
+</ul>
+<p>这是 OpenSSL 用于处理 X.509 证书的命令。X.509 是最常用的数字证书格式，它定义了证书的结构。通过此命令，可以签发证书、查看证书信息等。</p>
+<ul>
+<li><code>-req</code></li>
+</ul>
+<p>这个选项表示该命令是用来处理一个证书请求（CSR）。通过 CSR 文件（<code>ServerCA.req</code>）来签发证书。</p>
+<ul>
+<li><code>-CA rootCA.cer</code></li>
+</ul>
+<p>这个选项指定签发证书的根证书（CA 证书）。在这里，<code>rootCA.cer</code> 是用于签署请求的根证书文件。这个根证书将被用来验证所签署的证书。</p>
+<ul>
+<li><code>-CAkey rootCA.pvk</code></li>
+</ul>
+<p>这个选项指定根证书对应的私钥文件。<code>rootCA.pvk</code> 是用于签署证书请求的私钥文件。私钥用于生成签名，证明证书是由相应的根证书所有者签发的。</p>
+<ul>
+<li><code>-in ServerCA.req</code></li>
+</ul>
+<p>该选项指定输入文件，即证书签名请求（CSR）。在这里，<code>ServerCA.req</code> 是先前生成的证书请求文件。它包含了申请证书的主体信息（如公钥、域名等）。</p>
+<ul>
+<li><code>-out ServerCA.cer</code></li>
+</ul>
+<p>该选项指定输出文件，即签发的证书。在这里，生成的证书将保存为 <code>ServerCA.cer</code>，通常是 PEM 格式的 X.509 证书。</p>
+<ul>
+<li><code>-days 365</code></li>
+</ul>
+<p>这个选项指定新生成证书的有效期为 365 天。证书在到期后需要重新签发或续期。</p>
+<ul>
+<li><code>-extfile ServerCA.ext</code></li>
+</ul>
+<p>该选项指定一个外部配置文件，用于添加扩展（extensions）到生成的证书中。扩展文件（通常是 <code>.ext</code> 文件）包含额外的证书信息，如主题备用名称（SAN）、密钥用途、CRL 分发点等。这里的 <code>ServerCA.ext</code> 是包含扩展配置的文件。</p>
+<ul>
+<li><code>-sha256</code></li>
+</ul>
+<p>这个选项指定使用 SHA-256 哈希算法对证书进行签名。SHA-256 是目前安全性较高的哈希算法，用于生成签名。</p>
+<ul>
+<li><code>-set_serial 0x1111</code></li>
+</ul>
+<p>这个选项为生成的证书设置一个唯一的序列号。证书的序列号必须是唯一的，且不重复。在这里，序列号被设置为 <code>0x1111</code>，即十六进制的 <code>1111</code>。序列号通常是一个大整数，确保每个证书的唯一性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这条命令的作用是：</p>
+<ul>
+<li>使用根证书 <code>rootCA.cer</code> 和根证书私钥 <code>rootCA.pvk</code> 来签署一个证书请求（CSR），该请求文件为 <code>ServerCA.req</code>；</li>
+<li>签发的证书将被保存为 <code>ServerCA.cer</code>，并设置为有效期 365 天；</li>
+<li>使用 SHA-256 哈希算法对证书进行签名；</li>
+<li>证书的序列号被设置为 <code>0x1111</code>；</li>
+<li>使用 <code>ServerCA.ext</code> 文件来指定证书的扩展信息。</li>
+</ul>
+<p>最终生成的 <code>ServerCA.cer</code> 就是签名的证书，通常它将包含在服务器上，或者提供给需要验证其身份的客户端使用。</p>
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+              
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9B%B8%E5%85%B3/">局域网相关</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/https/"># https</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%B1%80%E5%9F%9F%E7%BD%91/"># 局域网</a>
+              
+                <a class="hover-with-bg" href="/tags/ssl%E8%AF%81%E4%B9%A6/"># ssl证书</a>
+              
+                <a class="hover-with-bg" href="/tags/mkcert/"># mkcert</a>
+              
+                <a class="hover-with-bg" href="/tags/openssl/"># openssl</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202411/896c1520e5b2.html">https://shaobingtongzhi.github.io/202411/896c1520e5b2.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>

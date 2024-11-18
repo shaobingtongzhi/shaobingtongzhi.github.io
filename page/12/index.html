@@ -447,6 +447,152 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/202208/69d79e7a173e.html">
+            
+            Redis 集群部署</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              拉取镜像1docker pull redis
+修改别名1docker tag [镜像ID] redis62
+一主两从配置步骤创建主redis配置文件redis.conf
+vi &#x2F;Users&#x2F;xxxx&#x2F;Document&#x2F;docker&#x2F;redis&#x2F;redis1&#x2F;redis.conf
+
+配置内容如下：
+
+
+123456port 637
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2022-08-01 00:00" pubdate>
+                  2022-08-01
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/04-Redis%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">04-Redis相关笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202202/62f052386f03.html">
+            
+            Linux 相关知识</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              Linux 相关知识常用命令查看当前目录占用空间大小
+123du -sh du -h --max-depth=0 
+
+ls查看文件大小指定单位
+1ls -l --block-size=m
+
+排序
+1du -sm ./* |sort -rn
+
+查看硬盘空间
+1df -h
+Linux 基本信息展示
+123456# 可显示电脑以及操作系统的相关信息。uname -a# 显示正在运行内核版本信息cat /
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2022-02-01 00:00" pubdate>
+                  2022-02-01
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/06-Linux%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">06-Linux相关知识</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202106/dc413bc18979.html">
+            
+            Linux 磁盘空间爆满，服务无法访问</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              原因：docker引擎默认是安装在系统盘下 &#x2F;var&#x2F;lib&#x2F;docker 一般来说系统盘比较小，当空间不够时会造成docker运行不正常
+造成空间不足的原因：
+
+
+没有用的镜像没有及时删除
+没有用的容器没有及时删除
+docker容器运行中产生的各种垃圾缓存
+系统产生的垃圾
+人为。。。
+
+
+解决方案：把docker迁移到数据盘，所以根本问题是保证磁盘的空间充足
+将do
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2021-06-07 00:00" pubdate>
+                  2021-06-07
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/202002/338072c120c8.html">
             
             Node 相关知识</a>
@@ -724,149 +870,6 @@ cpolar官网地址：cpolar.com
                   <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
                 
                   <span class="p-dot"></span><a href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201702/2a664ab64dcf.html">
-            
-            PhpStorm整理</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              PhpStorm整理
-获取临时激活码：http://jets.idejihuo.comIDEA临时激活码：http://www.idejihuo.com
-
-试用期重置插件地址
-备用插件地址
-教程
-常用插件
-IdeaVim 使用vim的操作
-
-CodeGlance 代码迷你地图
-
-Chinese(Simplified) Language 中文语言包，汉化
-
-BrowseWordAtCaret 选中相
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2017-02-01 10:21" pubdate>
-                  2017-02-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/03-%E7%BC%96%E8%BE%91%E5%99%A8%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">03-编辑器相关笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201605/96bf1cda4fda.html">
-            
-            Linux 下 java 输出中文乱码问题</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              1.检查java文件编码是否是UTF-82.检查系统环境是否安装了中文库
-1locale -a |grep zh_CN
-如果没有中文库，则先安装中文库
-
-安装中文库
-
-1sudo yum install kde-l10n-Chinese
-
-添加UTF-8字符集
-
-1localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
-
-配置环境变量
-
-123vi /etc/profi
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-05-01 00:00" pubdate>
-                  2016-05-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201604/78e744cf92e4.html">
-            
-            Linux 下自定义环境变量文件</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              linux下配置自己的环境变量文件my_env.sh配置环境变量分为系统级和用户级，系统级所有用户生效，用户级针对特定用户，现场环境根据职能不同，会通过用户限制操作范围，环境变量修改以实际需要为准，遵循权限最小原则。
-系统级一般添加系统环境变量，修改&#x2F;etc&#x2F;profile文件，如果操作失误，删除重要配置，影响系统运行。
-centos7版本中 &#x2F;etc&#x2F;pr
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-04-01 00:00" pubdate>
-                  2016-04-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
                 
               
             
