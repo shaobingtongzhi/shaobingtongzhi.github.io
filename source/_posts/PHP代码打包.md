@@ -15,21 +15,60 @@ categories:
 1. shell脚本
 
 ```sh
-#!/bin/sh
-echo 'Step1.开始拉取最新代码>>'
-git pull 
-echo 'Step2.开始比较差异文件>>'
-head=$(git rev-parse --short HEAD)
-lastHead=$(cat lastHead.txt)
-echo $head > lastHead.txt
-echo `git diff --name-only $lastHead $head` >updateFileList.txt
-echo 'Step3.将需要更新的文件拷贝到update目录下'
-rm -rf update/*
-php -f update.php
-echo 'Step5.打包并记录本次更新内容到本地日志文件'
-cd update
-zip -r `date +%Y%m%d_%H%M`'_CCB_UPDATE'.zip ./*
+#!/bin/bash
+
+cd "$(dirname "$0")"
+# 定义增量包目录和文件名
+output_file=`date +%Y%m%d_%H%M`'_CP_UPDATE'.tar.gz
+
+# 第一步：获取最新的提交版本
+latest_commit=$(git rev-parse --short HEAD)
+echo "最新提交版本: $latest_commit"
+
+# 第二步：读取上次的提交版本
+if [ ! -f lastHead.txt ]; then
+  echo "错误: 找不到 lastHead.txt 文件"
+  exit 1
+fi
+
+last_commit=$(cat lastHead.txt)
+echo "上次提交版本: $last_commit"
+
+# 第三步：获取两次提交版本之间的差异文件列表并输出到 update.txt
+cd ..  # 回到项目根目录
+git diff --name-only $last_commit $latest_commit | \
+  grep -v "^update/" | \
+  grep -v "^web/update.php" | \
+  grep -v "^web/phpinfo.php" | \
+  grep -v "^app/config/" | \
+  grep -v "\.gitignore$" > update/updateFileList.txt
+echo "差异文件列表已生成：updateFileList.txt"
+
+# 第四步：根据 updateFileList.txt 复制文件到增量包目录
+rm -rf update/update_code/*
+mkdir -p update/update_code
+
+while IFS= read -r file; do
+  if [ -f "$file" ]; then
+    # 创建目标目录并复制文件
+    mkdir -p "update/update_code/$(dirname "$file")"
+    cp "$file" "update/update_code/$file"
+    echo "复制文件: $file"
+  else
+    echo "警告: 文件 $file 不存在，可能已删除"
+  fi
+done < update/updateFileList.txt
+
+# 第五步：打包增量包目录成 tar.gz 文件
+cd update/update_code
+
+tar -czf $output_file --exclude=$output_file *
+echo "增量包已打包: $output_file"
+
+# 更新 lastHead.txt 文件为最新提交版本
 cd ..
+echo $latest_commit > lastHead.txt
+echo "更新 lastHead.txt 完成，内容为最新版本号: $latest_commit"
 echo ''>>updatelog.txt
 log='----- '`date +%Y%m%d-%H:%M`' 更新内容如下(请无视update目录下内容) -----'
 echo $log >> updatelog.txt
@@ -95,13 +134,14 @@ echo ''>>updatelog.txt
 
 ```php
 <?php
-define('ADMIN_USERNAME','');   // Admin Username
-define('ADMIN_PASSWORD','');   // Admin Password
+define('ADMIN_USERNAME','admin');   // Admin Username
+define('ADMIN_PASSWORD','admin12345+');   // Admin Password
 define('SITE_PATH',dirname(dirname(__FILE__)));
 define('UPDATE_ZIP_PATH',SITE_PATH.DIRECTORY_SEPARATOR.'zip_bak');
 define('FUNC',isset($_GET['f'])?$_GET['f']:'Default');
 // $GLOBALS
 $func = 'update'.FUNC;
+$GLOBALS['oldList'] = [];
 checkAuth();
 if( $GLOBALS['is_login'] || $func == 'updateSetAuth' ){
     if( function_exists($func)){
@@ -110,7 +150,6 @@ if( $GLOBALS['is_login'] || $func == 'updateSetAuth' ){
         die('Error:no access');
     }
 }
-
 
 function updateSetAuth(){
     if( $_POST['user'] == ADMIN_USERNAME && $_POST['pwd'] ==ADMIN_PASSWORD  ){
@@ -142,16 +181,17 @@ function updateDefault(){
 
 //上传处理
 function updateUpload(){
-    
+
     if( !is_dir(UPDATE_ZIP_PATH)){
         mkdir(UPDATE_ZIP_PATH,0775);
     }
-    
+
     if( empty($_FILES['file']) ){
         $GLOBALS['tips'][] = 'Error:please upload file';return;
     }
-    
-    if( pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION) !='zip'){
+
+
+    if( pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION) !='gz'){
         $GLOBALS['tips'][] = 'Error:not allowed file type';return;
     }
     $res = copy($_FILES['file']['tmp_name'],UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name']);
@@ -160,33 +200,35 @@ function updateUpload(){
         $GLOBALS['tips'][] = 'copy '.$_FILES['file']['tmp_name'].' to '.UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name'];
         return;
     }
-    $zip = new ZipArchive();
-    if( $zip->open( UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name'] ) === true){
-        $md5key = md5(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name']).date('YmdHis');
-        $tmpDir = UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$md5key;
-        //创建临时文件夹
-        mkdir(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$md5key);
-        $zip->extractTo($tmpDir);
+    $md5key = md5(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name']).date('YmdHis');
+    $tmpDir = UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$md5key;
+    //创建临时文件夹
+    mkdir($tmpDir);
+
+    $gzFile = UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$_FILES['file']['name'];
+
+    $command = "tar -zxvf {$gzFile} -C {$tmpDir}";
+    exec($command, $output, $returnVar);
+
+    if($returnVar === 0){
         $scanList = scandir($tmpDir);
         $GLOBALS['update_list'] = $todoList = [];
         foreach( $scanList as $v){
             if( $v != '..' && $v!='.'){
-                if( !in_array($v,['apps','libs','framework','public','views','config'])){
+                if( !in_array($v,['src','web','app','vendor'])){
                     $GLOBALS['tips'][] = 'ERROR: DIR '.$v.' is not Allowed  ,Update Error!<br/>';
-                    $zip->close();
                     return ;
                 }else{
                     $todoList[] = $v;
                 }
             }
         }
-
         foreach($todoList as $v){
             doUpdateList($tmpDir,$tmpDir.DIRECTORY_SEPARATOR.$v);
         }
-        //正式解压到站点目录下去，不要解压到其他地方去
-        $zip->extractTo(SITE_PATH);
-        $zip->close();
+        //删除临时目录
+        deleteDirectory($tmpDir);
+
     }else{
         $GLOBALS['tips'][] = 'Error:zip file canot open';return ;
     }
@@ -198,8 +240,25 @@ function doUpdateList($tmpDir,$dir){
         if($v != '..' && $v!='.' &&  is_dir($dir.DIRECTORY_SEPARATOR.$v) ){
             doUpdateList($tmpDir,$dir.DIRECTORY_SEPARATOR.$v);
         }elseif(is_file($dir.DIRECTORY_SEPARATOR.$v)){
-            copy($dir.DIRECTORY_SEPARATOR.$v,str_replace($tmpDir,SITE_PATH,$dir.DIRECTORY_SEPARATOR.$v));
-            $GLOBALS['update_list'][] = str_replace($tmpDir,SITE_PATH,$dir.DIRECTORY_SEPARATOR.$v);
+            // 获取目标路径
+            $targetPath = str_replace($tmpDir, SITE_PATH, $dir.DIRECTORY_SEPARATOR.$v);
+            $targetDir = dirname($targetPath);
+
+            // 检查并创建目标目录
+            if (!is_dir($targetDir)) {
+                if (!mkdir($targetDir, 0775, true)) {
+                    $GLOBALS['tips'][] = 'Error: Failed to create directory: ' . $targetDir;
+                    continue;
+                }
+            }
+
+            // 复制文件
+            if (!copy($dir.DIRECTORY_SEPARATOR.$v, $targetPath)) {
+                $GLOBALS['tips'][] = 'Error: Failed to copy file: ' . $targetPath;
+                continue;
+            }
+
+            $GLOBALS['update_list'][] = $targetPath;
         }
     }
 }
@@ -209,6 +268,7 @@ function updateShowOld(){
         mkdir(UPDATE_ZIP_PATH,0775);
     }
     $list = scandir(UPDATE_ZIP_PATH);
+
     foreach($list as $v){
         if( $v !='..' && $v !='.'){
             $ctime = filectime(UPDATE_ZIP_PATH.DIRECTORY_SEPARATOR.$v);
@@ -217,38 +277,56 @@ function updateShowOld(){
     }
 }
 
+function deleteDirectory($dirPath) {
+    if (!is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
+    }
+    if (is_file($dirPath)) {
+        return unlink($dirPath);
+    }
+    foreach (scandir($dirPath) as $item) {
+        if ($item == '.' || $item == '..') continue;
+        $item = $dirPath . DIRECTORY_SEPARATOR . $item;
+        if (is_dir($item)) {
+            deleteDirectory($item);
+        } else {
+            unlink($item);
+        }
+    }
+    return rmdir($dirPath);
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" >
-<title>代码更新管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <title>代码更新管理</title>
 </head>
 <body>
 <?php if( !$GLOBALS['is_login'] || FUNC == 'SetAuth'){ ?>
-    <form action="?f=SetAuth" method="post" enctype="multipart/form-data">
-        <table class="tableborder" >
-          <tr class="cell">
+<form action="?f=SetAuth" method="post" enctype="multipart/form-data">
+    <table class="tableborder" >
+        <tr class="cell">
             <td class="altbg2">
-            请先登录<br/>
-            账号： <input type="text" name="user" class="txt" style="width:300px"/>
-           <br/>
-            密码： <input type="password" name="pwd"" class="txt" style="width:300px"/>
-            <br/>
-            <input type="submit" name="botton2" style="background-color:orange;color:#000;margin:2px" value=" 登录 "/></td>
-          </tr>
-        </table>
-      </form> 
-    <?php if(!empty($GLOBALS['tips'])){ ?>
+                请先登录<br/>
+                账号： <input type="text" name="user" class="txt" style="width:300px"/>
+                <br/>
+                密码： <input type="password" name="pwd"" class="txt" style="width:300px"/>
+                <br/>
+                <input type="submit" name="botton2" style="background-color:orange;color:#000;margin:2px" value=" 登录 "/></td>
+        </tr>
+    </table>
+</form>
+<?php if(!empty($GLOBALS['tips'])){ ?>
     <ul>
         <?php foreach($GLOBALS['tips'] as $v){ ?>
-        <li> <?php echo $v;?></li>
+            <li> <?php echo $v;?></li>
         <?php } ?>
     </ul>
-    <?php } ?>
-        </body>
-    </html>  
+<?php } ?>
+</body>
+</html>
 <?php die(); } ?>
 <div>
 <pre>
@@ -261,50 +339,51 @@ function updateShowOld(){
 <?php if(FUNC == 'Default'){ ?>
     <form action="?f=Upload" method="post" enctype="multipart/form-data">
         <table class="tableborder" style="width:500px;">
-          <tr class="cell">
-            <td class="altbg2"><label >
-              上传代码包 <input type="file" name="file" class="txt" style="width:400px" style="float:left"/>
-            </label>
-            </td>
-            <td><input type="submit" name="botton2" style="background-color:orange;color:#000;margin:2px" value=" 更新代码包 "/></td>
-          </tr>
+            <tr class="cell">
+                <td class="altbg2"><label >
+                        上传代码包 <input type="file" name="file" class="txt" style="width:400px" style="float:left"/>
+                    </label>
+                </td>
+                <td><input type="submit" name="botton2" style="background-color:orange;color:#000;margin:2px" value=" 更新代码包 "/></td>
+            </tr>
         </table>
-      </form> 
+    </form>
 <?php }elseif(FUNC == 'Upload'){ ?>
-<div>
-<?php if(!empty($GLOBALS['tips'])){ ?>
-    <ul>
-    <?php foreach($GLOBALS['tips'] as $v){ ?>
-    <li> <?php echo $v;?></li>
-    <?php } ?>
-    </ul>
+    <div>
+    <?php if(!empty($GLOBALS['tips'])){ ?>
+        <ul>
+            <?php foreach($GLOBALS['tips'] as $v){ ?>
+                <li> <?php echo $v;?></li>
+            <?php } ?>
+        </ul>
     <?php }else{ ?>
-    <h2>代码更新成功！本次更新涉及目录：</h2>
-    <ul>
-    <?php foreach($GLOBALS['update_list'] as $v){ ?>
-    <li> <?php echo $v;?></li>
-    <?php } ?>
-    </ul>
-    </div>
+        <h2>代码更新成功！本次更新涉及目录：</h2>
+        <ul>
+            <?php foreach($GLOBALS['update_list'] as $v){ ?>
+                <li> <?php echo $v;?></li>
+            <?php } ?>
+        </ul>
+        </div>
     <?php }?>
 <?php }elseif(FUNC == 'ShowOld'){ ?>
     <div>
-    <h2>历史更新包列表：</h2>
-    <table style="width:100%;text-align:left;">
-        <tr>
-            <th>更新包名称</th>
-            <th>上传时间</th>
-        </tr>
-    <?php foreach($GLOBALS['oldList'] as $v){ ?>
-        <tr>
-            <td><?php echo $v['name'];?></td>
-            <td><?php echo $v['ctime'];?></td>
-        </tr>
-    <?php }?>
-    </table>
+        <h2>历史更新包列表：</h2>
+        <table style="width:100%;text-align:left;">
+            <tr>
+                <th>更新包名称</th>
+                <th>上传时间</th>
+            </tr>
+            <?php foreach($GLOBALS['oldList'] as $v){ ?>
+                <tr>
+                    <td><?php echo $v['name'];?></td>
+                    <td><?php echo $v['ctime'];?></td>
+                </tr>
+            <?php }?>
+        </table>
     </div>
 <?php }?>
 </body>
 </html>
+
 ```
 
