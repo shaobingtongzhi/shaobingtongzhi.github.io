@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>TreeSize一款管理磁盘空间的工具 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="TreeSize一款管理磁盘空间的工具"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>TreeSize一款管理磁盘空间的工具</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2025-01-23 00:00" pubdate>
+          2025-01-23
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 1.2k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        10
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-TreeSize%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 TreeSize？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.</span> <span class="toc-text">主要功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-TreeSize%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">为什么选择 TreeSize？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-TreeSize%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">如何使用 TreeSize？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeSize-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">TreeSize 的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h2 id="什么是-TreeSize？"><a href="#什么是-TreeSize？" class="headerlink" title="什么是 TreeSize？"></a>什么是 TreeSize？</h2><p>TreeSize 是一款功能强大的磁盘空间管理工具，适用于 Windows 操作系统。它能够帮助用户清晰地了解磁盘空间的使用情况，并通过图形化界面呈现磁盘、文件夹及文件的详细信息。无论是专业用户还是普通用户，TreeSize 都能有效地帮助你管理磁盘空间，发现和清理占用空间的文件。</p>
+<p><img src="https://github.com/hfshaobing/picx-images-hosting/raw/master/20250123/Snipaste_2025-01-23_08-36-20.1d54bcrru9j4.webp"></p>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><ol>
+<li><p><strong>磁盘空间扫描</strong><br>TreeSize 可以扫描整个磁盘或指定目录，生成清晰的磁盘空间占用报告。通过简单的图形化界面，用户可以快速查看文件和文件夹的大小。</p>
+</li>
+<li><p><strong>深入分析文件夹结构</strong><br>通过 TreeSize，用户可以查看每个文件夹内的文件大小，找到占用磁盘空间的“大块头”，进而做出清理或优化决策。</p>
+</li>
+<li><p><strong>支持多种视图</strong><br>TreeSize 提供不同的视图方式，包括：</p>
+<ul>
+<li><strong>树形结构视图</strong>：显示文件夹的层级结构，便于查看子文件夹占用的空间。</li>
+<li><strong>柱状图视图</strong>：用条形图呈现各个文件夹的占用空间，直观易懂。</li>
+<li><strong>圆形图视图</strong>：将文件夹结构以圆形图的形式展示，便于发现空间使用的瓶颈。</li>
+</ul>
+</li>
+<li><p><strong>文件过滤和搜索</strong><br>你可以使用 TreeSize 强大的搜索和过滤功能，快速定位大文件或不常用的文件。这对于清理不必要的文件非常有帮助。</p>
+</li>
+<li><p><strong>报告生成</strong><br>TreeSize 还支持导出扫描结果，并生成详细的报告。报告可以以 CSV、XML 或 HTML 格式保存，方便后续查看或分享。</p>
+</li>
+<li><p><strong>支持网络共享文件夹扫描</strong><br>如果你需要管理网络中的共享文件夹，TreeSize 也提供了对网络共享文件夹的支持，帮助你检查网络存储的使用情况。</p>
+</li>
+</ol>
+<h2 id="为什么选择-TreeSize？"><a href="#为什么选择-TreeSize？" class="headerlink" title="为什么选择 TreeSize？"></a>为什么选择 TreeSize？</h2><ol>
+<li><p><strong>高效节省时间</strong><br>在磁盘空间使用不明的情况下，TreeSize 提供了一个直观、高效的解决方案，可以快速找到哪些文件占用了大量磁盘空间，节省了手动查找的时间。</p>
+</li>
+<li><p><strong>图形化界面</strong><br>通过简洁明了的图形化界面，TreeSize 可以让用户一目了然地了解磁盘空间使用情况，而不需要依赖复杂的命令行操作。</p>
+</li>
+<li><p><strong>全面的功能支持</strong><br>TreeSize 提供了扫描、过滤、排序、报告生成等多项功能，几乎可以满足任何磁盘空间管理的需求。</p>
+</li>
+<li><p><strong>免费与付费版本</strong><br>TreeSize 提供了一个免费的版本（TreeSize Free），适合个人用户使用。如果需要更多高级功能，如深度分析、报告导出等，用户可以选择付费版（TreeSize Professional）。</p>
+</li>
+</ol>
+<h2 id="如何使用-TreeSize？"><a href="#如何使用-TreeSize？" class="headerlink" title="如何使用 TreeSize？"></a>如何使用 TreeSize？</h2><ol>
+<li><p><strong>下载与安装</strong><br>你可以从 TreeSize 官方网站下载 <a target="_blank" rel="noopener" href="https://www.jam-software.com/treesize_free">TreeSize</a>。下载后按照提示完成安装。</p>
+</li>
+<li><p><strong>启动 TreeSize</strong><br>安装完成后，启动 TreeSize，它会显示出你电脑中所有的磁盘和文件夹。</p>
+</li>
+<li><p><strong>选择扫描目录</strong><br>在主界面中，选择你要扫描的磁盘或文件夹。你可以选择整个磁盘或特定的文件夹进行扫描。</p>
+</li>
+<li><p><strong>查看结果</strong><br>扫描完成后，TreeSize 会以图形化形式展示磁盘空间占用情况。你可以通过切换不同视图来查看详细的空间使用情况。</p>
+</li>
+<li><p><strong>清理无用文件</strong><br>在分析完磁盘空间后，TreeSize 会列出占用空间较大的文件夹和文件，你可以选择删除或移动这些文件以释放空间。</p>
+</li>
+</ol>
+<h2 id="TreeSize-的使用场景"><a href="#TreeSize-的使用场景" class="headerlink" title="TreeSize 的使用场景"></a>TreeSize 的使用场景</h2><ul>
+<li><p><strong>个人电脑空间管理</strong><br>如果你的电脑常常因为空间不足而无法正常工作，TreeSize 能帮助你找出并清理那些占用空间的“大块头”文件。</p>
+</li>
+<li><p><strong>企业文件服务器管理</strong><br>在企业环境中，网络共享文件夹往往会有大量的文件积压。TreeSize 可以帮助企业管理员定期扫描文件夹，确保磁盘空间的合理使用。</p>
+</li>
+<li><p><strong>大数据分析</strong><br>对于需要管理大量数据的用户或组织，TreeSize 提供了非常便利的文件大小分析工具，帮助快速定位并处理数据存储问题。</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>TreeSize 是一款功能丰富、操作简便的磁盘空间管理工具，适用于各种场景，从个人电脑到企业级服务器。无论是查看磁盘使用情况、寻找大文件，还是进行空间清理，TreeSize 都能提供直观、有效的解决方案。如果你正在寻找一款强大的磁盘管理工具，TreeSize 无疑是一个不错的选择。</p>
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+              
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/Windows/"># Windows</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/"># 磁盘管理</a>
+              
+                <a class="hover-with-bg" href="/tags/TreeSize/"># TreeSize</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202501/3978ec7c90fc.html">https://shaobingtongzhi.github.io/202501/3978ec7c90fc.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
