@@ -6,7 +6,8 @@ tags:
   - 磁盘管理
   - TreeSize
 categories:
-  - 工具推荐
+  - 杂文
+  - 推荐
 ---
 
 ## 什么是 TreeSize？
