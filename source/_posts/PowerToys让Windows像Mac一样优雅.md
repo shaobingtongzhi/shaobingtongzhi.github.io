@@ -100,3 +100,21 @@ Keyword（关键词）建议设为数字（不受输入法状态影响）。
 
 
 
+## Everything
+
+下载地址：https://github.com/lin-ycv/EverythingPowerToys
+
+1. 解压 EverythingPT-0.88.0-x64.zip
+2. 拷贝至 PowerToys 的插件目录
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20250210/Snipaste_2025-02-10_08-44-15.3yca3yg5vjw0.webp)
+
+3. 重启 PowerToys 进入 PowerToys Run 查看
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20250210/Snipaste_2025-02-10_08-45-31.hxjp3671to0.webp)
+
+4. 设置激活命令为 @
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20250210/Snipaste_2025-02-10_08-46-57.6pusmiz3gko0.webp)
+
+5. 重启 PowerToysRun
