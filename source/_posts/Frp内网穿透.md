@@ -179,3 +179,76 @@ Please try again later.</p>
 </html>
 ```
 
+# 实战配置
+
+## 服务端
+
+frps.toml
+
+```toml
+bindPort = 7010
+webServer.addr = "127.0.0.1"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "admin12345+"
+auth.token = "authToken"
+```
+
+启动命令
+
+```sh
+frps.exe -c frps.toml
+```
+
+
+
+
+
+## 客户端
+
+frpc.toml
+
+```toml
+serverAddr = "xx.xx.xx.xx"  # 服务端所在的服务器IP
+serverPort = 7010
+auth.token = "authToken" #与服务端一致
+webServer.addr = "127.0.0.1"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "admin12345+"
+[[proxies]]
+name = "xxxx" # 名称随意
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 80 # 客户端开放的端口
+remotePort = 30001 # 映射到服务器的端口, 如果不通过端口直接访问的话，服务端可不开启这个端口，因为客户端和服务端是通过7010通信的，所以说开了7010就可以了
+
+[[proxies]]
+name = "xxxx1"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 81
+remotePort = 30002
+
+[[proxies]]
+name = "xxxx2"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 82
+remotePort = 30003
+transport.bandwidthLimit = "30MB"
+
+[[proxies]]
+name = "xxxx3"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 8080
+remotePort = 2321
+```
+
+启动命令
+
+```sh
+frpc.exe -c frpc.toml
+```
+
