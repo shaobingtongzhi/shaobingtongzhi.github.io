@@ -447,6 +447,56 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/202106/dc413bc18979.html">
+            
+            Linux 磁盘空间爆满，服务无法访问</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              原因：docker引擎默认是安装在系统盘下 &#x2F;var&#x2F;lib&#x2F;docker 一般来说系统盘比较小，当空间不够时会造成docker运行不正常
+造成空间不足的原因：
+
+
+没有用的镜像没有及时删除
+没有用的容器没有及时删除
+docker容器运行中产生的各种垃圾缓存
+系统产生的垃圾
+人为。。。
+
+
+解决方案：把docker迁移到数据盘，所以根本问题是保证磁盘的空间充足
+将do
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2021-06-07 00:00" pubdate>
+                  2021-06-07
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/202005/c0876d966a1e.html">
             
             Docker常用命令</a>
@@ -820,58 +870,6 @@ BrowseWordAtCaret 选中相
                   <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
                 
                   <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/03-%E7%BC%96%E8%BE%91%E5%99%A8%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">03-编辑器相关笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201605/96bf1cda4fda.html">
-            
-            Linux 下 java 输出中文乱码问题</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              1.检查java文件编码是否是UTF-82.检查系统环境是否安装了中文库
-1locale -a |grep zh_CN
-如果没有中文库，则先安装中文库
-
-安装中文库
-
-1sudo yum install kde-l10n-Chinese
-
-添加UTF-8字符集
-
-1localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
-
-配置环境变量
-
-123vi /etc/profi
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-05-01 00:00" pubdate>
-                  2016-05-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
                 
               
             
