@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>在Windows 11上安装vLLM的详细指南 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="在Windows 11上安装vLLM的详细指南"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>在Windows 11上安装vLLM的详细指南</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2025-04-09 00:00" pubdate>
+          2025-04-09
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 1.3k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        15
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">重要说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E9%80%9A%E8%BF%87WSL2%E5%AE%89%E8%A3%85vLLM%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">方法1：通过WSL2安装vLLM（推荐）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%AE%89%E8%A3%85WSL2"><span class="toc-number">2.1.</span> <span class="toc-text">步骤1：安装WSL2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E9%85%8D%E7%BD%AEWSL2%E4%BB%A5%E4%BD%BF%E7%94%A8GPU"><span class="toc-number">2.2.</span> <span class="toc-text">步骤2：配置WSL2以使用GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E5%AE%89%E8%A3%85vLLM"><span class="toc-number">2.3.</span> <span class="toc-text">步骤3：安装vLLM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44%EF%BC%9A%E8%BF%90%E8%A1%8CvLLM%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">步骤4：运行vLLM服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8Docker%E5%AE%89%E8%A3%85vLLM"><span class="toc-number">3.</span> <span class="toc-text">方法2：使用Docker安装vLLM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%AE%89%E8%A3%85Docker-Desktop"><span class="toc-number">3.1.</span> <span class="toc-text">步骤1：安装Docker Desktop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%AE%89%E8%A3%85NVIDIA-Container-Toolkit"><span class="toc-number">3.2.</span> <span class="toc-text">步骤2：安装NVIDIA Container Toolkit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E8%BF%90%E8%A1%8CvLLM-Docker%E5%AE%B9%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">步骤3：运行vLLM Docker容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95vLLM%E6%98%AF%E5%90%A6%E5%B7%A5%E4%BD%9C%E6%AD%A3%E5%B8%B8"><span class="toc-number">4.</span> <span class="toc-text">测试vLLM是否工作正常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%88%E5%AF%B9Windows%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">5.</span> <span class="toc-text">针对Windows的优化建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4"><span class="toc-number">6.</span> <span class="toc-text">故障排除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%981%EF%BC%9ACUDA%E4%B8%8D%E5%8F%AF%E7%94%A8%E6%88%96GPU%E6%9C%AA%E6%A3%80%E6%B5%8B%E5%88%B0"><span class="toc-number">6.1.</span> <span class="toc-text">问题1：CUDA不可用或GPU未检测到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%982%EF%BC%9A%E5%86%85%E5%AD%98%E6%88%96%E6%98%BE%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%94%99%E8%AF%AF"><span class="toc-number">6.2.</span> <span class="toc-text">问题2：内存或显存不足错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%983%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E9%97%AE%E9%A2%98"><span class="toc-number">6.3.</span> <span class="toc-text">问题3：模型下载问题</span></a></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h2 id="重要说明"><a href="#重要说明" class="headerlink" title="重要说明"></a>重要说明</h2><p>vLLM官方不直接支持Windows，它主要设计用于Linux和类Unix系统。但是，您有几种方法可以在Windows 11上使用vLLM：</p>
+<ol>
+<li><p>使用WSL2 (Windows Subsystem for Linux)</p>
+</li>
+<li><p>使用Docker容器</p>
+</li>
+<li><p>尝试直接安装（有限支持，不推荐）</p>
+</li>
+</ol>
+<p>下面我将详细介绍前两种方法，它们是最可靠的选择。</p>
+<h2 id="方法1：通过WSL2安装vLLM（推荐）"><a href="#方法1：通过WSL2安装vLLM（推荐）" class="headerlink" title="方法1：通过WSL2安装vLLM（推荐）"></a>方法1：通过WSL2安装vLLM（推荐）</h2><p>WSL2提供了在Windows上运行Linux的完整环境，这是运行vLLM的最佳选择。</p>
+<h3 id="步骤1：安装WSL2"><a href="#步骤1：安装WSL2" class="headerlink" title="步骤1：安装WSL2"></a>步骤1：安装WSL2</h3><ol>
+<li><p>以管理员身份</p>
+<p>打开PowerShell，运行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启计算机。</p>
+</li>
+<li><p>重启后，系统会自动启动Ubuntu安装。创建用户名和密码。</p>
+</li>
+<li><p>如果未自动安装Ubuntu，请手动安装：</p>
+</li>
+</ol>
+<p>打开PowerShell，运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --install -d Ubuntu-22.04</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤2：配置WSL2以使用GPU"><a href="#步骤2：配置WSL2以使用GPU" class="headerlink" title="步骤2：配置WSL2以使用GPU"></a>步骤2：配置WSL2以使用GPU</h3><ol>
+<li><p>下载并安装最新的NVIDIA驱动（确保选择支持WSL的版本）</p>
+</li>
+<li><p>在PowerShell中检查WSL是否可以访问GPU：</p>
+</li>
+</ol>
+<p>打开PowerShell，运行</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --list --verbose</span><br></pre></td></tr></table></figure>
+
+<p>确保显示的版本是”2”。</p>
+<ol start="3">
+<li>在WSL Ubuntu中安装CUDA：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入WSL</span></span><br><span class="line">wsl</span><br><span class="line"><span class="comment"># 更新软件包</span></span><br><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">sudo apt install -y build-essential wget</span><br><span class="line"><span class="comment"># 添加CUDA存储库</span></span><br><span class="line">wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb</span><br><span class="line">sudo dpkg -i cuda-keyring_1.1-1_all.deb</span><br><span class="line">sudo apt update</span><br><span class="line"><span class="comment"># 安装CUDA（不带显示驱动）</span></span><br><span class="line">sudo apt install -y cuda-toolkit-12-3</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>添加CUDA到路径：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=/usr/local/cuda/bin:$PATH&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>验证CUDA安装：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤3：安装vLLM"><a href="#步骤3：安装vLLM" class="headerlink" title="步骤3：安装vLLM"></a>步骤3：安装vLLM</h3><ol>
+<li>安装Python和虚拟环境：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Python和pip</span></span><br><span class="line">sudo apt install -y python3 python3-pip python3-venv</span><br><span class="line"><span class="comment"># 创建并激活虚拟环境</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ~/vllm-env</span><br><span class="line">python3 -m venv ~/vllm-env/venv</span><br><span class="line"><span class="built_in">source</span> ~/vllm-env/venv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装PyTorch：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch torchvision torchaudio</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装vLLM：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install vllm</span><br><span class="line"><span class="comment">#下载慢可用</span></span><br><span class="line">pip install vllm -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤4：运行vLLM服务器"><a href="#步骤4：运行vLLM服务器" class="headerlink" title="步骤4：运行vLLM服务器"></a>步骤4：运行vLLM服务器</h3><ol>
+<li>下载并运行模型：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活虚拟环境（如果还没激活）</span></span><br><span class="line"><span class="built_in">source</span> ~/vllm-env/venv/bin/activate</span><br><span class="line"><span class="comment"># 运行vLLM与DeepSeek-r1 7B模型</span></span><br><span class="line">python -m vllm.entrypoints.openai.api_server \</span><br><span class="line">    --model deepseek/deepseek-r1-7b \</span><br><span class="line">    --gpu-memory-utilization 0.9 \</span><br><span class="line">    --max-model-len 8192 \</span><br><span class="line">    --max-num-batched-tokens 4096 \</span><br><span class="line">    --dtype half</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>服务器将在<a href="http://localhost:8000启动。在Windows中，您可以通过此地址访问API。">http://localhost:8000启动。在Windows中，您可以通过此地址访问API。</a></li>
+</ol>
+<h2 id="方法2：使用Docker安装vLLM"><a href="#方法2：使用Docker安装vLLM" class="headerlink" title="方法2：使用Docker安装vLLM"></a>方法2：使用Docker安装vLLM</h2><p>如果您更喜欢Docker方式，这也是一个可行的选择。</p>
+<h3 id="步骤1：安装Docker-Desktop"><a href="#步骤1：安装Docker-Desktop" class="headerlink" title="步骤1：安装Docker Desktop"></a>步骤1：安装Docker Desktop</h3><ol>
+<li><p>从Docker官网下载并安装Docker Desktop。</p>
+</li>
+<li><p>启动Docker Desktop，确保在设置中启用了WSL2集成。</p>
+</li>
+<li><p>确保在Docker设置中启用了NVIDIA GPU支持。</p>
+</li>
+</ol>
+<h3 id="步骤2：安装NVIDIA-Container-Toolkit"><a href="#步骤2：安装NVIDIA-Container-Toolkit" class="headerlink" title="步骤2：安装NVIDIA Container Toolkit"></a>步骤2：安装NVIDIA Container Toolkit</h3><ol>
+<li>在WSL2中运行以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入WSL</span></span><br><span class="line">wsl</span><br><span class="line"><span class="comment"># 添加NVIDIA Docker存储库</span></span><br><span class="line">distribution=$(. /etc/os-release;<span class="built_in">echo</span> $ID<span class="variable">$VERSION_ID</span>)</span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -</span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/<span class="variable">$distribution</span>/nvidia-docker.list | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/nvidia-docker.list</span><br><span class="line"><span class="comment"># 更新并安装</span></span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y nvidia-container-toolkit</span><br><span class="line"><span class="comment"># 重新启动Docker</span></span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="步骤3：运行vLLM-Docker容器"><a href="#步骤3：运行vLLM-Docker容器" class="headerlink" title="步骤3：运行vLLM Docker容器"></a>步骤3：运行vLLM Docker容器</h3><ol>
+<li>在PowerShell或WSL中运行以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录用于模型缓存</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ~/models</span><br><span class="line"><span class="comment"># 运行vLLM容器</span></span><br><span class="line">docker run --gpus all -p 8000:8000 \</span><br><span class="line">--volume ~/models:/data \</span><br><span class="line">ghcr.io/vllm-project/vllm:latest \</span><br><span class="line">--model deepseek/deepseek-r1-7b \</span><br><span class="line">--gpu-memory-utilization 0.9 \</span><br><span class="line">--max-model-len 8192 \</span><br><span class="line">--max-num-batched-tokens 4096 \</span><br><span class="line">--dtype half \</span><br><span class="line">--download-dir /data</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>服务器将在<a href="http://localhost:8000启动。">http://localhost:8000启动。</a></li>
+</ol>
+<h2 id="测试vLLM是否工作正常"><a href="#测试vLLM是否工作正常" class="headerlink" title="测试vLLM是否工作正常"></a>测试vLLM是否工作正常</h2><p>无论使用WSL2还是Docker，您都可以按以下方式测试vLLM：</p>
+<ol>
+<li>在Windows PowerShell中运行</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> http://localhost:<span class="number">8000</span>/v1/models <span class="literal">-Method</span> GET</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>或者发送聊天请求：</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$body</span> = <span class="selector-tag">@</span>&#123;</span><br><span class="line">	model = <span class="string">&quot;deepseek/deepseek-r1-7b&quot;</span></span><br><span class="line">	messages = <span class="selector-tag">@</span>(</span><br><span class="line">		<span class="selector-tag">@</span>&#123;</span><br><span class="line">			role = <span class="string">&quot;user&quot;</span></span><br><span class="line">			content = <span class="string">&quot;简要解释下什么是数字孪生技术&quot;</span></span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br><span class="line">	temperature = <span class="number">0.7</span></span><br><span class="line">&#125; | <span class="built_in">ConvertTo-Json</span></span><br><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> http://localhost:<span class="number">8000</span>/v1/chat/completions <span class="literal">-Method</span> POST <span class="literal">-Body</span> <span class="variable">$body</span> <span class="literal">-ContentType</span> <span class="string">&quot;application/json&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="针对Windows的优化建议"><a href="#针对Windows的优化建议" class="headerlink" title="针对Windows的优化建议"></a>针对Windows的优化建议</h2><ol>
+<li>WSL2内存管理：创建或修改.wslconfig文件限制WSL2内存使用：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在Windows中的路径：C:\Users\&lt;用户名&gt;\.wslconfig</span><br><span class="line">[wsl2]</span><br><span class="line">memory=32GB</span><br><span class="line">swap=8GB</span><br><span class="line">processors=8</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>GPU监控：使用Windows任务管理器或NVIDIA控制面板监控GPU使用情况。</p>
+</li>
+<li><p>自动启动脚本：创建批处理文件以简化vLLM启动：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">wsl -d Ubuntu-22.04 -u &lt;用户名&gt; bash -ic &quot;source ~/vllm-env/venv/bin/activate &amp;&amp; python -m vllm.entrypoints.openai.api_server --model deepseek/deepseek-r1-7b --gpu-memory-utilization 0.9 --max-model-len 8192 --max-num-batched-tokens 4096 --dtype half&quot;</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="问题1：CUDA不可用或GPU未检测到"><a href="#问题1：CUDA不可用或GPU未检测到" class="headerlink" title="问题1：CUDA不可用或GPU未检测到"></a>问题1：CUDA不可用或GPU未检测到</h3><p>解决方案：</p>
+<ul>
+<li><p>确保安装了最新的NVIDIA驱动</p>
+</li>
+<li><p>在WSL中运行nvidia-smi验证GPU可见</p>
+</li>
+<li><p>检查CUDA路径是否正确设置</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 手动测试CUDA</span></span><br><span class="line">python -c <span class="string">&quot;import torch; print(torch.cuda.is_available()); print(torch.cuda.device_count())&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="问题2：内存或显存不足错误"><a href="#问题2：内存或显存不足错误" class="headerlink" title="问题2：内存或显存不足错误"></a>问题2：内存或显存不足错误</h3><p>解决方案：</p>
+<ul>
+<li><p>调整vLLM参数减少资源使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 减少资源使用的启动选项</span></span><br><span class="line">python -m vllm.entrypoints.openai.api_server \</span><br><span class="line">    --model deepseek/deepseek-r1-7b \</span><br><span class="line">    --gpu-memory-utilization 0.8 \</span><br><span class="line">    --max-model-len 4096 \</span><br><span class="line">    --max-num-batched-tokens 2048 \</span><br><span class="line">    --dtype half</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="问题3：模型下载问题"><a href="#问题3：模型下载问题" class="headerlink" title="问题3：模型下载问题"></a>问题3：模型下载问题</h3><p>解决方案：</p>
+<ul>
+<li><p>手动下载模型并使用本地路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用Hugging Face CLI下载</span></span><br><span class="line">pip install huggingface_hub</span><br><span class="line">huggingface-cli download deepseek/deepseek-r1-7b --local-dir ~/models/deepseek-r1-7b</span><br><span class="line"><span class="comment"># 使用本地模型</span></span><br><span class="line">python -m vllm.entrypoints.openai.api_server \</span><br><span class="line">    --model ~/models/deepseek-r1-7b \</span><br><span class="line">    --gpu-memory-utilization 0.9 \</span><br><span class="line">    --max-model-len 8192 \</span><br><span class="line">    --dtype half</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+          
+              
+                <a class="hover-with-bg" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"># 大模型</a>
+              
+                <a class="hover-with-bg" href="/tags/vLLM/"># vLLM</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202504/ee9f8cbd7b6e.html">https://shaobingtongzhi.github.io/202504/ee9f8cbd7b6e.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
