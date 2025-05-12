@@ -252,3 +252,145 @@ remotePort = 2321
 frpc.exe -c frpc.toml
 ```
 
+# 与Nginx的结合使用
+
+![](https://github.com/hfshaobing/picx-images-hosting/raw/master/20250512/网络结构.3lpvawqy05e0.webp)
+
+## 内网服务器
+
+### nginx
+
+项目E的配置
+
+```conf
+server {
+    listen        8083;
+    server_name  localhost;
+    root         "C:/Project/qinghuaci/frontend/dist";
+    location / {
+        index index.php index.html error/index.html;
+        error_page 400 /error/400.html;
+        error_page 403 /error/403.html;
+        error_page 404 /error/404.html;
+        error_page 500 /error/500.html;
+        error_page 501 /error/501.html;
+        error_page 502 /error/502.html;
+        error_page 503 /error/503.html;
+        error_page 504 /error/504.html;
+        error_page 505 /error/505.html;
+        error_page 506 /error/506.html;
+        error_page 507 /error/507.html;
+        error_page 509 /error/509.html;
+        error_page 510 /error/510.html;
+        include C:/Project/headQ/nginx.htaccess;
+        autoindex  off;
+    }
+    location /api/something {
+        proxy_pass http://localhost:8082/;
+        proxy_cache mycache;
+        proxy_cache_valid 200 302 100s;
+        add_header cache $upstream_cache_status;
+    }
+	# websocket转发
+    location /device/alarm {
+        proxy_pass http://127.0.0.1:8082;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+}
+```
+
+
+
+
+
+### frpc
+
+```toml
+serverAddr = "xxx.xx.xx.xx" #外网服务器IP
+serverPort = 7010
+auth.token = "123123"
+webServer.addr = "127.0.0.1"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "admin12345+"
+[[proxies]]
+name = "项目A"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 80
+remotePort = 30001
+
+[[proxies]]
+name = "项目B"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 81
+remotePort = 30002
+
+[[proxies]]
+name = "项目C"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 82
+remotePort = 30003
+transport.bandwidthLimit = "30MB"
+
+[[proxies]]
+name = "项目D"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 8080
+remotePort = 2321
+
+[[proxies]]
+name = "项目E"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 8083
+remotePort = 2322
+```
+
+## 外网服务器
+
+### nginx
+
+项目E的配置
+
+```conf
+server {
+        listen        80;
+        server_name  域名;
+        location / {
+            proxy_pass http://127.0.0.1:2322; # 转发到 FRP 的 HTTP 端口
+			proxy_set_header Host $host;      # 保持原始 Host 信息
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+        # websocket请求
+		location /device/alarm {
+			proxy_pass http://127.0.0.1:2322;
+			proxy_http_version 1.1;
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_set_header Connection "upgrade";
+			proxy_set_header Host $host;
+		}
+}
+
+```
+
+### frps
+
+没有变化
+
+```toml
+bindPort = 7010
+webServer.addr = "127.0.0.1"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "admin12345+"
+auth.token = "123123"
+```
+
