@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 138 字
+        共 236 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        1
+        3
          分钟
       </span>
     
@@ -495,7 +495,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">镜像的导入导出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%85%A5%E3%80%81%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">容器导入、导出为镜像</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">镜像的导入导出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%85%A5%E3%80%81%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">容器导入、导出为镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E9%95%9C%E5%83%8F%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">docker镜像源配置</span></a></li></ol>
     
   </div>
     <div id="article">
@@ -511,6 +511,10 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 <p>导入</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker import &lt;归档文件路径&gt; [&lt;镜像名称&gt;:&lt;标签&gt;]</span><br><span class="line"><span class="comment">#示例：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">docker import my_container.tar my_new_image:latest</span><br><span class="line"></span><br><span class="line">docker import https://example.com/my_container.tar my_new_image:latest</span><br><span class="line"></span><br><span class="line">docker import my_container.tar my_custom_image:v1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="docker镜像源配置"><a href="#docker镜像源配置" class="headerlink" title="docker镜像源配置"></a>docker镜像源配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;registry-mirrors&quot;:</span> [</span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.xdark.top&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.littlediary.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://dockerpull.org&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.crdz.gq&quot;</span>,</span><br><span class="line">    <span class="string">&quot;http://docker.1panel.live&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.unsee.tech&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.udayun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.kejilion.pro&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://registry.dockermirror.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.rainbond.cc&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.geekery.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.1panelproxy.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.linkedbus.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.nastool.de&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 
       </div>
