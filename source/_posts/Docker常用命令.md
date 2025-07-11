@@ -51,3 +51,27 @@ docker import my_container.tar my_custom_image:v1
 
 ```
 
+
+
+# docker镜像源配置
+
+```yaml
+"registry-mirrors": [
+    "https://dockerproxy.net",
+    "https://hub.xdark.top",
+    "https://hub.littlediary.cn",
+    "https://dockerpull.org",
+    "https://hub.crdz.gq",
+    "http://docker.1panel.live",
+    "https://docker.unsee.tech",
+    "https://docker.udayun.com",
+    "https://docker.kejilion.pro",
+    "https://registry.dockermirror.com",
+    "https://docker.rainbond.cc",
+    "https://hub.geekery.cn",
+    "https://docker.1panelproxy.com",
+    "https://docker.linkedbus.com",
+    "https://docker.nastool.de"
+]
+```
+
