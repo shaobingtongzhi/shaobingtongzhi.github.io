@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>邮箱 - 因为有你，所以精彩</title>
+    <title>ffmpeg的使用 - 因为有你，所以精彩</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
     <meta name="author" content="nuc_八道门">
     <meta name="keywords" content="">
-    <meta property="og:title" content="邮箱"/>
+    <meta property="og:title" content="ffmpeg的使用"/>
     <style>
 
 
@@ -449,7 +449,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>邮箱</h3>
+  <h3>ffmpeg的使用</h3>
     
       <span class="post-meta-label">
         nuc_八道门
@@ -458,8 +458,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2024-10-22 00:00" pubdate>
-          2024-10-22
+        <time datetime="2025-08-08 00:00" pubdate>
+          2025-08-08
         </time>
       </span>
     
@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 54 字
+        共 913 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        1
+        9
          分钟
       </span>
     
@@ -495,13 +495,79 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FFmpeg%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">FFmpeg的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDFFmpeg"><span class="toc-number">1.1.</span> <span class="toc-text">下载FFmpeg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">1.1.1.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macOS"><span class="toc-number">1.1.2.</span> <span class="toc-text">macOS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEFFmpeg%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88Windows%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">配置FFmpeg的环境变量（Windows）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FFmpeg%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">FFmpeg基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BFFmpeg%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.1.</span> <span class="toc-text">查看FFmpeg版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E8%A7%86%E9%A2%91%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">转换视频格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E5%8F%96%E8%A7%86%E9%A2%91%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91"><span class="toc-number">1.3.3.</span> <span class="toc-text">提取视频中的音频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.4.</span> <span class="toc-text">合并视频文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E8%A7%86%E9%A2%91%E5%92%8C%E9%9F%B3%E9%A2%91%EF%BC%88%E6%97%B6%E9%95%BF%E7%9B%B8%E5%90%8C%EF%BC%89"><span class="toc-number">1.3.5.</span> <span class="toc-text">合并视频和音频（时长相同）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%AA%E5%88%87%E8%A7%86%E9%A2%91"><span class="toc-number">1.3.6.</span> <span class="toc-text">剪切视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%86%E9%A2%91"><span class="toc-number">1.3.7.</span> <span class="toc-text">压缩视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%AA%E5%8F%96%E8%A7%86%E9%A2%91%E7%9A%84%E4%B8%80%E5%B8%A7%E4%BD%9C%E4%B8%BA%E5%9B%BE%E7%89%87"><span class="toc-number">1.3.8.</span> <span class="toc-text">截取视频的一帧作为图片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.4.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <p>微软邮箱：<a href="mailto:&#104;&#x66;&#x73;&#x68;&#x61;&#x6f;&#x62;&#105;&#x6e;&#x67;&#64;&#111;&#x75;&#x74;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;">&#104;&#x66;&#x73;&#x68;&#x61;&#x6f;&#x62;&#105;&#x6e;&#x67;&#64;&#111;&#x75;&#x74;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;</a> 密码：老密码</p>
-<p>chatgpt账号：苹果账号<a href="mailto:&#104;&#102;&#114;&#103;&#119;&#x72;&#103;&#x77;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#104;&#102;&#114;&#103;&#119;&#x72;&#103;&#x77;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+        <h1 id="FFmpeg的基本使用"><a href="#FFmpeg的基本使用" class="headerlink" title="FFmpeg的基本使用"></a>FFmpeg的基本使用</h1><p>FFmpeg是一个强大的开源多媒体处理工具，广泛用于音视频的转码、剪辑、合成、提取、流媒体等任务。在这篇文章中，我们将介绍如何下载、安装FFmpeg以及一些基本的使用命令。</p>
+<h2 id="下载FFmpeg"><a href="#下载FFmpeg" class="headerlink" title="下载FFmpeg"></a>下载FFmpeg</h2><p>FFmpeg支持多平台，包括Windows、Linux和macOS。你可以根据你的操作系统来下载对应版本的FFmpeg。</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>访问FFmpeg的官网：<a target="_blank" rel="noopener" href="https://ffmpeg.org/download.html">https://ffmpeg.org/download.html</a></li>
+<li>在<strong>Windows</strong>部分，点击“Windows builds by BtbN”链接，进入下载页面。</li>
+<li>在下载页面中，选择适合的版本（一般选择<strong>Release</strong>版本）。</li>
+<li>下载完成后，解压缩文件到你选择的目录（例如 <code>C:\ffmpeg</code>）。</li>
+</ol>
+<h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><p>在macOS上，FFmpeg可以通过Homebrew来安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ffmpeg</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置FFmpeg的环境变量（Windows）"><a href="#配置FFmpeg的环境变量（Windows）" class="headerlink" title="配置FFmpeg的环境变量（Windows）"></a>配置FFmpeg的环境变量（Windows）</h2><ol>
+<li>将FFmpeg的bin目录（如 <code>C:\ffmpeg\bin</code>）添加到系统环境变量中：<ul>
+<li>右键点击“此电脑”，选择“属性”。</li>
+<li>点击“高级系统设置” &gt; “环境变量”。</li>
+<li>在“系统变量”中找到<code>Path</code>，点击编辑。</li>
+<li>在末尾添加FFmpeg的bin目录路径（例如 <code>C:\ffmpeg\bin</code>）。</li>
+<li>保存并关闭。</li>
+</ul>
+</li>
+<li>打开命令行窗口，输入 <code>ffmpeg</code>，如果出现FFmpeg的版本信息，说明安装成功。</li>
+</ol>
+<h2 id="FFmpeg基本命令"><a href="#FFmpeg基本命令" class="headerlink" title="FFmpeg基本命令"></a>FFmpeg基本命令</h2><p>FFmpeg的命令行非常强大，以下是一些常见的基本命令。</p>
+<h3 id="查看FFmpeg版本"><a href="#查看FFmpeg版本" class="headerlink" title="查看FFmpeg版本"></a>查看FFmpeg版本</h3><p>要查看当前安装的FFmpeg版本，可以使用以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+
+<h3 id="转换视频格式"><a href="#转换视频格式" class="headerlink" title="转换视频格式"></a>转换视频格式</h3><p>FFmpeg最常见的用途之一是转码视频格式。例如，将一个MP4视频转换为AVI格式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 output.avi</span><br></pre></td></tr></table></figure>
+
+<h3 id="提取视频中的音频"><a href="#提取视频中的音频" class="headerlink" title="提取视频中的音频"></a>提取视频中的音频</h3><p>FFmpeg可以轻松提取视频中的音频并保存为MP3格式。例如，将一个MP4视频中的音频提取为MP3格式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vn -acodec libmp3lame output.mp3</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并视频文件"><a href="#合并视频文件" class="headerlink" title="合并视频文件"></a>合并视频文件</h3><p>要合并多个视频文件，首先需要将它们转换为相同的格式。以下是合并两个MP4文件的命令：</p>
+<ol>
+<li>创建一个包含所有要合并的视频文件的文本文件 <code>filelist.txt</code>，文件内容如下：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file &#x27;input1.mp4&#x27;</span><br><span class="line">file &#x27;input2.mp4&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用以下命令合并视频文件：</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4</span><br></pre></td></tr></table></figure>
+<h3 id="合并视频和音频（时长相同）"><a href="#合并视频和音频（时长相同）" class="headerlink" title="合并视频和音频（时长相同）"></a>合并视频和音频（时长相同）</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 -shortest output.mp4</span><br></pre></td></tr></table></figure>
+
+<h3 id="剪切视频"><a href="#剪切视频" class="headerlink" title="剪切视频"></a>剪切视频</h3><p>如果你只想剪切视频中的某一部分，可以使用以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -ss 00:00:30 -to 00:01:00 -c copy output.mp4</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-ss 00:00:30</code>表示从30秒开始剪切。</li>
+<li><code>-to 00:01:00</code>表示剪切到1分钟。</li>
+<li><code>-c copy</code>表示不进行转码，直接复制。</li>
+</ul>
+<h3 id="压缩视频"><a href="#压缩视频" class="headerlink" title="压缩视频"></a>压缩视频</h3><p>FFmpeg还可以用来压缩视频文件大小。例如，使用以下命令压缩视频：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vcodec libx264 -crf 23 output.mp4</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-vcodec libx264</code>指定视频编码器为H.264。</li>
+<li><code>-crf 23</code>控制压缩质量，值越小，质量越好，文件越大。</li>
+</ul>
+<h3 id="截取视频的一帧作为图片"><a href="#截取视频的一帧作为图片" class="headerlink" title="截取视频的一帧作为图片"></a>截取视频的一帧作为图片</h3><p>如果你想从视频中截取一帧作为图片，可以使用以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -ss 00:00:10 -vframes 1 output.png</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-ss 00:00:10</code>表示从视频的第10秒开始截取。</li>
+<li><code>-vframes 1</code>表示只提取1帧。</li>
+<li><code>output.png</code>为输出的图片文件。</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>FFmpeg是一个强大的多媒体工具，能够处理音视频的转码、剪辑、合成等任务。本文介绍了FFmpeg的下载、安装以及一些基本的使用方法，帮助你快速上手FFmpeg。如果你需要进行更复杂的操作，FFmpeg提供了更多的功能，详细的文档可以参考<a target="_blank" rel="noopener" href="https://ffmpeg.org/documentation.html">官方文档</a>。</p>
 
       </div>
     </div>
@@ -512,12 +578,14 @@ header .header__right .dropdown-menus .dropdown-menu {
     <div id="p-meta-i">
         
               
-                <a class="hover-with-bg" href="/categories/%E5%A4%87%E5%BF%98/">备忘</a>
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+              
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/%E6%8E%A8%E8%8D%90/">推荐</a>
               
           
           
               
-                <a class="hover-with-bg" href="/tags/%E9%82%AE%E7%AE%B1/"># 邮箱</a>
+                <a class="hover-with-bg" href="/tags/ffmpeg/"># ffmpeg</a>
               
           
     </div>
@@ -529,7 +597,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
   <div class="post-copyright">
     <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
-    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202410/361933b1d49d.html">https://shaobingtongzhi.github.io/202410/361933b1d49d.html</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202508/9405234ad88b.html">https://shaobingtongzhi.github.io/202508/9405234ad88b.html</a></p>
     <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
   </div>
   
