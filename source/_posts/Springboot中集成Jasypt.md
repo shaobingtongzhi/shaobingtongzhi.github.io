@@ -96,3 +96,66 @@ public class TestApplication {
 }
 ```
 
+## 扩展
+
+通过自定义的bean实现对配置的管理
+
+```java
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.apache.commons.lang3.StringUtils;
+
+@Configuration
+public class JasyptConfig {
+
+    @Value("${jasypt.encryptor.password:123456}")  // 通过配置文件获取密码，默认密码为123456（应更改）
+    private String password;
+
+    @Value("${jasypt.encryptor.algorithm:PBEWithMD5AndDES}")  // 通过配置文件获取加密算法，默认使用PBEWithMD5AndDES
+    private String algorithm;
+
+    @Value("${jasypt.encryptor.poolSize:1}")  // 配置线程池大小，默认1
+    private int poolSize;
+
+    @Bean("jasyptStringEncryptor")
+    public StringEncryptor stringEncryptor() {
+        PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
+        SimpleStringPBEConfig config = new SimpleStringPBEConfig();
+
+        // 获取密码（优先级：系统属性 > 环境变量 > 配置文件 > 默认值）
+        String effectivePassword = getPassword();
+        config.setPassword(effectivePassword);
+
+        // 配置加密算法、线程池大小和输出格式
+        config.setAlgorithm(algorithm);
+        config.setPoolSize(poolSize);
+        config.setStringOutputType("base64");  // 确保输出为文本格式
+
+        encryptor.setConfig(config);
+        return encryptor;
+    }
+
+    private String getPassword() {
+        // 优先级：系统属性 > 环境变量 > 配置文件中注入的值 > 默认值
+        String passwordFromSystemProp = System.getProperty("jasypt.encryptor.password");
+        if (StringUtils.isNotBlank(passwordFromSystemProp)) {
+            return passwordFromSystemProp;
+        }
+        
+        String passwordFromEnv = System.getenv("JASYPT_ENCRYPTOR_PASSWORD");
+        if (StringUtils.isNotBlank(passwordFromEnv)) {
+            return passwordFromEnv;
+        }
+
+        // 如果没有找到密码，返回配置文件中的密码或者默认值
+        return StringUtils.defaultIfBlank(password, "123456");  // 使用配置文件或默认值
+    }
+}
+
+
+```
+
