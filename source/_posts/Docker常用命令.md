@@ -16,12 +16,16 @@ tags:
 
 ```sh
 docker save -o <文件路径> <镜像名称>:<标签>
+#批量导出
+docker images -q | xargs -I {} docker save -o {}.tar {}
 ```
 
 导入
 
 ```sh
 docker load -i <镜像文件路径>
+#批量导入
+ls /path/to/images/*.tar | xargs -I {} docker load -i {}
 ```
 
 # 容器导入、导出为镜像
@@ -73,5 +77,11 @@ docker import my_container.tar my_custom_image:v1
     "https://docker.linkedbus.com",
     "https://docker.nastool.de"
 ]
+```
+
+# 安装到其它盘
+
+```sh
+start /w "" "Docker Desktop Installer.exe" install --backend=wsl-2 --installation-dir=E:\Programs\docker --wsl-default-data-root=E:\Programs\wsl --accept-license
 ```
 
