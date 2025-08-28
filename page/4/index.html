@@ -447,6 +447,93 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/202404/e801f08789ed.html">
+            
+            mysql navicat 自动执行定时任务/事件</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              查看mysql是否开启了定时任务1show variables like &#x27;event_scheduler&#x27;;
+
+
+查看event_scheduler如果为OFF或0就表示关闭 
+12#开启命令set global event_scheduler = on;
+
+这个时候，如果重启了mysql服务，发现 event_scheduler 又成 off 了，所以需要在mysql的配置
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2024-04-30 00:00" pubdate>
+                  2024-04-30
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Mysql%E6%9C%8D%E5%8A%A1%E5%99%A8/">Mysql服务器</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202404/c37ea3024ebb.html">
+            
+            Springboot环境下java调用c语言生成的动态链接库文件</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              背景在项目中要求部分算法程序必须使用 C 或 C++ 进行开发，而项目使用的是 Java 程序，框架是Springboot，好在java中提供了JNI机制，允许 Java 代码调用本地（Native）代码，比如 C 或 C++ 编写的代码
+基本流程生成JNI头文件用于链接动态链接库
+
+编写一个Java类 AddJni.java
+
+12345678package net.xxx.jni;public
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2024-04-25 00:00" pubdate>
+                  2024-04-25
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/09-java%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">09-java相关笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/202404/9df34319e46f.html">
             
             Arthas的使用</a>
@@ -762,87 +849,6 @@ mysql.ini
                   <span class="p-dot"></span><a href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a>
                 
                   <span class="p-dot"></span><a href="/categories/%E5%B7%A5%E4%BD%9C/%E9%83%A8%E7%BD%B2/">部署</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/54be9cddec8e.html">
-            
-            Mysql常用操作汇总</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              Mysql 常用操作导入123456# 导入一个名为database_name的数据库，该数据库的数据文件是database_name.sqlmysql -u username -p database_name &lt; database_name.sql # 在执行上述命令时，系统会提示您输入密码。请将username替换为您的MySQL用户名，如果需要，也可以指定主机和端口：mysql -h 
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-03 00:00" pubdate>
-                  2024-04-03
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Mysql%E6%9C%8D%E5%8A%A1%E5%99%A8/">Mysql服务器</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/202404/dff99d8c1aae.html">
-            
-            自动拉取代码方案</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              
-参考链接：https://blog.csdn.net/u014389734/article/details/116639771
-
-简介需要在一台windows操作系统的服务器上搭建公司项目的测试环境，后端接口是php，前端是vue，目前有一台空置的电脑，目标是：在这台空置电脑上搭建运行环境，且能自动同步开发代码
-准备工作PHP运行环境：Phpstudy_pro
-Vue运行环境：nvm 、node
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2024-04-02 00:00" pubdate>
-                  2024-04-02
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">Web服务器部署</a>
                 
               
             

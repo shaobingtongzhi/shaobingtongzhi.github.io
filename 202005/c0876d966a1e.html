@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 236 字
+        共 307 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        3
+        4
          分钟
       </span>
     
@@ -495,16 +495,16 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">镜像的导入导出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%85%A5%E3%80%81%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">容器导入、导出为镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E9%95%9C%E5%83%8F%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">docker镜像源配置</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">镜像的导入导出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%85%A5%E3%80%81%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">容器导入、导出为镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E9%95%9C%E5%83%8F%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">docker镜像源配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%88%B0%E5%85%B6%E5%AE%83%E7%9B%98"><span class="toc-number">4.</span> <span class="toc-text">安装到其它盘</span></a></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
         <h1 id="镜像的导入导出"><a href="#镜像的导入导出" class="headerlink" title="镜像的导入导出"></a>镜像的导入导出</h1><p>导出</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o &lt;文件路径&gt; &lt;镜像名称&gt;:&lt;标签&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker save -o &lt;文件路径&gt; &lt;镜像名称&gt;:&lt;标签&gt;</span><br><span class="line"><span class="comment">#批量导出</span></span><br><span class="line">docker images -q | xargs -I &#123;&#125; docker save -o &#123;&#125;.tar &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>导入</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i &lt;镜像文件路径&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker load -i &lt;镜像文件路径&gt;</span><br><span class="line"><span class="comment">#批量导入</span></span><br><span class="line"><span class="built_in">ls</span> /path/to/images/*.tar | xargs -I &#123;&#125; docker load -i &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="容器导入、导出为镜像"><a href="#容器导入、导出为镜像" class="headerlink" title="容器导入、导出为镜像"></a>容器导入、导出为镜像</h1><p>导出</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> &lt;容器ID或容器名称&gt; &gt; &lt;输出文件&gt;</span><br><span class="line"><span class="comment">#示例：</span></span><br><span class="line"><span class="comment"># 导出为tar</span></span><br><span class="line">docker <span class="built_in">export</span> my_container &gt; my_container.tar</span><br><span class="line"><span class="comment"># 导出并压缩</span></span><br><span class="line">docker <span class="built_in">export</span> my_container | gzip &gt; my_container.tar.gz</span><br></pre></td></tr></table></figure>
@@ -515,6 +515,8 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 
 <h1 id="docker镜像源配置"><a href="#docker镜像源配置" class="headerlink" title="docker镜像源配置"></a>docker镜像源配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;registry-mirrors&quot;:</span> [</span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.xdark.top&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.littlediary.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://dockerpull.org&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.crdz.gq&quot;</span>,</span><br><span class="line">    <span class="string">&quot;http://docker.1panel.live&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.unsee.tech&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.udayun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.kejilion.pro&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://registry.dockermirror.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.rainbond.cc&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.geekery.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.1panelproxy.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.linkedbus.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.nastool.de&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装到其它盘"><a href="#安装到其它盘" class="headerlink" title="安装到其它盘"></a>安装到其它盘</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start /w <span class="string">&quot;&quot;</span> <span class="string">&quot;Docker Desktop Installer.exe&quot;</span> install --backend=wsl-2 --installation-dir=E:\Programs\docker --wsl-default-data-root=E:\Programs\wsl --accept-license</span><br></pre></td></tr></table></figure>
 
 
       </div>
