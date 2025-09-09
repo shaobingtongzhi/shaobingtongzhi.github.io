@@ -85,3 +85,12 @@ docker import my_container.tar my_custom_image:v1
 start /w "" "Docker Desktop Installer.exe" install --backend=wsl-2 --installation-dir=E:\Programs\docker --wsl-default-data-root=E:\Programs\wsl --accept-license
 ```
 
+
+
+# 查看容器端口
+
+```sh
+docker port <容器名称>
+```
+
+> 可以用来查看对应的端口是否正常启动了
