@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/null">
     <link rel="icon" type="image/png" href="/null">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>Docker常用命令 - 因为有你，所以精彩</title>
+    <title>Docker部署Emqx服务 - 因为有你，所以精彩</title>
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     
@@ -16,7 +16,7 @@
     <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
     <meta name="author" content="nuc_八道门">
     <meta name="keywords" content="">
-    <meta property="og:title" content="Docker常用命令"/>
+    <meta property="og:title" content="Docker部署Emqx服务"/>
     <style>
 
 
@@ -449,7 +449,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <article class="page">
 <div id="post-meta-m">
     <div class="post-meta" id="post-meta">
-  <h3>Docker常用命令</h3>
+  <h3>Docker部署Emqx服务</h3>
     
       <span class="post-meta-label">
         nuc_八道门
@@ -458,8 +458,8 @@ header .header__right .dropdown-menus .dropdown-menu {
     
       <span class="post-meta-label">
         <span class="p-dot"></span>
-        <time datetime="2020-05-01 00:00" pubdate>
-          2020-05-01
+        <time datetime="2025-09-09 00:00" pubdate>
+          2025-09-09
         </time>
       </span>
     
@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 339 字
+        共 601 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        4
+        7
          分钟
       </span>
     
@@ -495,36 +495,57 @@ header .header__right .dropdown-menus .dropdown-menu {
 <div class="article-m">
   <div class="post-toc">
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">镜像的导入导出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%85%A5%E3%80%81%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">容器导入、导出为镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E9%95%9C%E5%83%8F%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">docker镜像源配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%88%B0%E5%85%B6%E5%AE%83%E7%9B%98"><span class="toc-number">4.</span> <span class="toc-text">安装到其它盘</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%AB%AF%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">查看容器端口</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">快速运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-number">3.</span> <span class="toc-text">访问管理控制台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">配置和数据持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%97%B6%E4%B8%8D%E5%8F%98%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">启动时不变的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">运行时更新的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">4.3.</span> <span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%8C%81%E4%B9%85%E5%8C%96%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.3.1.</span> <span class="toc-text">配置持久化步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.3.2.</span> <span class="toc-text">数据持久化步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">5.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8%E5%86%85"><span class="toc-number">5.1.</span> <span class="toc-text">进入容器内</span></a></li></ol></li></ol>
     
   </div>
     <div id="article">
       <div id="post-content" class="markdown-body textretty">
-        <h1 id="镜像的导入导出"><a href="#镜像的导入导出" class="headerlink" title="镜像的导入导出"></a>镜像的导入导出</h1><p>导出</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker save -o &lt;文件路径&gt; &lt;镜像名称&gt;:&lt;标签&gt;</span><br><span class="line"><span class="comment">#批量导出</span></span><br><span class="line">docker images -q | xargs -I &#123;&#125; docker save -o &#123;&#125;.tar &#123;&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull emqx/emqx:5.8.8</span><br></pre></td></tr></table></figure>
+<h1 id="快速运行"><a href="#快速运行" class="headerlink" title="快速运行"></a>快速运行</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name emqx \</span><br><span class="line">  -p 1883:1883 \    <span class="comment"># MQTT 协议端口</span></span><br><span class="line">  -p 8883:8883 \    <span class="comment"># MQTT SSL 端口</span></span><br><span class="line">  -p 8083:8083 \    <span class="comment"># WebSocket 协议端口</span></span><br><span class="line">  -p 8084:8084 \    <span class="comment"># WebSocket SSL 端口</span></span><br><span class="line">  -p 18083:18083 \  <span class="comment"># Dashboard 管理控制台</span></span><br><span class="line">  emqx/emqx:5.8.8</span><br></pre></td></tr></table></figure>
 
-<p>导入</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker load -i &lt;镜像文件路径&gt;</span><br><span class="line"><span class="comment">#批量导入</span></span><br><span class="line"><span class="built_in">ls</span> /path/to/images/*.tar | xargs -I &#123;&#125; docker load -i &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="访问管理控制台"><a href="#访问管理控制台" class="headerlink" title="访问管理控制台"></a>访问管理控制台</h1><p>在浏览器打开：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:18083</span><br></pre></td></tr></table></figure>
 
-<h1 id="容器导入、导出为镜像"><a href="#容器导入、导出为镜像" class="headerlink" title="容器导入、导出为镜像"></a>容器导入、导出为镜像</h1><p>导出</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> &lt;容器ID或容器名称&gt; &gt; &lt;输出文件&gt;</span><br><span class="line"><span class="comment">#示例：</span></span><br><span class="line"><span class="comment"># 导出为tar</span></span><br><span class="line">docker <span class="built_in">export</span> my_container &gt; my_container.tar</span><br><span class="line"><span class="comment"># 导出并压缩</span></span><br><span class="line">docker <span class="built_in">export</span> my_container | gzip &gt; my_container.tar.gz</span><br></pre></td></tr></table></figure>
+<p>默认账号密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：admin</span><br><span class="line">密码：public</span><br></pre></td></tr></table></figure>
 
-<p>导入</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker import &lt;归档文件路径&gt; [&lt;镜像名称&gt;:&lt;标签&gt;]</span><br><span class="line"><span class="comment">#示例：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">docker import my_container.tar my_new_image:latest</span><br><span class="line"></span><br><span class="line">docker import https://example.com/my_container.tar my_new_image:latest</span><br><span class="line"></span><br><span class="line">docker import my_container.tar my_custom_image:v1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="配置和数据持久化"><a href="#配置和数据持久化" class="headerlink" title="配置和数据持久化"></a>配置和数据持久化</h1><h2 id="启动时不变的配置"><a href="#启动时不变的配置" class="headerlink" title="启动时不变的配置"></a>启动时不变的配置</h2><p>启动时不变的配置放在 etc&#x2F;emqx.conf</p>
+<h2 id="运行时更新的配置"><a href="#运行时更新的配置" class="headerlink" title="运行时更新的配置"></a>运行时更新的配置</h2><p>直接在控制台进行修改</p>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>etc&#x2F;emqx.conf 在容器里是只读的，无法修改，要映射到宿主机</p>
+<p>控制台修改的配置存在 data&#x2F;configs&#x2F; </p>
+<h3 id="配置持久化步骤"><a href="#配置持久化步骤" class="headerlink" title="配置持久化步骤"></a>配置持久化步骤</h3><ol>
+<li>复制 emqx.conf 到宿主机目录</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> emqx:/opt/emqx/etc/emqx.conf .</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>重启一个容器</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 暂停并删除旧容器</span></span><br><span class="line">doker stop emqx</span><br><span class="line">docke <span class="built_in">rm</span> emqx</span><br><span class="line"><span class="comment"># 启动新容器</span></span><br><span class="line">docker run -d --name emqx -p 1883:1883 -p 8883:8883 -p 8083:8083 -p 8084:8084 -p 18083:18083 -v E:/docker/emqx/data:/opt/emqx/data -v E:/docker/emqx/conf/emqx.conf:/opt/emqx/etc/emqx.conf -v E:/docker/emqx/log:/opt/emqx/log emqx/emqx:5.8.8</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>使用默认cookie有安全风险，修改</p>
+<p>  <img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20250909/Snipaste_2025-09-09_14-15-33.6pcoen10py80.webp"></p>
+</li>
+<li><p>管理面板修改报文大小</p>
+</li>
+</ol>
+<p>  <img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20250909/Snipaste_2025-09-09_14-26-09.2lowgovv6ru0.webp"></p>
+<ol start="5">
+<li>检验是否生效<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 暂停并删除容器</span></span><br><span class="line">docker stop emqx</span><br><span class="line">docker <span class="built_in">rm</span> emqx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启新容器</span></span><br><span class="line">docker run -d --name emqx -p 1883:1883 -p 8883:8883 -p 8083:8083 -p 8084:8084 -p 18083:18083 -v E:/docker/emqx/data:/opt/emqx/data -v E:/docker/emqx/conf/emqx.conf:/opt/emqx/etc/emqx.conf -v E:/docker/emqx/log:/opt/emqx/log emqx/emqx:5.8.8</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker logs emqx 查看没有了告警提示</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20250909/Snipaste_2025-09-09_14-31-33.778mrs9f3cs0.webp"></p>
+<h3 id="数据持久化步骤"><a href="#数据持久化步骤" class="headerlink" title="数据持久化步骤"></a>数据持久化步骤</h3><p>除了需要挂载&#x2F;opt&#x2F;emqx&#x2F;data目录外还需要固定hostname，因为 emqx 在运行时，数据存储的目录是 &#x2F;opt&#x2F;emqx&#x2F;data&#x2F;mnesia&#x2F;节点名</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20250909/Snipaste_2025-09-09_14-36-23.1uogyr7z6ug0.webp"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定hostname</span></span><br><span class="line">docker run --hostname emqx.dev -e EMQX_HOST=emqx.dev -d --name emqx -p 1883:1883 -p 8883:8883 -p 8083:8083 -p 8084:8084 -p 18083:18083 -v E:/docker/emqx/data:/opt/emqx/data -v E:/docker/emqx/conf/emqx.conf:/opt/emqx/etc/emqx.conf -v E:/docker/emqx/log:/opt/emqx/log emqx/emqx:5.8.8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保持节点名不变是数据持久化不丢失的关键</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="进入容器内"><a href="#进入容器内" class="headerlink" title="进入容器内"></a>进入容器内</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过emqx用户进入容器内</span></span><br><span class="line">docker <span class="built_in">exec</span> -u emqx -it emqx bash</span><br><span class="line"><span class="comment">#可参考官方文档使用命令行进行操作</span></span><br><span class="line">emqx ctl <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="docker镜像源配置"><a href="#docker镜像源配置" class="headerlink" title="docker镜像源配置"></a>docker镜像源配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;registry-mirrors&quot;:</span> [</span><br><span class="line">    <span class="string">&quot;https://dockerproxy.net&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.xdark.top&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.littlediary.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://dockerpull.org&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.crdz.gq&quot;</span>,</span><br><span class="line">    <span class="string">&quot;http://docker.1panel.live&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.unsee.tech&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.udayun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.kejilion.pro&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://registry.dockermirror.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.rainbond.cc&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://hub.geekery.cn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.1panelproxy.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.linkedbus.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.nastool.de&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装到其它盘"><a href="#安装到其它盘" class="headerlink" title="安装到其它盘"></a>安装到其它盘</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start /w <span class="string">&quot;&quot;</span> <span class="string">&quot;Docker Desktop Installer.exe&quot;</span> install --backend=wsl-2 --installation-dir=E:\Programs\docker --wsl-default-data-root=E:\Programs\wsl --accept-license</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="查看容器端口"><a href="#查看容器端口" class="headerlink" title="查看容器端口"></a>查看容器端口</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port &lt;容器名称&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以用来查看对应的端口是否正常启动了</p>
-</blockquote>
+<p>参考文档：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/v5.8/admin/cli.html">https://docs.emqx.com/zh/emqx/v5.8/admin/cli.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://docker.emqx.dev/">https://docker.emqx.dev</a> 可生成docker-compose文件</p>
 
       </div>
     </div>
@@ -535,18 +556,16 @@ header .header__right .dropdown-menus .dropdown-menu {
     <div id="p-meta-i">
         
               
-                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
               
-                <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/08-docker%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">08-docker相关笔记</a>
+                <a class="hover-with-bg" href="/categories/%E5%AE%9E%E6%88%98/Emqx%E6%9C%8D%E5%8A%A1%E5%99%A8/">Emqx服务器</a>
               
           
           
               
-                <a class="hover-with-bg" href="/tags/docker/"># docker</a>
+                <a class="hover-with-bg" href="/tags/emqx/"># emqx</a>
               
-                <a class="hover-with-bg" href="/tags/save/"># save</a>
-              
-                <a class="hover-with-bg" href="/tags/load/"># load</a>
+                <a class="hover-with-bg" href="/tags/mqtt/"># mqtt</a>
               
           
     </div>
@@ -558,7 +577,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
   <div class="post-copyright">
     <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
-    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202005/c0876d966a1e.html">https://shaobingtongzhi.github.io/202005/c0876d966a1e.html</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202509/4030af141dfb.html">https://shaobingtongzhi.github.io/202509/4030af141dfb.html</a></p>
     <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
   </div>
   
