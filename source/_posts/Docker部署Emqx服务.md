@@ -125,8 +125,48 @@ docker exec -u emqx -it emqx bash
 emqx ctl help
 ```
 
+# 场景
 
+A 通过主题发布了一条消息，B订阅了主题，但是过程中，emqx服务挂了，相当于消息已经到了emqx了，只是B还没收到，需要开启会话持久化
 
+```conf
+node {
+  name = "emqx@127.0.0.1"
+  cookie = "emqxsecretadfjkclkecookie"
+  data_dir = "data"
+}
+
+cluster {
+  name = emqxcl
+  discovery_strategy = singleton
+}
+
+dashboard {
+    listeners {
+        http.bind = 18083
+        # https.bind = 18084
+        https {
+            ssl_options {
+                certfile = "${EMQX_ETC_DIR}/certs/cert.pem"
+                keyfile = "${EMQX_ETC_DIR}/certs/key.pem"
+            }
+        }
+    }
+}
+durable_sessions {
+  enable = true
+}
+```
+
+两个地方需要注意：
+
+1. discovery_strategy = singleton
+2. 开启会话持久化
+```conf
+durable_sessions {
+	enable = true
+}
+```
 参考文档：
 
 https://docs.emqx.com/zh/emqx/v5.8/admin/cli.html
