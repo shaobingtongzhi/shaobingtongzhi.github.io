@@ -447,6 +447,89 @@ header .header__right .dropdown-menus .dropdown-menu {
         
         <article class="index-card-info">
           <h3 class="index-header">
+            <a href="/202005/c0876d966a1e.html">
+            
+            Docker常用命令</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              镜像的导入导出导出
+123docker save -o &lt;文件路径&gt; &lt;镜像名称&gt;:&lt;标签&gt;#批量导出docker images -q | xargs -I &#123;&#125; docker save -o &#123;&#125;.tar &#123;&#125;
+
+导入
+123docker load -i &lt;镜像文件路径&gt;#批量导入ls /
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2020-05-01 00:00" pubdate>
+                  2020-05-01
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/08-docker%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">08-docker相关笔记</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
+            <a href="/202002/338072c120c8.html">
+            
+            Node 相关知识</a>
+          </h3>
+          <p class="index-excerpt">
+              
+              
+                
+              
+              node与npm 知识总结node 版本更新简介node.js是javascript的一种运行环境，是对Google V8引擎进行的封装，是一个服务器端的javascript的解释器。
+使用 n注意：n命令不支持windows系統，只支持mac
+简介一个简易的node版本管理工具
+安装12345678# 查看当前版本node -v# 清理本地包缓存npm cache clean -f# 安装npm
+          </p>
+          <div class="index-btm post-metas">
+            
+              
+                <time datetime="2020-02-01 00:00" pubdate>
+                  2020-02-01
+                </time>
+              
+            
+            
+              
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                
+                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/05-Node%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">05-Node相关知识</a>
+                
+              
+            
+          </div>
+        </article>
+      </div>
+    
+  
+    
+      <div class="index-card">
+        
+        <article class="index-card-info">
+          <h3 class="index-header">
             <a href="/201906/9bcc155a804d.html">
             
             Memcache 漏洞修复</a>
@@ -794,94 +877,12 @@ BrowseWordAtCaret 选中相
       </div>
     
   
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201604/78e744cf92e4.html">
-            
-            Linux 下自定义环境变量文件</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              linux下配置自己的环境变量文件my_env.sh配置环境变量分为系统级和用户级，系统级所有用户生效，用户级针对特定用户，现场环境根据职能不同，会通过用户限制操作范围，环境变量修改以实际需要为准，遵循权限最小原则。
-系统级一般添加系统环境变量，修改&#x2F;etc&#x2F;profile文件，如果操作失误，删除重要配置，影响系统运行。
-centos7版本中 &#x2F;etc&#x2F;pr
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-04-01 00:00" pubdate>
-                  2016-04-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/">实战</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AE%9E%E6%88%98/%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">问题处理</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
-    
-      <div class="index-card">
-        
-        <article class="index-card-info">
-          <h3 class="index-header">
-            <a href="/201603/e31e38164ad3.html">
-            
-            CentOS 安装 JDK 环境</a>
-          </h3>
-          <p class="index-excerpt">
-              
-              
-                
-              
-              centos安装jdk源码下载jdk源码包
-https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.tar.gz
-
-安装解压123456#在目录usr/local下新建目录jdk,并将下载的jdk源码包传到当前目录下cd /usr/localmkdir jdkcd jdk#解压tar -zxvf xxxx.tar.gz
-配置环
-          </p>
-          <div class="index-btm post-metas">
-            
-              
-                <time datetime="2016-03-01 00:00" pubdate>
-                  2016-03-01
-                </time>
-              
-            
-            
-              
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
-                
-                  <span class="p-dot"></span><a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/09-java%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">09-java相关笔记</a>
-                
-              
-            
-          </div>
-        </article>
-      </div>
-    
-  
 </div>
 </div>
 
     <nav aria-label="navigation">
       <span class="pagination" id="pagination">
-        <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span>
+        <a class="extend prev" rel="prev" href="/page/13/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/15/">&gt;</a>
       </span>
     </nav>
 
