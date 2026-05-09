@@ -467,7 +467,7 @@ header .header__right .dropdown-menus .dropdown-menu {
       
       <span class="post-meta">
         <span class="p-dot"></span>
-        共 918 字
+        共 991 字
       </span>
     
     
@@ -476,7 +476,7 @@ header .header__right .dropdown-menus .dropdown-menu {
         <span class="p-dot"></span>
         
         预计 
-        10
+        11
          分钟
       </span>
     
@@ -518,7 +518,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 <li>下载 Jasypt Command Line Tool。</li>
 <li>使用下面的命令来加密文本（例如数据库密码）：</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -<span class="built_in">cp</span> jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input=<span class="string">&quot;/native/MacValidator.dll&quot;</span> password=<span class="string">&quot;123456&quot;</span> algorithm=<span class="string">&quot;PBEWithMD5AndDES&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jasypt-1.9.3.jar 已经通过 jasypt-spring-boot-starter 依赖进来了，找到对应目录执行下面的加密、解密命令即可</span></span><br><span class="line"><span class="comment"># 加密</span></span><br><span class="line">java -<span class="built_in">cp</span> jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input=<span class="string">&quot;/native/MacValidator.dll&quot;</span> password=<span class="string">&quot;123456&quot;</span> algorithm=<span class="string">&quot;PBEWithMD5AndDES&quot;</span></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">java -<span class="built_in">cp</span> jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input=<span class="string">&quot;加密后的字符串&quot;</span> password=<span class="string">&quot;你的密钥&quot;</span> algorithm=PBEWithMD5AndDES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这将返回一个加密后的字符串，将其复制到配置文件中的 <code>ENC(...)</code> 里。</p>
 <h2 id="使用加密的配置"><a href="#使用加密的配置" class="headerlink" title="使用加密的配置"></a>使用加密的配置</h2><p>一旦将加密后的值放入配置文件中，Jasypt 会在 Spring Boot 启动时自动解密它们，解密后的值会被注入到相应的属性中。</p>
