@@ -59,7 +59,12 @@ core:
 - 使用下面的命令来加密文本（例如数据库密码）：
 
 ```sh
+# jasypt-1.9.3.jar 已经通过 jasypt-spring-boot-starter 依赖进来了，找到对应目录执行下面的加密、解密命令即可
+# 加密
 java -cp jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="/native/MacValidator.dll" password="123456" algorithm="PBEWithMD5AndDES"
+# 解密
+java -cp jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="加密后的字符串" password="你的密钥" algorithm=PBEWithMD5AndDES
+
 ```
 
 这将返回一个加密后的字符串，将其复制到配置文件中的 `ENC(...)` 里。
