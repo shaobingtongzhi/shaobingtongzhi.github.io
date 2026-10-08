@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>电子元器件入门 - 因为有你，所以精彩</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="好看的皮囊千篇一律，有趣的灵魂万里挑一">
+    <meta name="author" content="nuc_八道门">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="电子元器件入门"/>
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">八一杠</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+		<a href="/html" class="button">
+			<div class="navbar-menu">模版</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+		<a href="/html" class="dropdown-menu button">模版</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3>电子元器件入门</h3>
+    
+      <span class="post-meta-label">
+        nuc_八道门
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2026-10-08 00:00" pubdate>
+          2026-10-08
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 2.7k 字
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        
+        预计 
+        24
+         分钟
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%87%E7%94%A8%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">万用表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E9%98%BB%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">电阻器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">主要参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E8%81%94%E4%B8%8E%E5%B9%B6%E8%81%94"><span class="toc-number">2.3.</span> <span class="toc-text">串联与并联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E7%8E%AF%E7%94%B5%E9%98%BB%E8%AF%BB%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">色环电阻读数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B"><span class="toc-number">2.5.</span> <span class="toc-text">检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E7%94%B5%E9%98%BB"><span class="toc-number">2.6.</span> <span class="toc-text">敏感电阻</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">2.6.1.</span> <span class="toc-text">压敏电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">2.6.2.</span> <span class="toc-text">热敏电阻</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%95%8F%E7%94%B5%E9%98%BB"><span class="toc-number">2.6.3.</span> <span class="toc-text">光敏电阻</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E5%AE%B9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">电容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0-1"><span class="toc-number">3.1.</span> <span class="toc-text">主要参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text">常见类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E8%81%94%E4%B8%8E%E5%B9%B6%E8%81%94-1"><span class="toc-number">3.3.</span> <span class="toc-text">串联与并联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B-1"><span class="toc-number">3.4.</span> <span class="toc-text">检测</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E6%84%9F%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">电感器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E5%8E%8B%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">变压器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%99%B6%E4%BD%93%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">6.</span> <span class="toc-text">晶体二极管</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">晶体三极管</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%A7%E7%94%B5%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">继电器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E5%99%A8%E4%BB%B6%E9%80%9F%E6%9F%A5"><span class="toc-number">9.</span> <span class="toc-text">元器件速查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">小结</span></a></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <p>电子电路再复杂，拆开来看也就是几个基础元器件的组合。这篇笔记把常见元器件按「特点 → 作用 → 检测」的思路梳理一遍，重点放在<strong>怎么识别</strong>和<strong>怎么用万用表判断好坏</strong>上，方便后续看电路图、修家电时随时翻。</p>
+<p>下面提到的检测方法，基本都靠一块万用表就能完成，所以先简单交代一下工具。</p>
+<h1 id="万用表"><a href="#万用表" class="headerlink" title="万用表"></a>万用表</h1><p>维修和检测元件最常用的工具，能测电压（V）、电流（A）、电阻（Ω）、电容（F），部分型号还能测二极管、三极管、通断蜂鸣。</p>
+<ul>
+<li><strong>电阻档</strong>：测电阻、电感线圈、二极管正反向、线路通断</li>
+<li><strong>二极管档</strong>：直接读出正向压降，判断二极管好坏最直观</li>
+<li><strong>电容档</strong>：测电容量</li>
+<li><strong>电压档</strong>：测电路工作电压，排查供电是否正常</li>
+</ul>
+<blockquote>
+<p>用电阻档测量前，一定要先断开被测元件所在电路的电源，并给电容放电，否则读数不准甚至损坏表头。</p>
+</blockquote>
+<h1 id="电阻器"><a href="#电阻器" class="headerlink" title="电阻器"></a>电阻器</h1><p>导体对电流的阻碍作用称为电阻，符号 <strong>R</strong>，单位<strong>欧姆（Ω）</strong>，常用单位还有 kΩ、MΩ（1 kΩ &#x3D; 1000 Ω，1 MΩ &#x3D; 1000 kΩ）。</p>
+<p>常见电阻的图片</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.24bcyxfcffz4.webp"></p>
+<h2 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h2><ul>
+<li><strong>标称阻值</strong>：元件上标注的阻值</li>
+<li><strong>额定功率</strong>：能长期承受的最大功率，常见 1&#x2F;8 W、1&#x2F;4 W、1&#x2F;2 W、1 W</li>
+<li><strong>误差精度</strong>：实际阻值与标称值的偏差，常见 ±5%、±1%</li>
+</ul>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>限流、降压、分压</p>
+<ul>
+<li><strong>限流</strong>：串在 LED、三极管基极等回路里，把电流控制在安全范围</li>
+<li><strong>降压</strong>：串接后分掉一部分电压</li>
+<li><strong>分压</strong>：两个电阻串联，从中间取出需要的电压</li>
+</ul>
+<h2 id="串联与并联"><a href="#串联与并联" class="headerlink" title="串联与并联"></a>串联与并联</h2><ul>
+<li><strong>串联</strong>：R &#x3D; R₁ + R₂ + …，阻值变大，分压</li>
+<li><strong>并联</strong>：1&#x2F;R &#x3D; 1&#x2F;R₁ + 1&#x2F;R₂ + …，阻值变小，分流</li>
+</ul>
+<h2 id="色环电阻读数"><a href="#色环电阻读数" class="headerlink" title="色环电阻读数"></a>色环电阻读数</h2><p>四环电阻：前两环是有效数字，第三环是倍率（10ⁿ），第四环是误差。</p>
+<table>
+<thead>
+<tr>
+<th>颜色</th>
+<th>数值</th>
+<th>倍率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>黑</td>
+<td>0</td>
+<td>10⁰</td>
+</tr>
+<tr>
+<td>棕</td>
+<td>1</td>
+<td>10¹</td>
+</tr>
+<tr>
+<td>红</td>
+<td>2</td>
+<td>10²</td>
+</tr>
+<tr>
+<td>橙</td>
+<td>3</td>
+<td>10³</td>
+</tr>
+<tr>
+<td>黄</td>
+<td>4</td>
+<td>10⁴</td>
+</tr>
+<tr>
+<td>绿</td>
+<td>5</td>
+<td>10⁵</td>
+</tr>
+<tr>
+<td>蓝</td>
+<td>6</td>
+<td>10⁶</td>
+</tr>
+<tr>
+<td>紫</td>
+<td>7</td>
+<td>10⁷</td>
+</tr>
+<tr>
+<td>灰</td>
+<td>8</td>
+<td>10⁸</td>
+</tr>
+<tr>
+<td>白</td>
+<td>9</td>
+<td>10⁹</td>
+</tr>
+</tbody></table>
+<p>误差环：金 ±5%、银 ±10%、棕 ±1%、红 ±2%。</p>
+<p>举例：<strong>棕 黑 红 金</strong> &#x3D; 1、0 × 10²、±5% &#x3D; <strong>1 kΩ</strong>。五环电阻则多一位有效数字，读数方法类似。</p>
+<h2 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h2><p>用万用表的电阻档进行检测</p>
+<ul>
+<li>测量值与标称阻值接近即正常；<strong>远大于标称值</strong>说明内部断路，<strong>接近 0</strong> 说明短路</li>
+<li>指针式万用表换档后要先短接表笔<strong>调零</strong>，再测量</li>
+<li>在路测量时结果会受并联支路影响，必要时拆下元件单独测</li>
+</ul>
+<h2 id="敏感电阻"><a href="#敏感电阻" class="headerlink" title="敏感电阻"></a>敏感电阻</h2><p>包含压敏电阻、热敏电阻、光敏电阻、湿敏电阻、气敏电阻、力敏电阻、磁敏电阻等</p>
+<p>这类电阻的阻值会随外界物理量（电压、温度、光照、湿度、气体、压力、磁场）变化，所以常被当作<strong>传感器</strong>用。</p>
+<h3 id="压敏电阻"><a href="#压敏电阻" class="headerlink" title="压敏电阻"></a>压敏电阻</h3><p>特点：当外加电压都达到其临界值时，其阻值会急剧变小</p>
+<p>作用：过压保护和抑制浪涌电流</p>
+<p>检测：阻值都较大，因此检测压敏电阻主要是看其是否短路损坏</p>
+<blockquote>
+<p>压敏电阻多和保险丝一起使用，保护负载</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.3zjwfkdcxsg0.webp" alt="image-20261008105605593"></p>
+<h3 id="热敏电阻"><a href="#热敏电阻" class="headerlink" title="热敏电阻"></a>热敏电阻</h3><p>特点：阻值随温度变化而变化</p>
+<p>作用：进行温度检测</p>
+<p>检测：用万用表检测，给电阻加热，看阻值变化</p>
+<p>按变化方向又分两类：</p>
+<ul>
+<li><strong>NTC（负温度系数）</strong>：温度升高，阻值变小，最常见</li>
+<li><strong>PTC（正温度系数）</strong>：温度升高，阻值变大，可作自恢复保险</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.2zsoijglqxk0.webp"></p>
+<h3 id="光敏电阻"><a href="#光敏电阻" class="headerlink" title="光敏电阻"></a>光敏电阻</h3><p>特点：阻值会随入射光线的强弱而变化，光线越强阻值越小，光线越弱阻值越大</p>
+<p>作用：进行光检测</p>
+<p>常见于光控开关、路灯自动点亮、光电计数等场景。检测时可用手遮挡与手电照射对比阻值变化。</p>
+<h1 id="电容器"><a href="#电容器" class="headerlink" title="电容器"></a>电容器</h1><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.44bpxvpbu8m0.webp"></p>
+<p>电容的主要参数有<font color="red">电容量</font>和<font color="red">耐压</font></p>
+<p>单位<strong>法拉（F）</strong>，常用 μF（微法）、nF（纳法）、pF（皮法）。</p>
+<h2 id="主要参数-1"><a href="#主要参数-1" class="headerlink" title="主要参数"></a>主要参数</h2><ul>
+<li><strong>电容量</strong>：储存电荷的能力</li>
+<li><strong>耐压</strong>：能承受的最高工作电压，超过会击穿</li>
+<li>其他：温度系数、漏电流、ESR</li>
+</ul>
+<h2 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电解电容</td>
+<td>容量大、<strong>有极性</strong>，长脚为正、短脚为负，外壳标有负极条</td>
+</tr>
+<tr>
+<td>陶瓷电容</td>
+<td>体积小、无极性、高频特性好，多用于去耦</td>
+</tr>
+<tr>
+<td>钽电容</td>
+<td>容量密度高、有极性，注意不要反接</td>
+</tr>
+<tr>
+<td>薄膜电容</td>
+<td>稳定性好、无极性，多用于谐振、耦合</td>
+</tr>
+</tbody></table>
+<p>特点：隔直流通交流</p>
+<p>补充：电容两端<strong>电压不能突变</strong>，所以常用于储能和滤波；充放电需要时间，这是它区别于电阻的关键特性。</p>
+<p>作用：耦合、旁路滤波、移相、谐振</p>
+<ul>
+<li><strong>耦合</strong>：传递交流信号，隔断前后级直流工作点</li>
+<li><strong>滤波</strong>：滤除纹波，让电压更平滑</li>
+<li><strong>旁路&#x2F;去耦</strong>：给高频干扰提供低阻通路</li>
+</ul>
+<h2 id="串联与并联-1"><a href="#串联与并联-1" class="headerlink" title="串联与并联"></a>串联与并联</h2><p>规律与电阻<strong>相反</strong>：</p>
+<ul>
+<li><strong>并联</strong>：C &#x3D; C₁ + C₂ + …，容量变大，但耐压取最小值</li>
+<li><strong>串联</strong>：1&#x2F;C &#x3D; 1&#x2F;C₁ + 1&#x2F;C₂ + …，容量变小，耐压提高</li>
+</ul>
+<h2 id="检测-1"><a href="#检测-1" class="headerlink" title="检测"></a>检测</h2><p>用万用表的电容挡进行检测</p>
+<ul>
+<li>电容量与标称值接近即正常；偏差过大或读数为 0 说明失效</li>
+<li>用电阻档测时，指针应有<strong>先摆后回</strong>的充电过程，指针不动说明开路，指针不回落说明短路</li>
+<li>测量前必须<strong>先放电</strong>，电解电容尤其注意极性</li>
+</ul>
+<h1 id="电感器"><a href="#电感器" class="headerlink" title="电感器"></a>电感器</h1><p>储存电能的元件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.41amepz1cx60.webp"></p>
+<p>单位<strong>亨利（H）</strong>，常用 mH、μH。</p>
+<p>特点：通直流阻交流</p>
+<p>补充：电感<strong>电流不能突变</strong>，断电瞬间会产生反向感应电动势（楞次定律），这是开关电源和继电器线圈需要续流二极管的原因。</p>
+<p>作用：分频、滤波、谐振、磁偏转</p>
+<p>常见于滤波器、LC 谐振回路、开关电源储能、扬声器分频器等。</p>
+<p>检测：万用表电阻档初步检测，是否短路、断路、绝缘不良等情况</p>
+<ul>
+<li>正常线圈直流电阻很小（几欧到几十欧）</li>
+<li><strong>无穷大</strong>说明断路，<strong>接近 0 且短路</strong>要警惕匝间短路</li>
+<li>有铁芯的还要检查绕组与铁芯之间是否绝缘不良</li>
+</ul>
+<h1 id="变压器"><a href="#变压器" class="headerlink" title="变压器"></a>变压器</h1><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.1xdy8g2hwdds.webp"></p>
+<p>由初级绕组、次级绕组和铁芯（或磁芯）组成，靠<strong>电磁感应</strong>传递能量。</p>
+<p>特点：传输交流隔离直流，并可同时实现电压变换、阻抗变换、相位变换</p>
+<p>核心关系：<strong>电压比 &#x3D; 匝数比</strong>，即 U₁&#x2F;U₂ &#x3D; N₁&#x2F;N₂；电流比则相反，功率基本守恒（忽略损耗）。</p>
+<p>作用：电压变换</p>
+<p>常见类型：电源变压器、音频变压器、高频&#x2F;开关变压器、隔离变压器。</p>
+<p>检测：万用表进行基本检测</p>
+<ul>
+<li>分别测初级、次级绕组电阻，判断是否断路</li>
+<li>测绕组与铁芯之间电阻，判断绝缘是否良好（应为无穷大）</li>
+<li>通电后测次级输出电压是否符合预期</li>
+</ul>
+<h1 id="晶体二极管"><a href="#晶体二极管" class="headerlink" title="晶体二极管"></a>晶体二极管</h1><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.na55n52j3m8.webp"></p>
+<p>核心是 <strong>PN 结</strong>，具有单向导电性。</p>
+<p>特点：单向导电，一般情况下只允许电流从正极流向负极</p>
+<ul>
+<li>正向导通时有固定压降：<strong>硅管约 0.6<del>0.7 V，锗管约 0.2</del>0.3 V</strong></li>
+<li>反向截止，但存在很小的反向漏电流</li>
+</ul>
+<p>作用：整流、检波、开关</p>
+<p>按用途可分为：整流二极管、稳压二极管、开关二极管、发光二极管（LED）、光电二极管、肖特基二极管等。</p>
+<p>检测：电阻档，正反向电阻的阻值应该相差很大</p>
+<ul>
+<li>用<strong>二极管档</strong>更直观：正向显示压降（如 0.5~0.7），反向显示溢出（1 或 OL）</li>
+<li>若正反向都为 0 说明击穿短路，都为无穷大说明开路</li>
+<li><strong>极性判断</strong>：有色环（或符号箭头指向）的一端为<strong>负极</strong></li>
+</ul>
+<h1 id="晶体三极管"><a href="#晶体三极管" class="headerlink" title="晶体三极管"></a>晶体三极管</h1><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.2ln4o5nys580.webp"></p>
+<p>三个电极：<strong>基极 b、集电极 c、发射极 e</strong>，分 <strong>NPN</strong> 和 <strong>PNP</strong> 两种类型。</p>
+<p>特点：放大电流</p>
+<p>电流放大系数 <strong>β &#x3D; Ic &#x2F; Ib</strong>，即基极的小电流控制集电极的大电流，这是「放大」的本质。</p>
+<p>三个工作区：</p>
+<table>
+<thead>
+<tr>
+<th>工作区</th>
+<th>条件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>截止区</td>
+<td>发射结反偏</td>
+<td>相当于断开的开关</td>
+</tr>
+<tr>
+<td>放大区</td>
+<td>发射结正偏、集电结反偏</td>
+<td>信号放大</td>
+</tr>
+<tr>
+<td>饱和区</td>
+<td>发射结、集电结均正偏</td>
+<td>相当于闭合的开关</td>
+</tr>
+</tbody></table>
+<p>作用：放大、振荡、电子开关、可变电阻、阻抗变换</p>
+<p>检测：用二极管档分别测两个 PN 结（b-e、b-c），正向有压降、反向无穷大即正常；再结合两个结的方向判断是 NPN 还是 PNP。</p>
+<h1 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h1><p><img src="https://cdn.jsdelivr.net/gh/hfshaobing/picx-images-hosting@master/20261008/image.3w44qm3h7xm0.webp"></p>
+<p>由<strong>线圈</strong>和<strong>触点</strong>两部分组成，线圈通电产生磁场，吸合衔铁带动触点动作。</p>
+<p>触点分为：<strong>常开触点 NO</strong>（不通电时断开）、<strong>常闭触点 NC</strong>（不通电时闭合）、<strong>公共端 COM</strong>。</p>
+<p>作用：间接控制和隔离控制</p>
+<p>价值在于<strong>用小电流、低电压控制大电流、高电压</strong>，同时把控制回路和负载回路电气隔离，避免强电干扰弱电。</p>
+<p>主要参数：线圈额定电压（5 V、12 V、24 V 等）、触点容量（可承受的电压电流）。</p>
+<p>检测：</p>
+<ul>
+<li>测线圈两端电阻，判断线圈是否断路</li>
+<li>手动或通电吸合时，测 NO&#x2F;NC 触点通断是否正常</li>
+</ul>
+<h1 id="元器件速查"><a href="#元器件速查" class="headerlink" title="元器件速查"></a>元器件速查</h1><table>
+<thead>
+<tr>
+<th>元件</th>
+<th>特点</th>
+<th>主要作用</th>
+<th>检测方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电阻器</td>
+<td>阻碍电流，阻值固定</td>
+<td>限流、降压、分压</td>
+<td>电阻档，比对标称值</td>
+</tr>
+<tr>
+<td>敏感电阻</td>
+<td>阻值随外界物理量变化</td>
+<td>传感、保护</td>
+<td>改变外界条件看阻值变化</td>
+</tr>
+<tr>
+<td>电容器</td>
+<td>隔直流通交流，电压不能突变</td>
+<td>耦合、滤波、谐振</td>
+<td>电容档；电阻档看充放电</td>
+</tr>
+<tr>
+<td>电感器</td>
+<td>通直流阻交流，电流不能突变</td>
+<td>滤波、谐振、扼流</td>
+<td>电阻档，测通断</td>
+</tr>
+<tr>
+<td>变压器</td>
+<td>电磁感应传能，隔离直流</td>
+<td>电压&#x2F;阻抗&#x2F;相位变换</td>
+<td>测绕组通断与绝缘</td>
+</tr>
+<tr>
+<td>晶体二极管</td>
+<td>单向导电</td>
+<td>整流、检波、开关</td>
+<td>二极管档测正反向</td>
+</tr>
+<tr>
+<td>晶体三极管</td>
+<td>电流放大</td>
+<td>放大、开关、振荡</td>
+<td>测两个 PN 结</td>
+</tr>
+<tr>
+<td>继电器</td>
+<td>线圈控制触点</td>
+<td>间接控制、隔离控制</td>
+<td>测线圈电阻与触点通断</td>
+</tr>
+</tbody></table>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>判断一个元件好坏，核心都是<strong>和它的正常状态做对比</strong>：电阻看阻值、电容看容量和充放电、二极管看单向性、三极管看两个 PN 结。</li>
+<li>敏感电阻的「变化」才是它的正常状态，测之前先想清楚该给它什么条件。</li>
+<li>维修时遵循「先断电、先放电、先目视（鼓包、烧焦、变色）」的顺序，再上表测量。</li>
+</ul>
+
+      </div>
+    </div>
+</div>
+
+<div class="post-category">
+
+    <div id="p-meta-i">
+        
+              
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+              
+                <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/">实用方法</a>
+              
+          
+          
+              
+                <a class="hover-with-bg" href="/tags/%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/"># 电子元器件</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%94%B5%E9%98%BB/"># 电阻</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%94%B5%E5%AE%B9/"># 电容</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%94%B5%E6%84%9F/"># 电感</a>
+              
+                <a class="hover-with-bg" href="/tags/%E4%BA%8C%E6%9E%81%E7%AE%A1/"># 二极管</a>
+              
+                <a class="hover-with-bg" href="/tags/%E4%B8%89%E6%9E%81%E7%AE%A1/"># 三极管</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%BB%A7%E7%94%B5%E5%99%A8/"># 继电器</a>
+              
+                <a class="hover-with-bg" href="/tags/%E4%B8%87%E7%94%A8%E8%A1%A8/"># 万用表</a>
+              
+          
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">nuc_八道门</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://shaobingtongzhi.github.io/202610/6ac3bc76589c.html">https://shaobingtongzhi.github.io/202610/6ac3bc76589c.html</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy;  2020 - 2023&nbsp;&nbsp;nuc_badaomen</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/oCoke/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    
+      <a class="toc-btn" id="share-btn"><i>
+        <svg t="1670124379155" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2683" width="25" height="25"><path d="M395.946667 234.666667v64H256v469.333333h512V522.666667h64V768a64 64 0 0 1-64 64H256a64 64 0 0 1-64-64V298.666667a64 64 0 0 1 64-64h139.946667z m335.850666-87.914667l150.848 150.826667-158.378666 158.4-45.269334-45.248L748.394667 341.333333H672c-121.685333 0-220.714667 97.024-223.914667 217.941334L448 565.333333v85.333334h-64v-85.333334C384 406.272 512.938667 277.333333 672 277.333333h99.861333l-85.312-85.333333 45.248-45.248z" p-id="2684" fill="var(--first-text-color)"></path></svg>
+      </i></a>
+    
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'});" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+    <script>
+        query("#share-btn")[0].onclick = async () => {
+            let url = `${location.protocol}//${location.hostname}${location.port ? ":"+location.port:location.port}${location.pathname}#read=${sessionStorage.getItem(location.pathname+"_read_y") || ""}`;
+            try {
+                await navigator.clipboard.writeText(url);
+                prompt_core("分享链接已经复制至剪贴板", 4800, true);
+            } catch(e) {
+                prompt_core("分享链接复制失败，请手动复制<br/>"+url, 4800, false);
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
+
+
+
+    <script>
+        const getScrollPosition = (el = window) => ({
+            x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+            y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+        });
+        // 此处的 750 是「页面元素的最大宽度」
+        var wx = document.getElementsByClassName("article-m")[0].clientWidth;
+        var wy = document.getElementsByClassName("article-m")[0].clientHeight;
+        function windowScroll() {
+            // 反复修改 确保页面尺寸不改变
+            wx = document.getElementsByClassName("article-m")[0].clientWidth;
+            wy = document.getElementsByClassName("article-m")[0].clientHeight;
+            let y = Math.round(getScrollPosition().y);
+            // console.log(y);
+            // 组合字符串，同时记录页面坐标，页面宽度和高度
+            let p = `${y}:${wx}:${wy}`;
+            // 写入到 sessionStorage 中
+            sessionStorage.setItem(location.pathname + "_read_y", p);
+        }
+        // URL 中是否包含传递的坐标信息
+        setTimeout(() => {
+            if (location.hash.split("#read=").length > 1) {
+                prompt_core("已有阅读进度，正在跳转", 4800, true);
+                // 分离字符串
+                let read_y = location.hash.split("#read=")[1];
+                read_y = read_y.split(":");
+                // 组合乘积，顺滑移动至坐标
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            } else {
+                // 从 sessionStorage 中获取
+                let read_y = sessionStorage.getItem(location.pathname + "_read_y") || "0:0:0";
+                read_y = read_y.split(":");
+                if (read_y[0] != "0") prompt_core("已有阅读进度，正在跳转", 4800, true);
+                window.scrollTo({top: Math.round(Number(read_y[0]) * Number(read_y[1] * Number(read_y[2] / wx / wy))), behavior: "smooth"});
+            }
+        }, 500);
+        window.onscroll = windowScroll;
+    </script>
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
